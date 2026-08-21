@@ -2,6 +2,7 @@ import { Router } from 'express';
 import type { Request, Response } from 'express';
 import { getDb } from '../db/index.js';
 import { FALLBACK_INPUT_PER_M, FALLBACK_OUTPUT_PER_M } from '../db/model-pricing.js';
+import { providerIdFor, providerDisplayName } from '../lib/provider-identity.js';
 
 export const analyticsRouter = Router();
 
@@ -240,7 +241,16 @@ analyticsRouter.get('/by-model', (req: Request, res: Response) => {
   })));
 });
 
-// Stats grouped by platform
+// Stats grouped by platform.
+//
+// Custom endpoints all share the platform id 'custom' (services/custom-
+// endpoint.ts), so grouping by `platform` alone would collapse every custom
+// relay into one row and the operator could not tell which endpoint did what
+// (#889). We therefore also group by the serving key's base_url — the canonical
+// endpoint identity (custom-endpoint.ts pools credentials by base_url, and the
+// router treats every key sharing a base_url as one endpoint). Non-custom keys
+// carry no base_url, so COALESCE(base_url,'') keeps each of them in a single
+// per-platform group exactly as before.
 analyticsRouter.get('/by-platform', (req: Request, res: Response) => {
   const range = (req.query.range as string) ?? '7d';
   const since = getSinceTimestamp(range);
@@ -248,31 +258,37 @@ analyticsRouter.get('/by-platform', (req: Request, res: Response) => {
 
   const rows = db.prepare(`
     SELECT
-      platform,
+      r.platform,
+      COALESCE(k.base_url, '') as base_url,
       COUNT(*) as requests,
-      COUNT(latency_ms) as latency_count,
-      SUM(CASE WHEN status = 'success' THEN 1 ELSE 0 END) * 100.0 / NULLIF(SUM(CASE WHEN status <> 'canceled' THEN 1 ELSE 0 END), 0) as success_rate,
-      AVG(latency_ms) as avg_latency_ms,
-      AVG(ttfb_ms) as avg_ttfb_ms,
-      SUM(CASE WHEN status = 'error' THEN 1 ELSE 0 END) as error_count,
-      AVG(CASE WHEN output_tokens > 0 AND latency_ms > 0
-        THEN output_tokens / (latency_ms / 1000.0) ELSE NULL END) as avg_tokens_per_second,
-      SUM(input_tokens) as total_input_tokens,
-      SUM(output_tokens) as total_output_tokens
-    FROM requests
-    WHERE created_at >= ?
-    GROUP BY platform
+      COUNT(r.latency_ms) as latency_count,
+      SUM(CASE WHEN r.status = 'success' THEN 1 ELSE 0 END) * 100.0 / NULLIF(SUM(CASE WHEN r.status <> 'canceled' THEN 1 ELSE 0 END), 0) as success_rate,
+      AVG(r.latency_ms) as avg_latency_ms,
+      AVG(r.ttfb_ms) as avg_ttfb_ms,
+      SUM(CASE WHEN r.status = 'error' THEN 1 ELSE 0 END) as error_count,
+      AVG(CASE WHEN r.output_tokens > 0 AND r.latency_ms > 0
+        THEN r.output_tokens / (r.latency_ms / 1000.0) ELSE NULL END) as avg_tokens_per_second,
+      SUM(r.input_tokens) as total_input_tokens,
+      SUM(r.output_tokens) as total_output_tokens
+    FROM requests r
+    LEFT JOIN api_keys k ON k.id = r.key_id
+    WHERE r.created_at >= ?
+    GROUP BY r.platform, COALESCE(k.base_url, '')
     ORDER BY requests DESC
   `).all(since) as any[];
 
   // P95 latency is a per-group percentile; SQLite has no native percentile
-  // aggregate, so we take the nearest-rank value per platform with a small
-  // ORDER BY/OFFSET query. The platform count is tiny (one row per provider),
-  // so the extra round-trips are negligible and keep the SQL readable.
+  // aggregate, so we take the nearest-rank value per group with a small
+  // ORDER BY/OFFSET query. The group count is tiny (one row per provider /
+  // custom endpoint), so the extra round-trips are negligible and keep the SQL
+  // readable. The WHERE must match the grouping exactly — platform AND the
+  // endpoint's base_url — or a custom endpoint's p95 would bleed in latency
+  // from every other custom endpoint.
   const p95Stmt = db.prepare(`
-    SELECT latency_ms FROM requests
-    WHERE created_at >= ? AND platform = ? AND latency_ms IS NOT NULL
-    ORDER BY latency_ms ASC
+    SELECT r.latency_ms FROM requests r
+    LEFT JOIN api_keys k ON k.id = r.key_id
+    WHERE r.created_at >= ? AND r.platform = ? AND COALESCE(k.base_url, '') = ? AND r.latency_ms IS NOT NULL
+    ORDER BY r.latency_ms ASC
     LIMIT 1 OFFSET ?
   `);
 
@@ -281,11 +297,20 @@ analyticsRouter.get('/by-platform', (req: Request, res: Response) => {
     // latency rows (latency_count), so a NULL can neither be counted into the
     // denominator nor selected as the p95 value.
     const latencyCount = r.latency_count ?? 0;
+    const baseUrl: string | null = r.base_url || null;
     const p95Row = latencyCount > 0
-      ? (p95Stmt.get(since, r.platform, Math.floor((latencyCount - 1) * 0.95)) as { latency_ms: number } | undefined)
+      ? (p95Stmt.get(since, r.platform, r.base_url, Math.floor((latencyCount - 1) * 0.95)) as { latency_ms: number } | undefined)
       : undefined;
     return {
       platform: r.platform,
+      // Stable, unique id for this row: the platform slug for catalog providers,
+      // 'custom:<base_url>' for custom endpoints (falls back to 'custom' when
+      // the key is gone). The client uses this as the chart key and the
+      // recent-calls filter value.
+      providerId: providerIdFor(r.platform, baseUrl),
+      // The short identifier the operator actually reads: the endpoint host for
+      // custom rows, the platform slug otherwise.
+      endpoint: providerDisplayName(r.platform, baseUrl),
       requests: r.requests,
       successRate: Math.round((r.success_rate ?? 0) * 10) / 10,
       avgLatencyMs: Math.round(r.avg_latency_ms),
@@ -515,32 +540,63 @@ analyticsRouter.get('/requests', (req: Request, res: Response) => {
   const limit = Math.min(Math.max(parseInt(req.query.limit as string, 10) || 100, 1), 500);
   const offset = Math.max(parseInt(req.query.offset as string, 10) || 0, 0);
 
-  // Optional filters. Both are validated (whitelist / shape) and applied as
+  // Optional filters. All are validated (whitelist / shape) and applied as
   // bound parameters; absent filters keep the default behavior identical.
   const status = req.query.status as string | undefined;
   if (status !== undefined && status !== 'success' && status !== 'error' && status !== 'canceled') {
     res.status(400).json({ error: "invalid status filter (expected 'success', 'error' or 'canceled')" });
     return;
   }
-  // Platform ids are short slugs ('groq', 'pt-custom_1'); anything else is a
-  // client bug, not a filter.
+  // Provider filter. The `provider` param carries the stable row id returned by
+  // /by-platform: a platform slug ('groq') or 'custom:<base_url>' for a custom
+  // endpoint (#889 — every custom relay shares the 'custom' platform id, so the
+  // endpoint's base_url is what actually selects one). The legacy `platform`
+  // param still works for old clients. Both are bound parameters, never
+  // interpolated, so the only validation needed is shape.
+  const provider = req.query.provider as string | undefined;
   const platform = req.query.platform as string | undefined;
-  if (platform !== undefined && !/^[A-Za-z0-9_-]{1,64}$/.test(platform)) {
-    res.status(400).json({ error: 'invalid platform filter' });
-    return;
+  let providerFilterSql = '';
+  const providerFilterParams: string[] = [];
+  if (provider !== undefined) {
+    if (provider.length > 256 || /[\r\n]/.test(provider)) {
+      res.status(400).json({ error: 'invalid provider filter' });
+      return;
+    }
+    if (provider.startsWith('custom:')) {
+      // Select one custom endpoint by its base_url.
+      providerFilterSql = " AND r.platform = 'custom' AND COALESCE(k.base_url, '') = ?";
+      providerFilterParams.push(provider.slice('custom:'.length));
+    } else if (/^[A-Za-z0-9_-]{1,64}$/.test(provider)) {
+      providerFilterSql = ' AND r.platform = ?';
+      providerFilterParams.push(provider);
+    } else {
+      res.status(400).json({ error: 'invalid provider filter' });
+      return;
+    }
+  } else if (platform !== undefined) {
+    // Platform ids are short slugs ('groq', 'pt-custom_1'); anything else is a
+    // client bug, not a filter.
+    if (!/^[A-Za-z0-9_-]{1,64}$/.test(platform)) {
+      res.status(400).json({ error: 'invalid platform filter' });
+      return;
+    }
+    providerFilterSql = ' AND r.platform = ?';
+    providerFilterParams.push(platform);
   }
   const db = getDb();
 
   const filterSql =
     (status !== undefined ? ' AND r.status = ?' : '') +
-    (platform !== undefined ? ' AND r.platform = ?' : '');
+    providerFilterSql;
   const filterParams = [
     ...(status !== undefined ? [status] : []),
-    ...(platform !== undefined ? [platform] : []),
+    ...providerFilterParams,
   ];
 
   const total = (db.prepare(
-    `SELECT COUNT(*) as c FROM requests r WHERE r.created_at >= ?${filterSql}`
+    `SELECT COUNT(*) as c FROM requests r
+       LEFT JOIN api_keys k ON k.id = r.key_id
+      WHERE r.created_at >= ?${filterSql}`
   ).get(since, ...filterParams) as { c: number }).c;
 
   const rows = db.prepare(`
