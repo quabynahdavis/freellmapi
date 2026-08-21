@@ -38,6 +38,7 @@ import { Skeleton } from '@/components/ui/skeleton'
 import { Tooltip as HoverTooltip } from '@/components/tooltip'
 import { formatSqliteUtcToLocalTime } from '@/lib/utils'
 import { platformColors } from '@/lib/routing'
+import { categoryAxisProps } from '@/lib/chart-axis'
 import { useI18n } from '@/i18n'
 
 type TimeRange = '24h' | '7d' | '30d' | '90d'
@@ -655,7 +656,7 @@ export default function AnalyticsPage() {
               <ResponsiveContainer width="100%" height={240}>
                 <BarChart data={byPlatform} margin={{ top: 6, right: 6, left: -12, bottom: 0 }}>
                   <CartesianGrid strokeDasharray="2 4" stroke={gridStyle} />
-                  <XAxis dataKey="platform" tick={axisStyle} tickLine={false} axisLine={{ stroke: gridStyle }} />
+                  <XAxis dataKey="platform" tick={axisStyle} tickLine={false} axisLine={{ stroke: gridStyle }} {...categoryAxisProps()} />
                   <YAxis tick={axisStyle} tickLine={false} axisLine={false} />
                   <Tooltip contentStyle={tooltipStyle} />
                   <Bar dataKey="requests" name={t('analytics.requests')} fill={primaryFill} radius={[3, 3, 0, 0]} maxBarSize={24} />
@@ -671,7 +672,7 @@ export default function AnalyticsPage() {
               <ResponsiveContainer width="100%" height={240}>
                 <BarChart data={byClient} margin={{ top: 6, right: 6, left: -12, bottom: 0 }}>
                   <CartesianGrid strokeDasharray="2 4" stroke={gridStyle} />
-                  <XAxis dataKey="clientAgent" tick={axisStyle} tickLine={false} axisLine={{ stroke: gridStyle }} />
+                  <XAxis dataKey="clientAgent" tick={axisStyle} tickLine={false} axisLine={{ stroke: gridStyle }} {...categoryAxisProps()} />
                   <YAxis tick={axisStyle} tickLine={false} axisLine={false} />
                   <Tooltip contentStyle={tooltipStyle} />
                   <Bar dataKey="requests" name={t('analytics.requests')} fill={seriesB} radius={[3, 3, 0, 0]} maxBarSize={24} />
@@ -688,7 +689,7 @@ export default function AnalyticsPage() {
               <ResponsiveContainer width="100%" height={240}>
                 <BarChart data={byPlatform} margin={{ top: 6, right: 6, left: -12, bottom: 0 }}>
                   <CartesianGrid strokeDasharray="2 4" stroke={gridStyle} />
-                  <XAxis dataKey="platform" tick={axisStyle} tickLine={false} axisLine={{ stroke: gridStyle }} />
+                  <XAxis dataKey="platform" tick={axisStyle} tickLine={false} axisLine={{ stroke: gridStyle }} {...categoryAxisProps()} />
                   <YAxis unit="ms" tick={axisStyle} tickLine={false} axisLine={false} />
                   <Tooltip contentStyle={tooltipStyle} />
                   <Legend wrapperStyle={{ fontSize: 12 }} iconType="rect" />
@@ -709,7 +710,7 @@ export default function AnalyticsPage() {
               <ResponsiveContainer width="100%" height={240}>
                 <BarChart data={byPlatform} margin={{ top: 6, right: 6, left: -12, bottom: 0 }}>
                   <CartesianGrid strokeDasharray="2 4" stroke={gridStyle} />
-                  <XAxis dataKey="platform" tick={axisStyle} tickLine={false} axisLine={{ stroke: gridStyle }} />
+                  <XAxis dataKey="platform" tick={axisStyle} tickLine={false} axisLine={{ stroke: gridStyle }} {...categoryAxisProps()} />
                   <YAxis unit="ms" tick={axisStyle} tickLine={false} axisLine={false} />
                   <Tooltip contentStyle={tooltipStyle} />
                   <Bar dataKey="avgTtfbMs" name={t('analytics.avgTtft')} fill={seriesA} radius={[3, 3, 0, 0]} maxBarSize={24} />
@@ -742,7 +743,7 @@ export default function AnalyticsPage() {
               <ResponsiveContainer width="100%" height={240}>
                 <BarChart data={errorDist.byPlatform} margin={{ top: 6, right: 6, left: -12, bottom: 0 }}>
                   <CartesianGrid strokeDasharray="2 4" stroke={gridStyle} />
-                  <XAxis dataKey="platform" tick={axisStyle} tickLine={false} axisLine={{ stroke: gridStyle }} />
+                  <XAxis dataKey="platform" tick={axisStyle} tickLine={false} axisLine={{ stroke: gridStyle }} {...categoryAxisProps()} />
                   <YAxis tick={axisStyle} tickLine={false} axisLine={false} />
                   <Tooltip contentStyle={tooltipStyle} />
                   <Bar dataKey="count" name={t('analytics.errors')} fill="var(--destructive)" radius={[3, 3, 0, 0]} maxBarSize={24} />
