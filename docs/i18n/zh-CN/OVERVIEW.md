@@ -20,6 +20,18 @@ use the same words (提供方, 词元, 令牌, ...).
 | [docs/install.md](docs/install.md) | [../../../docs/install.md](../../../docs/install.md) | Installation guide covering Docker Compose, local setup, and desktop app installs. |
 | [docs/api.md](docs/api.md) | [../../../docs/api.md](../../../docs/api.md) | API reference for the OpenAI-compatible `/v1` endpoints, authentication, and request formats. |
 
+### Translated domain subtrees
+
+Each folder below mirrors a `docs/` subdomain (OVERVIEW, numbered topic
+docs, CHANGELOG):
+
+| Folder | Mirrors | Contents |
+| --- | --- | --- |
+| [docs/env/](docs/env/OVERVIEW.md) | [../../../docs/env/](../../../docs/env/) | Runtime configuration surface: the full `.env` variable reference, encryption-key handling, and outbound proxy configuration. |
+| [docs/deployment/](docs/deployment/OVERVIEW.md) | [../../../docs/deployment/](../../../docs/deployment/) | Docker operations: image, Compose quickstart, persistence, healthchecks, upgrades, and backups. |
+| [docs/providers/](docs/providers/OVERVIEW.md) | [../../../docs/providers/](../../../docs/providers/) | Provider layer: supported platforms catalog, quotas/cooldowns/key health, and how to add a new provider. |
+| [docs/testing/](docs/testing/OVERVIEW.md) | [../../../docs/testing/](../../../docs/testing/) | Test matrix across workspaces, server suite conventions, and the coding-agent compatibility suite. |
+
 Pages not listed here have no translation yet; they link to their English
 originals by design.
 
