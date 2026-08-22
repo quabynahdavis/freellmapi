@@ -21,6 +21,8 @@ The root [README](../README.md) is the product overview; this directory contains
 | [success.html](success.html) | Static website asset (not a doc): post-install success page. |
 | [install.sh](install.sh) | Unix Docker bootstrap script served by the project website. |
 | [install.ps1](install.ps1) | PowerShell bootstrap script served by the project website. |
+| [env/](env/OVERVIEW.md) | Runtime configuration: full `.env` variable reference, encryption-key lifecycle, and outbound-proxy configuration; see its own [OVERVIEW.md](env/OVERVIEW.md). |
+| [deployment/](deployment/OVERVIEW.md) | Docker operations: image & Compose reference, container networking gotchas, upgrades, backups, declarative config; see its own [OVERVIEW.md](deployment/OVERVIEW.md). |
 | [i18n/](i18n/OVERVIEW.md) | Translated documentation tree (zh-CN); see its own [OVERVIEW.md](i18n/OVERVIEW.md). |
 | [install/](install/OVERVIEW.md) | Platform-specific installation guides; see its own [OVERVIEW.md](install/OVERVIEW.md). |
 
