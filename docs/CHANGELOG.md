@@ -2,6 +2,17 @@
 
 Revision history for `docs/`, derived from git commits touching this directory. Most recent first.
 
+## 2026-08-22
+
+| Commit | Date | Summary |
+| --- | --- | --- |
+| `676ae20` | 2026-08-22 | docs(testing): add test matrix and compatibility-suite documentation |
+| `b21ec10` | 2026-08-22 | docs(providers): add platform catalog and integration guides |
+| `abe6b00` | 2026-08-22 | docs(deployment): add Docker operations and maintenance domain |
+| `ac0a9ce` | 2026-08-22 | docs(env): add runtime configuration reference domain |
+
+## 2026-08-10 and earlier
+
 | Commit | Date | Summary |
 | --- | --- | --- |
 | `8cb75ac` | 2026-08-10 | feat(proxy): opt-in X-Fallback-Detail header with per-hop failover timings (#792) |

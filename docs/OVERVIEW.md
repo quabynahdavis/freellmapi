@@ -23,6 +23,8 @@ The root [README](../README.md) is the product overview; this directory contains
 | [install.ps1](install.ps1) | PowerShell bootstrap script served by the project website. |
 | [env/](env/OVERVIEW.md) | Runtime configuration: full `.env` variable reference, encryption-key lifecycle, and outbound-proxy configuration; see its own [OVERVIEW.md](env/OVERVIEW.md). |
 | [deployment/](deployment/OVERVIEW.md) | Docker operations: image & Compose reference, container networking gotchas, upgrades, backups, declarative config; see its own [OVERVIEW.md](deployment/OVERVIEW.md). |
+| [providers/](providers/OVERVIEW.md) | Provider integrations: supported-platform catalog with auth models and adapter classes, per-key quota accounting and cooldowns, and a contributor walkthrough for adding a provider; see its own [OVERVIEW.md](providers/OVERVIEW.md). |
+| [testing/](testing/OVERVIEW.md) | Testing: local test command matrix and CI summary, server-suite layout and conventions, and the e2e coding-agent compatibility suite; see its own [OVERVIEW.md](testing/OVERVIEW.md). |
 | [i18n/](i18n/OVERVIEW.md) | Translated documentation tree (zh-CN); see its own [OVERVIEW.md](i18n/OVERVIEW.md). |
 | [install/](install/OVERVIEW.md) | Platform-specific installation guides; see its own [OVERVIEW.md](install/OVERVIEW.md). |
 
