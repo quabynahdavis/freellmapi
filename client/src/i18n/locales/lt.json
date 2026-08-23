@@ -14,7 +14,9 @@
     "switchToChinese": "Perėjimas prie kinų kalbos",
     "switchToEnglish": "Perėjimas prie anglų kalbos",
     "modelsMenu": "Naršyti modelių tipus",
-    "agents": "Agentai"
+    "agents": "Agentai",
+    "logs": "Žurnalas",
+    "analyticsMenu": "Analizės puslapiai"
   },
   "auth": {
     "createYourAccount": "Sukurkite savo paskyrą",
@@ -216,8 +218,8 @@
     "localOverride": "Vietinis perrašymas",
     "displayName": "Rodymo pavadinimas",
     "sizeLabel": "Gebėjimų lygis",
-    "sizeLabelHint": "Frontier/Large/Medium/Small lemia intelekto ašį. Modeliai be atpažinto lygio gauna 0.",
-    "sizeLabelNone": "Nėra (neįvertinta)",
+    "sizeLabelHint": "Frontier/Large/Medium/Small nustato intelekto ašį: aukštesnis lygis visada pranoksta žemesnį, o to paties lygio viduje intelekto reitingas vis dar keičia įvertį. Modelis be atpažinto lygio šioje ašyje gauna žemiausią įvertį, tačiau intelektas – tik viena iš trijų ašių: esant geram patikimumui ir greičiui jis vis tiek gali būti pasirinktas.",
+    "sizeLabelNone": "Nėra (žemiausias intelekto įvertis)",
     "contextWindow": "Kontekstas",
     "inFallback": "Grandinėje",
     "saveModelSettings": "Išsaugoti modelio nustatymus",
@@ -393,6 +395,7 @@
     "customTypeEmbedding": "Įterpimas",
     "customTypeImage": "Vaizdas",
     "customTypeAudio": "Garsas",
+    "customTypeTranscription": "Transcription",
     "customBaseUrl": "Bazės URL",
     "customModels": "Modeliai",
     "customModel": "Modelis",
@@ -409,6 +412,7 @@
     "addEmbeddingModel": "Įterpimo pridėjimas",
     "addImageModel": "Pridėti paveikslėlio modelį",
     "addAudioModel": "Pridėti garso modelį",
+    "addTranscriptionModel": "Add transcription model",
     "addingCustom": "Prideda...",
     "discoverModels": "Gauti modelius",
     "probeNow": "Išbandyti galinį tašką",
@@ -633,6 +637,32 @@
     "requestedModel": "Prašytas modelis",
     "ttft": "TTFT",
     "requestsByAgent": "Užklausos pagal agentą"
+  },
+  "logs": {
+    "title": "Žurnalas",
+    "description": "Tiesioginis serverio žurnalas. Nauji įrašai atsiranda tol, kol puslapis atidarytas.",
+    "pause": "Pristabdyti",
+    "resume": "Tęsti",
+    "clear": "Išvalyti žurnalą",
+    "cleared": "Serverio žurnalas išvalytas",
+    "levelFilter": "Žurnalo lygiai",
+    "levels": {
+      "debug": "Debug",
+      "info": "Info",
+      "warn": "Įspėjimas",
+      "error": "Klaida"
+    },
+    "countsHint": "Skaičiai rodo viso serverio žurnalo buferio sumas, o ne tik šiuos filtrus atitinkančius įrašus.",
+    "searchPlaceholder": "Ieškoti žurnalo pranešimuose…",
+    "jumpToLatest": "Pereiti prie naujausių",
+    "showMore": "Rodyti daugiau",
+    "showLess": "Rodyti mažiau",
+    "buffered": "Rodoma: {count} iš daugiausiai {max} buferyje laikomų įrašų",
+    "emptyTitle": "Žurnale dar nėra įrašų",
+    "emptyDescription": "Įrašai atsiras čia, kai serveris juos užrašys. Jei tikėjotės rezultatų, išplėskite lygio, tiekėjo ar paieškos filtrus.",
+    "noLevelsTitle": "Nepasirinktas nė vienas lygis",
+    "noLevelsDescription": "Įjunkite bent vieną lygį, kad matytumėte žurnalo įrašus.",
+    "loadFailed": "Nepavyko įkelti serverio žurnalo."
   },
   "playground": {
     "title": "Žaidimų aikštelė",

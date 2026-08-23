@@ -14,7 +14,9 @@
     "switchToChinese": "Çinceye geç",
     "switchToEnglish": "İngilizceye geç",
     "modelsMenu": "Model türlerine göz atın",
-    "agents": "Ajanlar"
+    "agents": "Ajanlar",
+    "logs": "Günlükler",
+    "analyticsMenu": "Analitik sayfaları"
   },
   "auth": {
     "createYourAccount": "Hesabınızı oluşturun",
@@ -216,8 +218,8 @@
     "localOverride": "yerel geçersiz kılma",
     "displayName": "Görünen ad",
     "sizeLabel": "Yetenek kademesi",
-    "sizeLabelHint": "Frontier/Large/Medium/Small istihbarat eksenini belirler. Tanınan kademesi olmayan modeller 0 puan alır.",
-    "sizeLabelNone": "Yok (puanlanmamış)",
+    "sizeLabelHint": "Frontier/Large/Medium/Small istihbarat eksenini belirler: üst kademe her zaman alt kademeyi geçer ve aynı kademe içinde istihbarat sıralaması puanı hâlâ değiştirir. Tanınan kademesi olmayan bir model bu eksende en düşük puanı alır, ancak istihbarat üç eksenden yalnızca biridir — güvenilirliği ve hızı iyiyse yine de yönlendirmeyi kazanabilir.",
+    "sizeLabelNone": "Yok (en düşük istihbarat puanı)",
     "contextWindow": "Bağlam",
     "inFallback": "Zincirli",
     "saveModelSettings": "Model ayarlarını kaydet",
@@ -393,6 +395,7 @@
     "customTypeEmbedding": "Gömme",
     "customTypeImage": "Resim",
     "customTypeAudio": "Ses",
+    "customTypeTranscription": "Transcription",
     "customBaseUrl": "Temel URL",
     "customModels": "Modeller",
     "customModel": "Modeli",
@@ -409,6 +412,7 @@
     "addEmbeddingModel": "Gömme ekle",
     "addImageModel": "Resim modeli ekle",
     "addAudioModel": "Ses modeli ekle",
+    "addTranscriptionModel": "Add transcription model",
     "addingCustom": "Ekleniyor…",
     "discoverModels": "Modelleri getir",
     "probeNow": "Uç noktayı test et",
@@ -633,6 +637,32 @@
     "requestedModel": "İstenilen model",
     "ttft": "TTFT",
     "requestsByAgent": "Ajan başına istekler"
+  },
+  "logs": {
+    "title": "Günlükler",
+    "description": "Canlı sunucu günlüğü. Sayfa açıkken yeni kayıtlar akmaya devam eder.",
+    "pause": "Duraklat",
+    "resume": "Sürdür",
+    "clear": "Günlükleri temizle",
+    "cleared": "Sunucu günlüğü temizlendi",
+    "levelFilter": "Günlük düzeyleri",
+    "levels": {
+      "debug": "Hata ayıklama",
+      "info": "Bilgi",
+      "warn": "Uyarı",
+      "error": "Hata"
+    },
+    "countsHint": "Sayılar yalnızca bu filtrelere uyan kayıtları değil, sunucudaki günlük arabelleğinin tamamını kapsar.",
+    "searchPlaceholder": "Günlük mesajlarında ara…",
+    "jumpToLatest": "En sona git",
+    "showMore": "Daha fazla göster",
+    "showLess": "Daha az göster",
+    "buffered": "Arabellekteki en fazla {max} kayıttan {count} tanesi gösteriliyor",
+    "emptyTitle": "Henüz günlük kaydı yok",
+    "emptyDescription": "Sunucu kayıtları yazdıkça burada görünür. Çıktı bekliyorsanız düzey, sağlayıcı veya arama filtrelerini genişletin.",
+    "noLevelsTitle": "Düzey seçilmedi",
+    "noLevelsDescription": "Günlük çıktısını görmek için en az bir düzeyi açın.",
+    "loadFailed": "Sunucu günlüğü yüklenemedi."
   },
   "playground": {
     "title": "Bahçesi",

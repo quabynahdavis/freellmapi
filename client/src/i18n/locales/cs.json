@@ -14,7 +14,9 @@
     "switchToChinese": "Přechod na čínštinu",
     "switchToEnglish": "Přechod na angličtinu",
     "modelsMenu": "Procházet typy modelů",
-    "agents": "Agenti"
+    "agents": "Agenti",
+    "logs": "Logy",
+    "analyticsMenu": "Stránky analytiky"
   },
   "auth": {
     "createYourAccount": "Vytvořte si účet",
@@ -216,8 +218,8 @@
     "localOverride": "Místní přepsání",
     "displayName": "Zobrazovací název",
     "sizeLabel": "Úroveň schopností",
-    "sizeLabelHint": "Frontier/Large/Medium/Small určují osu zpravodajství. Modely bez rozpoznané úrovně mají skóre 0.",
-    "sizeLabelNone": "Žádná (bez hodnocení)",
+    "sizeLabelHint": "Frontier/Large/Medium/Small určují osu zpravodajství: vyšší úroveň vždy překoná nižší a v rámci jedné úrovně pořadí zpravodajství skóre stále posouvá. Model bez rozpoznané úrovně má na této ose nejnižší skóre, ale zpravodajství je jen jedna ze tří os — s dobrou spolehlivostí a rychlostí může být zvolen i tak.",
+    "sizeLabelNone": "Žádná (nejnižší skóre zpravodajství)",
     "contextWindow": "Kontext",
     "inFallback": "V řetězci",
     "saveModelSettings": "Uložit nastavení modelu",
@@ -393,6 +395,7 @@
     "customTypeEmbedding": "Vložení",
     "customTypeImage": "Obrázek",
     "customTypeAudio": "Audio",
+    "customTypeTranscription": "Transcription",
     "customBaseUrl": "Základní URL",
     "customModels": "Modely",
     "customModel": "Model",
@@ -409,6 +412,7 @@
     "addEmbeddingModel": "Přidání vložení",
     "addImageModel": "Přidat model obrazu",
     "addAudioModel": "Přidat audio model",
+    "addTranscriptionModel": "Add transcription model",
     "addingCustom": "Přidávám...",
     "discoverModels": "Načíst modely",
     "probeNow": "Otestovat endpoint",
@@ -633,6 +637,32 @@
     "requestedModel": "Požadovaný model",
     "ttft": "TTFT",
     "requestsByAgent": "Požadavky podle agenta"
+  },
+  "logs": {
+    "title": "Logy",
+    "description": "Živý log serveru. Nové záznamy přibývají, dokud je stránka otevřená.",
+    "pause": "Pozastavit",
+    "resume": "Pokračovat",
+    "clear": "Vymazat logy",
+    "cleared": "Log serveru vymazán",
+    "levelFilter": "Úrovně logování",
+    "levels": {
+      "debug": "Debug",
+      "info": "Info",
+      "warn": "Varování",
+      "error": "Chyba"
+    },
+    "countsHint": "Počty se vztahují k celé vyrovnávací paměti logu na serveru, ne jen k záznamům odpovídajícím těmto filtrům.",
+    "searchPlaceholder": "Hledat ve zprávách logu…",
+    "jumpToLatest": "Přejít na nejnovější",
+    "showMore": "Zobrazit více",
+    "showLess": "Zobrazit méně",
+    "buffered": "Zobrazeno {count} z maximálně {max} uložených záznamů",
+    "emptyTitle": "Zatím žádné záznamy v logu",
+    "emptyDescription": "Záznamy se zde objeví, jakmile je server zapíše. Pokud jste čekali výstup, rozšiřte filtry úrovně, poskytovatele nebo hledání.",
+    "noLevelsTitle": "Není vybrána žádná úroveň",
+    "noLevelsDescription": "Zapněte alespoň jednu úroveň, abyste viděli výstup logu.",
+    "loadFailed": "Log serveru se nepodařilo načíst."
   },
   "playground": {
     "title": "Hřiště",

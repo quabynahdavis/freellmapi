@@ -27,6 +27,8 @@ const KEY_MODEL_SCOPE_FILENAME = '20260805_000001_key_model_scope.ts';
 const CLIENT_PROFILES_FILENAME = '20260805_000002_client_profiles.ts';
 const API_KEY_PROXY_FILENAME = '20260810_000001_api_key_proxy.ts';
 const PLAYGROUND_CONVERSATIONS_FILENAME = '20260820_000001_playground_conversations.ts';
+const CUSTOM_MODEL_TOMBSTONES_FILENAME = '20260819_000001_custom_model_tombstones.ts';
+const SERVER_LOGS_FILENAME = '20260823_000001_server_logs.ts';
 
 interface SchemaRow {
   type: string;
@@ -99,7 +101,9 @@ describe('migration round trip', () => {
         KEY_MODEL_SCOPE_FILENAME,
         CLIENT_PROFILES_FILENAME,
         API_KEY_PROXY_FILENAME,
+        CUSTOM_MODEL_TOMBSTONES_FILENAME,
         PLAYGROUND_CONVERSATIONS_FILENAME,
+        SERVER_LOGS_FILENAME,
       ]);
     } finally {
       db.close();

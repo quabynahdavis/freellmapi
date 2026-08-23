@@ -14,7 +14,9 @@
     "switchToChinese": "中国語に切り替える",
     "switchToEnglish": "英語に切り替える",
     "modelsMenu": "モデルタイプを参照する",
-    "agents": "エージェント"
+    "agents": "エージェント",
+    "logs": "ログ",
+    "analyticsMenu": "分析ページ"
   },
   "auth": {
     "createYourAccount": "アカウントを作成する",
@@ -216,8 +218,8 @@
     "localOverride": "ローカルオーバーライド",
     "displayName": "表示名",
     "sizeLabel": "能力ティア",
-    "sizeLabelHint": "Frontier/Large/Medium/Small がインテリジェンス軸を決めます。認識されるティアのないモデルは 0 として扱われます。",
-    "sizeLabelNone": "なし（スコアなし）",
+    "sizeLabelHint": "Frontier/Large/Medium/Small がインテリジェンス軸を決めます。上位のティアは常に下位のティアを上回り、同じティア内でもインテリジェンス順位がスコアを動かします。認識されるティアのないモデルはこの軸で最下位のスコアになりますが、インテリジェンスは 3 つの軸のうちの 1 つにすぎず、信頼性と速度が高ければ自動ルーティングで選ばれることもあります。",
+    "sizeLabelNone": "なし（インテリジェンススコア最下位）",
     "contextWindow": "コンテキスト",
     "inFallback": "連鎖中",
     "saveModelSettings": "モデル設定の保存",
@@ -393,6 +395,7 @@
     "customTypeEmbedding": "埋め込み",
     "customTypeImage": "画像",
     "customTypeAudio": "オーディオ",
+    "customTypeTranscription": "Transcription",
     "customBaseUrl": "ベース URL",
     "customModels": "モデル",
     "customModel": "モデル",
@@ -409,6 +412,7 @@
     "addEmbeddingModel": "埋め込みの追加",
     "addImageModel": "画像モデルを追加",
     "addAudioModel": "オーディオモデルの追加",
+    "addTranscriptionModel": "Add transcription model",
     "addingCustom": "追加中…",
     "discoverModels": "モデルを取得",
     "probeNow": "エンドポイントをテスト",
@@ -633,6 +637,32 @@
     "requestedModel": "要求されたモデル",
     "ttft": "TTFT",
     "requestsByAgent": "エージェント別リクエスト"
+  },
+  "logs": {
+    "title": "ログ",
+    "description": "サーバーのライブログです。ページを開いている間、新しいエントリが順次流れてきます。",
+    "pause": "一時停止",
+    "resume": "再開",
+    "clear": "ログを消去",
+    "cleared": "サーバーログを消去しました",
+    "levelFilter": "ログレベル",
+    "levels": {
+      "debug": "デバッグ",
+      "info": "情報",
+      "warn": "警告",
+      "error": "エラー"
+    },
+    "countsHint": "件数はサーバー上のログバッファ全体の合計であり、これらのフィルターに一致するエントリだけの数ではありません。",
+    "searchPlaceholder": "ログメッセージを検索…",
+    "jumpToLatest": "最新へ移動",
+    "showMore": "さらに表示",
+    "showLess": "表示を少なくする",
+    "buffered": "バッファ内の最大 {max} 件のうち {count} 件を表示中",
+    "emptyTitle": "ログエントリはまだありません",
+    "emptyDescription": "サーバーが書き込むと、ここにエントリが表示されます。出力があるはずの場合は、レベル・プロバイダー・検索のフィルターを広げてください。",
+    "noLevelsTitle": "レベルが選択されていません",
+    "noLevelsDescription": "ログ出力を表示するには、レベルを 1 つ以上オンにしてください。",
+    "loadFailed": "サーバーログを読み込めませんでした。"
   },
   "playground": {
     "title": "遊び場",

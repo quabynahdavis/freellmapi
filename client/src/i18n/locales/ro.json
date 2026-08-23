@@ -14,7 +14,9 @@
     "switchToChinese": "Trecerea la chineză",
     "switchToEnglish": "Trecerea la engleză",
     "modelsMenu": "Explorează tipurile de modele",
-    "agents": "Agenți"
+    "agents": "Agenți",
+    "logs": "Jurnale",
+    "analyticsMenu": "Pagini de analiză"
   },
   "auth": {
     "createYourAccount": "Creează-ți contul",
@@ -216,8 +218,8 @@
     "localOverride": "Suprascriere locală",
     "displayName": "Nume afișat",
     "sizeLabel": "Nivel de capacitate",
-    "sizeLabelHint": "Frontier/Large/Medium/Small determină axa inteligenței. Modelele fără un nivel recunoscut primesc 0.",
-    "sizeLabelNone": "Niciunul (fără punctaj)",
+    "sizeLabelHint": "Frontier/Large/Medium/Small determină axa inteligenței: un nivel superior îl depășește întotdeauna pe unul inferior, iar în cadrul aceluiași nivel rangul de inteligență continuă să miște punctajul. Un model fără un nivel recunoscut primește cel mai mic punctaj pe această axă, dar inteligența este doar una dintre cele trei axe — cu fiabilitate și viteză bune poate fi totuși rutat.",
+    "sizeLabelNone": "Niciunul (cel mai mic punctaj de inteligență)",
     "contextWindow": "Context",
     "inFallback": "În lanț",
     "saveModelSettings": "Salvează setările modelului",
@@ -393,6 +395,7 @@
     "customTypeEmbedding": "Încorporare",
     "customTypeImage": "Imagine",
     "customTypeAudio": "Audio",
+    "customTypeTranscription": "Transcription",
     "customBaseUrl": "Baza URL",
     "customModels": "Modele",
     "customModel": "Model",
@@ -409,6 +412,7 @@
     "addEmbeddingModel": "Încorporare prin adăugare",
     "addImageModel": "Adaugă modelul imaginii",
     "addAudioModel": "Adaugă modelul audio",
+    "addTranscriptionModel": "Add transcription model",
     "addingCustom": "Adăugând...",
     "discoverModels": "Preia modelele",
     "probeNow": "Testează endpointul",
@@ -633,6 +637,32 @@
     "requestedModel": "Modelul cerut",
     "ttft": "TTFT",
     "requestsByAgent": "Cereri per agent"
+  },
+  "logs": {
+    "title": "Jurnale",
+    "description": "Jurnalul serverului în timp real. Intrările noi apar cât timp pagina este deschisă.",
+    "pause": "Pauză",
+    "resume": "Reia",
+    "clear": "Golește jurnalele",
+    "cleared": "Jurnalul serverului a fost golit",
+    "levelFilter": "Niveluri de jurnal",
+    "levels": {
+      "debug": "Debug",
+      "info": "Info",
+      "warn": "Avertisment",
+      "error": "Eroare"
+    },
+    "countsHint": "Numărătorile se referă la întregul buffer de jurnal de pe server, nu doar la intrările care corespund acestor filtre.",
+    "searchPlaceholder": "Caută în mesajele din jurnal…",
+    "jumpToLatest": "Sari la cele mai recente",
+    "showMore": "Afișează mai mult",
+    "showLess": "Afișează mai puțin",
+    "buffered": "Se afișează {count} din cel mult {max} intrări din buffer",
+    "emptyTitle": "Încă nu există intrări în jurnal",
+    "emptyDescription": "Intrările apar aici pe măsură ce serverul le scrie. Lărgește filtrele de nivel, furnizor sau căutare dacă te așteptai la rezultate.",
+    "noLevelsTitle": "Niciun nivel selectat",
+    "noLevelsDescription": "Activează cel puțin un nivel pentru a vedea jurnalul.",
+    "loadFailed": "Nu s-a putut încărca jurnalul serverului."
   },
   "playground": {
     "title": "Locul de joacă",

@@ -14,7 +14,9 @@
     "switchToChinese": "چینی پر سوئچ کریں۔",
     "switchToEnglish": "انگریزی پر سوئچ کریں۔",
     "modelsMenu": "ماڈل کی اقسام کو براؤز کریں۔",
-    "agents": "ایجنٹس"
+    "agents": "ایجنٹس",
+    "logs": "لاگز",
+    "analyticsMenu": "تجزیات کے صفحات"
   },
   "auth": {
     "createYourAccount": "اپنا اکاؤنٹ بنائیں",
@@ -216,8 +218,8 @@
     "localOverride": "مقامی اوور رائڈ",
     "displayName": "ڈسپلے کا نام",
     "sizeLabel": "صلاحیت کا درجہ",
-    "sizeLabelHint": "Frontier/Large/Medium/Small ذہانت کے محور کا تعین کرتے ہیں۔ تسلیم شدہ درجے کے بغیر ماڈلز کو 0 اسکور ملتا ہے۔",
-    "sizeLabelNone": "کوئی نہیں (بغیر اسکور)",
+    "sizeLabelHint": "Frontier/Large/Medium/Small ذہانت کے محور کا تعین کرتے ہیں: اونچا درجہ ہمیشہ نچلے درجے سے آگے رہتا ہے، اور ایک ہی درجے کے اندر ذہانت کی درجہ بندی اسکور کو ہلاتی رہتی ہے۔ تسلیم شدہ درجے کے بغیر ماڈل کو اس محور پر سب سے کم اسکور ملتا ہے، مگر ذہانت تین محوروں میں سے صرف ایک ہے — بھروسے مندی اور رفتار اچھی ہوں تو وہ پھر بھی منتخب ہو سکتا ہے۔",
+    "sizeLabelNone": "کوئی نہیں (سب سے کم ذہانت اسکور)",
     "contextWindow": "سیاق و سباق",
     "inFallback": "زنجیر میں",
     "saveModelSettings": "ماڈل کی ترتیبات کو محفوظ کریں۔",
@@ -393,6 +395,7 @@
     "customTypeEmbedding": "سرایت کرنا",
     "customTypeImage": "تصویر",
     "customTypeAudio": "آڈیو",
+    "customTypeTranscription": "Transcription",
     "customBaseUrl": "بیس URL",
     "customModels": "ماڈلز",
     "customModel": "ماڈل",
@@ -409,6 +412,7 @@
     "addEmbeddingModel": "سرایت شامل کریں۔",
     "addImageModel": "تصویری ماڈل شامل کریں۔",
     "addAudioModel": "آڈیو ماڈل شامل کریں۔",
+    "addTranscriptionModel": "Add transcription model",
     "addingCustom": "شامل کیا جا رہا ہے…",
     "discoverModels": "ماڈلز حاصل کریں",
     "probeNow": "اینڈ پوائنٹ کی جانچ کریں",
@@ -633,6 +637,32 @@
     "requestedModel": "ماڈل کی درخواست کی۔",
     "ttft": "TTFT",
     "requestsByAgent": "فی ایجنٹ درخواستیں"
+  },
+  "logs": {
+    "title": "لاگز",
+    "description": "لائیو سرور لاگ۔ صفحہ کھلا رہنے تک نئے اندراجات آتے رہتے ہیں۔",
+    "pause": "روکیں",
+    "resume": "جاری رکھیں",
+    "clear": "لاگز صاف کریں",
+    "cleared": "سرور لاگ صاف کر دیا گیا",
+    "levelFilter": "لاگ لیولز",
+    "levels": {
+      "debug": "ڈیبگ",
+      "info": "انفو",
+      "warn": "انتباہ",
+      "error": "خرابی"
+    },
+    "countsHint": "گنتی سرور پر موجود پورے لاگ بفر کی ہے، صرف ان فلٹرز سے مماثل اندراجات کی نہیں۔",
+    "searchPlaceholder": "لاگ پیغامات تلاش کریں…",
+    "jumpToLatest": "تازہ ترین پر جائیں",
+    "showMore": "مزید دکھائیں",
+    "showLess": "کم دکھائیں",
+    "buffered": "زیادہ سے زیادہ {max} بفر شدہ اندراجات میں سے {count} دکھائے جا رہے ہیں",
+    "emptyTitle": "ابھی تک کوئی لاگ اندراج نہیں",
+    "emptyDescription": "سرور جیسے جیسے لکھتا ہے، اندراجات یہاں ظاہر ہوتے جائیں گے۔ اگر آپ کو آؤٹ پٹ کی توقع تھی تو لیول، فراہم کنندہ یا تلاش کے فلٹرز کا دائرہ بڑھائیں۔",
+    "noLevelsTitle": "کوئی لیول منتخب نہیں",
+    "noLevelsDescription": "لاگ آؤٹ پٹ دیکھنے کے لیے کم از کم ایک لیول آن کریں۔",
+    "loadFailed": "سرور لاگ لوڈ نہیں ہو سکا۔"
   },
   "playground": {
     "title": "کھیل کا میدان",

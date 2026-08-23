@@ -14,7 +14,9 @@
     "switchToChinese": "चीनी पर स्विच करें",
     "switchToEnglish": "अंग्रेजी पर स्विच करें",
     "modelsMenu": "मॉडल प्रकार ब्राउज़ करें",
-    "agents": "एजेंट"
+    "agents": "एजेंट",
+    "logs": "लॉग",
+    "analyticsMenu": "विश्लेषिकी पेज"
   },
   "auth": {
     "createYourAccount": "अपना खाता बनाएं",
@@ -216,8 +218,8 @@
     "localOverride": "स्थानीय ओवरराइड",
     "displayName": "प्रदर्शन नाम",
     "sizeLabel": "क्षमता स्तर",
-    "sizeLabelHint": "Frontier/Large/Medium/Small बुद्धि अक्ष तय करते हैं। मान्य स्तर के बिना मॉडल को 0 स्कोर मिलता है।",
-    "sizeLabelNone": "कोई नहीं (बिना स्कोर)",
+    "sizeLabelHint": "Frontier/Large/Medium/Small बुद्धि अक्ष तय करते हैं: ऊँचा स्तर हमेशा निचले स्तर से आगे रहता है, और एक ही स्तर के भीतर बुद्धि रैंक स्कोर को हिलाती रहती है। मान्य स्तर के बिना मॉडल को इस अक्ष पर सबसे कम स्कोर मिलता है, लेकिन बुद्धि तीन अक्षों में से केवल एक है — अच्छी विश्वसनीयता और गति होने पर वह फिर भी रूट जीत सकता है।",
+    "sizeLabelNone": "कोई नहीं (सबसे कम बुद्धि स्कोर)",
     "contextWindow": "प्रसंग",
     "inFallback": "शृंखला में",
     "saveModelSettings": "मॉडल सेटिंग सहेजें",
@@ -393,6 +395,7 @@
     "customTypeEmbedding": "एंबेडिंग",
     "customTypeImage": "छवि",
     "customTypeAudio": "ऑडियो",
+    "customTypeTranscription": "Transcription",
     "customBaseUrl": "आधार URL",
     "customModels": "मॉडल",
     "customModel": "मॉडल",
@@ -409,6 +412,7 @@
     "addEmbeddingModel": "एम्बेडिंग जोड़ें",
     "addImageModel": "छवि मॉडल जोड़ें",
     "addAudioModel": "ऑडियो मॉडल जोड़ें",
+    "addTranscriptionModel": "Add transcription model",
     "addingCustom": "जोड़ा जा रहा है...",
     "discoverModels": "मॉडल लाएँ",
     "probeNow": "एंडपॉइंट का परीक्षण करें",
@@ -633,6 +637,32 @@
     "requestedModel": "अनुरोधित मॉडल",
     "ttft": "TTFT",
     "requestsByAgent": "एजेंट के अनुसार अनुरोध"
+  },
+  "logs": {
+    "title": "लॉग",
+    "description": "लाइव सर्वर लॉग। पेज खुला रहने तक नई प्रविष्टियाँ आती रहती हैं।",
+    "pause": "रोकें",
+    "resume": "जारी रखें",
+    "clear": "लॉग साफ़ करें",
+    "cleared": "सर्वर लॉग साफ़ कर दिया गया",
+    "levelFilter": "लॉग स्तर",
+    "levels": {
+      "debug": "डीबग",
+      "info": "इन्फ़ो",
+      "warn": "चेतावनी",
+      "error": "त्रुटि"
+    },
+    "countsHint": "गिनती सर्वर पर मौजूद पूरे लॉग बफ़र की है, सिर्फ़ इन फ़िल्टरों से मेल खाने वाली प्रविष्टियों की नहीं।",
+    "searchPlaceholder": "लॉग संदेश खोजें…",
+    "jumpToLatest": "नवीनतम पर जाएँ",
+    "showMore": "और दिखाएँ",
+    "showLess": "कम दिखाएँ",
+    "buffered": "अधिकतम {max} बफ़र प्रविष्टियों में से {count} दिखाई जा रही हैं",
+    "emptyTitle": "अभी तक कोई लॉग प्रविष्टि नहीं",
+    "emptyDescription": "सर्वर जैसे-जैसे लिखता है, प्रविष्टियाँ यहाँ दिखती जाएँगी। यदि आपको आउटपुट की उम्मीद थी तो स्तर, प्रदाता या खोज फ़िल्टर का दायरा बढ़ाएँ।",
+    "noLevelsTitle": "कोई स्तर चयनित नहीं",
+    "noLevelsDescription": "लॉग आउटपुट देखने के लिए कम से कम एक स्तर चालू करें।",
+    "loadFailed": "सर्वर लॉग लोड नहीं हो सका।"
   },
   "playground": {
     "title": "खेल का मैदान",

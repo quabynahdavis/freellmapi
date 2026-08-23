@@ -14,7 +14,9 @@
     "switchToChinese": "ወደ ቻይንኛ ቀይር",
     "switchToEnglish": "ወደ እንግሊዝኛ ቀይር",
     "modelsMenu": "የሞዴል አይነቶችን ያስሱ",
-    "agents": "ወኪሎች"
+    "agents": "ወኪሎች",
+    "logs": "መዝገቦች",
+    "analyticsMenu": "የአፈጻጸም ገጾች"
   },
   "auth": {
     "createYourAccount": "መለያዎን ይፍጠሩ",
@@ -216,8 +218,8 @@
     "localOverride": "የአካባቢ መሻር",
     "displayName": "የማሳያ ስም",
     "sizeLabel": "የአቅም ደረጃ",
-    "sizeLabelHint": "Frontier/Large/Medium/Small የአእምሮ ዘንግን ይወስናሉ። የታወቀ ደረጃ የሌላቸው ሞዴሎች 0 ያገኛሉ።",
-    "sizeLabelNone": "ምንም (ያልተመዘነ)",
+    "sizeLabelHint": "Frontier/Large/Medium/Small የአእምሮ ዘንግን ይወስናሉ፦ ከፍ ያለ ደረጃ ሁልጊዜ ከዝቅተኛው ይበልጣል፣ በአንድ ደረጃ ውስጥ ደግሞ የአእምሮ ደረጃው ነጥቡን ማንቀሳቀሱን ይቀጥላል። የታወቀ ደረጃ የሌለው ሞዴል በዚህ ዘንግ ላይ ዝቅተኛውን ነጥብ ያገኛል፤ ነገር ግን አእምሮ ከሦስቱ ዘንጎች አንዱ ብቻ ነው — ጠንካራ አስተማማኝነትና ፍጥነት አሁንም መንገዱን ሊያሸንፉለት ይችላሉ።",
+    "sizeLabelNone": "ምንም (ዝቅተኛው የአእምሮ ነጥብ)",
     "contextWindow": "አውድ",
     "inFallback": "በሰንሰለት ውስጥ",
     "saveModelSettings": "የሞዴል ቅንብሮችን ያስቀምጡ",
@@ -393,6 +395,7 @@
     "customTypeEmbedding": "መክተት",
     "customTypeImage": "ምስል",
     "customTypeAudio": "ኦዲዮ",
+    "customTypeTranscription": "Transcription",
     "customBaseUrl": "የመሠረት URL",
     "customModels": "ሞዴሎች",
     "customModel": "ሞዴል",
@@ -409,6 +412,7 @@
     "addEmbeddingModel": "መክተትን ያክሉ",
     "addImageModel": "የምስል ሞዴል ያክሉ",
     "addAudioModel": "የድምጽ ሞዴል ያክሉ",
+    "addTranscriptionModel": "Add transcription model",
     "addingCustom": "በማከል ላይ...",
     "discoverModels": "ሞዴሎችን አምጣ",
     "probeNow": "የመጨረሻ ነጥቡን ይፈትሹ",
@@ -633,6 +637,32 @@
     "requestedModel": "የተጠየቀው ሞዴል",
     "ttft": "TTFT",
     "requestsByAgent": "ጥያቄዎች በወኪል"
+  },
+  "logs": {
+    "title": "መዝገቦች",
+    "description": "የቀጥታ የአገልጋይ መዝገብ። ገጹ ክፍት ሆኖ ሳለ አዲስ ግቤቶች እየገቡ ይሄዳሉ።",
+    "pause": "አቁም",
+    "resume": "ቀጥል",
+    "clear": "መዝገቦችን አጽዳ",
+    "cleared": "የአገልጋይ መዝገብ ጸድቷል",
+    "levelFilter": "የመዝገብ ደረጃዎች",
+    "levels": {
+      "debug": "ማረሚያ",
+      "info": "መረጃ",
+      "warn": "ማስጠንቀቂያ",
+      "error": "ስህተት"
+    },
+    "countsHint": "ቁጥሮቹ በአገልጋዩ ላይ ላለው ሙሉ የመዝገብ ማጠራቀሚያ ጠቅላላ ናቸው፣ ከእነዚህ ማጣሪያዎች ጋር የሚዛመዱ ግቤቶች ብቻ አይደሉም።",
+    "searchPlaceholder": "የመዝገብ መልዕክቶችን ይፈልጉ...",
+    "jumpToLatest": "ወደ የቅርብ ጊዜው ዝለል",
+    "showMore": "ተጨማሪ አሳይ",
+    "showLess": "ያነሰ አሳይ",
+    "buffered": "ከተከማቹ እስከ {max} ግቤቶች ውስጥ {count} በማሳየት ላይ",
+    "emptyTitle": "እስካሁን ምንም የመዝገብ ግቤቶች የሉም",
+    "emptyDescription": "አገልጋዩ ሲጽፋቸው ግቤቶች እዚህ ይታያሉ። ውጤት የጠበቁ ከሆነ የደረጃ፣ የአቅራቢ ወይም የፍለጋ ማጣሪያዎችን ያስፉ።",
+    "noLevelsTitle": "ምንም ደረጃ አልተመረጠም",
+    "noLevelsDescription": "የመዝገብ ውጤትን ለማየት ቢያንስ አንድ ደረጃ ያብሩ።",
+    "loadFailed": "የአገልጋዩን መዝገብ መጫን አልተቻለም።"
   },
   "playground": {
     "title": "የመጫወቻ ሜዳ",

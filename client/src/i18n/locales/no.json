@@ -14,7 +14,9 @@
     "switchToChinese": "Overgang til kinesisk",
     "switchToEnglish": "Bytte til engelsk",
     "modelsMenu": "Bla gjennom modelltyper",
-    "agents": "Agenter"
+    "agents": "Agenter",
+    "logs": "Logg",
+    "analyticsMenu": "Analysesider"
   },
   "auth": {
     "createYourAccount": "Opprett kontoen din",
@@ -216,8 +218,8 @@
     "localOverride": "Lokal overstyring",
     "displayName": "Visningsnavn",
     "sizeLabel": "Kapasitetsnivå",
-    "sizeLabelHint": "Frontier/Large/Medium/Small styrer etterretningsaksen. Modeller uten et gjenkjent nivå får 0.",
-    "sizeLabelNone": "Ingen (uten poeng)",
+    "sizeLabelHint": "Frontier/Large/Medium/Small bestemmer etterretningsaksen: et høyere nivå slår alltid et lavere, og innenfor et nivå flytter etterretningsrangeringen fortsatt poengsummen. En modell uten et gjenkjent nivå får den laveste poengsummen på denne aksen, men etterretning er bare én av tre akser — god pålitelighet og hastighet kan fortsatt gi den ruten.",
+    "sizeLabelNone": "Ingen (laveste etterretningspoeng)",
     "contextWindow": "Kontekst",
     "inFallback": "I kjeden",
     "saveModelSettings": "Lagre modellinnstillinger",
@@ -393,6 +395,7 @@
     "customTypeEmbedding": "Innleiring",
     "customTypeImage": "Bilde",
     "customTypeAudio": "Lyd",
+    "customTypeTranscription": "Transcription",
     "customBaseUrl": "Base URL",
     "customModels": "Modeller",
     "customModel": "Modell",
@@ -409,6 +412,7 @@
     "addEmbeddingModel": "Legg til embedding",
     "addImageModel": "Legg til bildemodell",
     "addAudioModel": "Legg til lydmodell",
+    "addTranscriptionModel": "Add transcription model",
     "addingCustom": "Legger til...",
     "discoverModels": "Hent modeller",
     "probeNow": "Test endepunktet",
@@ -633,6 +637,32 @@
     "requestedModel": "Etterspurt modell",
     "ttft": "TTFT",
     "requestsByAgent": "Forespørsler per agent"
+  },
+  "logs": {
+    "title": "Logg",
+    "description": "Live serverlogg. Nye oppføringer kommer inn mens siden er åpen.",
+    "pause": "Sett på pause",
+    "resume": "Fortsett",
+    "clear": "Tøm loggen",
+    "cleared": "Serverloggen er tømt",
+    "levelFilter": "Loggnivåer",
+    "levels": {
+      "debug": "Debug",
+      "info": "Info",
+      "warn": "Advarsel",
+      "error": "Feil"
+    },
+    "countsHint": "Tallene gjelder hele loggbufferen på serveren, ikke bare oppføringene som treffer disse filtrene.",
+    "searchPlaceholder": "Søk i loggmeldinger…",
+    "jumpToLatest": "Gå til nyeste",
+    "showMore": "Vis mer",
+    "showLess": "Vis mindre",
+    "buffered": "Viser {count} av opptil {max} bufrede oppføringer",
+    "emptyTitle": "Ingen loggoppføringer ennå",
+    "emptyDescription": "Oppføringer vises her etter hvert som serveren skriver dem. Utvid filtrene for nivå, leverandør eller søk hvis du ventet utdata.",
+    "noLevelsTitle": "Ingen nivåer valgt",
+    "noLevelsDescription": "Slå på minst ett nivå for å se loggutdata.",
+    "loadFailed": "Kunne ikke laste inn serverloggen."
   },
   "playground": {
     "title": "Lekeplass",

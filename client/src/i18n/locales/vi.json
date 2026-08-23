@@ -14,7 +14,9 @@
     "switchToChinese": "Chuyển sang tiếng Trung",
     "switchToEnglish": "Chuyển sang tiếng Anh",
     "modelsMenu": "Duyệt các loại mô hình",
-    "agents": "Tác nhân"
+    "agents": "Tác nhân",
+    "logs": "Nhật ký",
+    "analyticsMenu": "Trang phân tích"
   },
   "auth": {
     "createYourAccount": "Tạo tài khoản của bạn",
@@ -216,8 +218,8 @@
     "localOverride": "ghi đè cục bộ",
     "displayName": "Tên hiển thị",
     "sizeLabel": "Bậc năng lực",
-    "sizeLabelHint": "Frontier/Large/Medium/Small quyết định trục tình báo. Mô hình không có bậc được nhận diện sẽ nhận điểm 0.",
-    "sizeLabelNone": "Không có (không chấm điểm)",
+    "sizeLabelHint": "Frontier/Large/Medium/Small quyết định trục tình báo: bậc cao hơn luôn vượt bậc thấp hơn, và trong cùng một bậc thì thứ hạng tình báo vẫn làm dịch chuyển điểm. Mô hình không có bậc được nhận diện sẽ nhận điểm thấp nhất trên trục này, nhưng tình báo chỉ là một trong ba trục — độ tin cậy và tốc độ tốt vẫn có thể giúp nó được chọn định tuyến.",
+    "sizeLabelNone": "Không có (điểm tình báo thấp nhất)",
     "contextWindow": "Bối cảnh",
     "inFallback": "Trong chuỗi",
     "saveModelSettings": "Lưu cài đặt mô hình",
@@ -393,6 +395,7 @@
     "customTypeEmbedding": "Nhúng",
     "customTypeImage": "Hình ảnh",
     "customTypeAudio": "Âm thanh",
+    "customTypeTranscription": "Transcription",
     "customBaseUrl": "Căn cứ URL",
     "customModels": "Người mẫu",
     "customModel": "người mẫu",
@@ -409,6 +412,7 @@
     "addEmbeddingModel": "Thêm nhúng",
     "addImageModel": "Thêm mô hình hình ảnh",
     "addAudioModel": "Thêm mô hình âm thanh",
+    "addTranscriptionModel": "Add transcription model",
     "addingCustom": "Đang thêm…",
     "discoverModels": "Lấy danh sách mô hình",
     "probeNow": "Kiểm thử endpoint",
@@ -633,6 +637,32 @@
     "requestedModel": "Mô hình được yêu cầu",
     "ttft": "TTFT",
     "requestsByAgent": "Yêu cầu theo tác nhân"
+  },
+  "logs": {
+    "title": "Nhật ký",
+    "description": "Nhật ký máy chủ trực tiếp. Mục mới sẽ hiện dần khi trang đang mở.",
+    "pause": "Tạm dừng",
+    "resume": "Tiếp tục",
+    "clear": "Xóa nhật ký",
+    "cleared": "Đã xóa nhật ký máy chủ",
+    "levelFilter": "Mức nhật ký",
+    "levels": {
+      "debug": "Gỡ lỗi",
+      "info": "Thông tin",
+      "warn": "Cảnh báo",
+      "error": "Lỗi"
+    },
+    "countsHint": "Số đếm là tổng của toàn bộ vùng đệm nhật ký trên máy chủ, không chỉ các mục khớp với những bộ lọc này.",
+    "searchPlaceholder": "Tìm trong nội dung nhật ký…",
+    "jumpToLatest": "Đến mục mới nhất",
+    "showMore": "Xem thêm",
+    "showLess": "Thu gọn",
+    "buffered": "Đang hiển thị {count} trong tối đa {max} mục được lưu đệm",
+    "emptyTitle": "Chưa có mục nhật ký nào",
+    "emptyDescription": "Các mục sẽ xuất hiện ở đây khi máy chủ ghi nhật ký. Hãy nới rộng bộ lọc mức, nhà cung cấp hoặc tìm kiếm nếu bạn mong có kết quả.",
+    "noLevelsTitle": "Chưa chọn mức nào",
+    "noLevelsDescription": "Bật ít nhất một mức để xem nội dung nhật ký.",
+    "loadFailed": "Không thể tải nhật ký máy chủ."
   },
   "playground": {
     "title": "Sân chơi",

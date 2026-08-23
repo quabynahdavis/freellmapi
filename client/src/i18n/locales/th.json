@@ -14,7 +14,9 @@
     "switchToChinese": "เปลี่ยนไปใช้ภาษาจีน",
     "switchToEnglish": "เปลี่ยนเป็นภาษาอังกฤษ",
     "modelsMenu": "เรียกดูประเภทโมเดล",
-    "agents": "เอเจนต์"
+    "agents": "เอเจนต์",
+    "logs": "บันทึก",
+    "analyticsMenu": "หน้าการวิเคราะห์"
   },
   "auth": {
     "createYourAccount": "สร้างบัญชีของคุณ",
@@ -216,8 +218,8 @@
     "localOverride": "การแทนที่ในท้องถิ่น",
     "displayName": "ชื่อที่แสดง",
     "sizeLabel": "ระดับความสามารถ",
-    "sizeLabelHint": "Frontier/Large/Medium/Small กำหนดแกนความฉลาด โมเดลที่ไม่มีระดับที่รู้จักจะได้คะแนน 0",
-    "sizeLabelNone": "ไม่มี (ไม่ให้คะแนน)",
+    "sizeLabelHint": "Frontier/Large/Medium/Small กำหนดแกนความฉลาด ระดับที่สูงกว่าจะเหนือกว่าระดับที่ต่ำกว่าเสมอ และภายในระดับเดียวกันอันดับความฉลาดยังคงขยับคะแนน โมเดลที่ไม่มีระดับที่รู้จักจะได้คะแนนต่ำสุดบนแกนนี้ แต่ความฉลาดเป็นเพียงหนึ่งในสามแกน หากความน่าเชื่อถือและความเร็วดี ก็ยังถูกกำหนดเส้นทางอัตโนมัติได้",
+    "sizeLabelNone": "ไม่มี (คะแนนความฉลาดต่ำสุด)",
     "contextWindow": "บริบท",
     "inFallback": "ในห่วงโซ่",
     "saveModelSettings": "บันทึกการตั้งค่าโมเดล",
@@ -393,6 +395,7 @@
     "customTypeEmbedding": "การฝัง",
     "customTypeImage": "รูปภาพ",
     "customTypeAudio": "เสียง",
+    "customTypeTranscription": "Transcription",
     "customBaseUrl": "ฐาน URL",
     "customModels": "โมเดล",
     "customModel": "รุ่น",
@@ -409,6 +412,7 @@
     "addEmbeddingModel": "เพิ่มการฝัง",
     "addImageModel": "เพิ่มรูปแบบรูปภาพ",
     "addAudioModel": "เพิ่มโมเดลเสียง",
+    "addTranscriptionModel": "Add transcription model",
     "addingCustom": "กำลังเพิ่ม...",
     "discoverModels": "ดึงรายการโมเดล",
     "probeNow": "ทดสอบเอนด์พอยต์",
@@ -633,6 +637,32 @@
     "requestedModel": "รุ่นที่ขอ",
     "ttft": "TTFT",
     "requestsByAgent": "คำขอตามเอเจนต์"
+  },
+  "logs": {
+    "title": "บันทึก",
+    "description": "บันทึกเซิร์ฟเวอร์แบบเรียลไทม์ รายการใหม่จะทยอยเข้ามาขณะเปิดหน้านี้",
+    "pause": "หยุดชั่วคราว",
+    "resume": "ทำต่อ",
+    "clear": "ล้างบันทึก",
+    "cleared": "ล้างบันทึกเซิร์ฟเวอร์แล้ว",
+    "levelFilter": "ระดับบันทึก",
+    "levels": {
+      "debug": "ดีบัก",
+      "info": "ข้อมูล",
+      "warn": "คำเตือน",
+      "error": "ข้อผิดพลาด"
+    },
+    "countsHint": "จำนวนที่แสดงเป็นยอดรวมของบัฟเฟอร์บันทึกทั้งหมดบนเซิร์ฟเวอร์ ไม่ใช่เฉพาะรายการที่ตรงกับตัวกรองเหล่านี้",
+    "searchPlaceholder": "ค้นหาข้อความในบันทึก…",
+    "jumpToLatest": "ไปที่รายการล่าสุด",
+    "showMore": "แสดงเพิ่มเติม",
+    "showLess": "แสดงน้อยลง",
+    "buffered": "กำลังแสดง {count} จากบัฟเฟอร์สูงสุด {max} รายการ",
+    "emptyTitle": "ยังไม่มีรายการบันทึก",
+    "emptyDescription": "รายการจะปรากฏที่นี่เมื่อเซิร์ฟเวอร์เขียนบันทึก หากคาดว่าควรมีผลลัพธ์ ให้ขยายตัวกรองระดับ ผู้ให้บริการ หรือคำค้นหา",
+    "noLevelsTitle": "ยังไม่ได้เลือกระดับ",
+    "noLevelsDescription": "เปิดอย่างน้อยหนึ่งระดับเพื่อดูผลลัพธ์ในบันทึก",
+    "loadFailed": "ไม่สามารถโหลดบันทึกเซิร์ฟเวอร์ได้"
   },
   "playground": {
     "title": "สนามเด็กเล่น",

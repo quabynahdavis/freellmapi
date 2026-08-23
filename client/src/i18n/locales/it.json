@@ -14,7 +14,9 @@
     "switchToChinese": "Passa al cinese",
     "switchToEnglish": "Passa all'inglese",
     "modelsMenu": "Sfoglia i tipi di modello",
-    "agents": "Agenti"
+    "agents": "Agenti",
+    "logs": "Log",
+    "analyticsMenu": "Pagine di analisi"
   },
   "auth": {
     "createYourAccount": "Crea il tuo account",
@@ -216,8 +218,8 @@
     "localOverride": "override locale",
     "displayName": "Nome visualizzato",
     "sizeLabel": "Livello di capacità",
-    "sizeLabelHint": "Frontier/Large/Medium/Small determinano l'asse dell'intelligenza. I modelli senza un livello riconosciuto ottengono 0.",
-    "sizeLabelNone": "Nessuno (senza punteggio)",
+    "sizeLabelHint": "Frontier/Large/Medium/Small determinano l'asse dell'intelligenza: un livello superiore ha sempre la precedenza su uno inferiore e, all'interno di un livello, la posizione di intelligenza continua a spostare il punteggio. Un modello senza un livello riconosciuto ottiene il punteggio più basso su questo asse, ma l'intelligenza è solo uno dei tre assi: con buona affidabilità e velocità può comunque essere instradato.",
+    "sizeLabelNone": "Nessuno (punteggio di intelligenza più basso)",
     "contextWindow": "Contesto",
     "inFallback": "Nella catena",
     "saveModelSettings": "Salva impostazioni modello",
@@ -393,6 +395,7 @@
     "customTypeEmbedding": "Embedding",
     "customTypeImage": "Immagine",
     "customTypeAudio": "Audio",
+    "customTypeTranscription": "Transcription",
     "customBaseUrl": "URL di base",
     "customModels": "Modelli",
     "customModel": "Modello",
@@ -409,6 +412,7 @@
     "addEmbeddingModel": "Aggiungi embedding",
     "addImageModel": "Aggiungi modello immagine",
     "addAudioModel": "Aggiungi modello audio",
+    "addTranscriptionModel": "Add transcription model",
     "addingCustom": "Aggiunta…",
     "discoverModels": "Recupera modelli",
     "probeNow": "Testa l'endpoint",
@@ -633,6 +637,32 @@
     "requestedModel": "Modello richiesto",
     "ttft": "TTFT",
     "requestsByAgent": "Richieste per agente"
+  },
+  "logs": {
+    "title": "Log",
+    "description": "Log del server in tempo reale. Le nuove voci arrivano mentre la pagina è aperta.",
+    "pause": "Sospendi",
+    "resume": "Riprendi",
+    "clear": "Cancella i log",
+    "cleared": "Log del server cancellato",
+    "levelFilter": "Livelli di log",
+    "levels": {
+      "debug": "Debug",
+      "info": "Info",
+      "warn": "Avviso",
+      "error": "Errore"
+    },
+    "countsHint": "I conteggi si riferiscono all'intero buffer di log sul server, non solo alle voci che corrispondono a questi filtri.",
+    "searchPlaceholder": "Cerca nei messaggi di log…",
+    "jumpToLatest": "Vai alle più recenti",
+    "showMore": "Mostra di più",
+    "showLess": "Mostra meno",
+    "buffered": "Visualizzate {count} voci su un massimo di {max} nel buffer",
+    "emptyTitle": "Ancora nessuna voce di log",
+    "emptyDescription": "Le voci compaiono qui man mano che il server le scrive. Allarga i filtri di livello, fornitore o ricerca se ti aspettavi dei risultati.",
+    "noLevelsTitle": "Nessun livello selezionato",
+    "noLevelsDescription": "Attiva almeno un livello per vedere l'output del log.",
+    "loadFailed": "Impossibile caricare il log del server."
   },
   "playground": {
     "title": "Playground",

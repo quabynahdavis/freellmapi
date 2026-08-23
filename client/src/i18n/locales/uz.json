@@ -14,7 +14,9 @@
     "switchToChinese": "Xitoy tiliga o'tish",
     "switchToEnglish": "Ingliz tiliga o'tish",
     "modelsMenu": "Model turlarini ko'rib chiqing",
-    "agents": "Agentlar"
+    "agents": "Agentlar",
+    "logs": "Jurnal",
+    "analyticsMenu": "Analitika sahifalari"
   },
   "auth": {
     "createYourAccount": "Hisob qaydnomangizni yarating",
@@ -216,8 +218,8 @@
     "localOverride": "mahalliy bekor qilish",
     "displayName": "Ko'rsatilgan nom",
     "sizeLabel": "Qobiliyat darajasi",
-    "sizeLabelHint": "Frontier/Large/Medium/Small intellekt o'qini belgilaydi. Tanilgan darajasi bo'lmagan modellar 0 ball oladi.",
-    "sizeLabelNone": "Yo'q (baholanmagan)",
+    "sizeLabelHint": "Frontier/Large/Medium/Small intellekt o'qini belgilaydi: yuqoriroq daraja doimo pastrog'idan ustun turadi, bir daraja ichida esa intellekt reytingi ballni o'zgartirishda davom etadi. Tanilgan darajasi bo'lmagan model bu o'qda eng past ballni oladi, ammo intellekt uchta o'qdan faqat bittasi — ishonchliligi va tezligi yaxshi bo'lsa, u baribir tanlanishi mumkin.",
+    "sizeLabelNone": "Yo'q (eng past intellekt bali)",
     "contextWindow": "Kontekst",
     "inFallback": "Zanjirda",
     "saveModelSettings": "Model sozlamalarini saqlang",
@@ -393,6 +395,7 @@
     "customTypeEmbedding": "Oʻrnatish",
     "customTypeImage": "Rasm",
     "customTypeAudio": "Audio",
+    "customTypeTranscription": "Transcription",
     "customBaseUrl": "Baza URL",
     "customModels": "Modellar",
     "customModel": "Model",
@@ -409,6 +412,7 @@
     "addEmbeddingModel": "O'rnatishni qo'shing",
     "addImageModel": "Rasm modelini qo'shing",
     "addAudioModel": "Audio modelini qo'shing",
+    "addTranscriptionModel": "Add transcription model",
     "addingCustom": "Qo‘shilmoqda…",
     "discoverModels": "Modellarni olish",
     "probeNow": "Endpointni sinab ko‘rish",
@@ -633,6 +637,32 @@
     "requestedModel": "So'ralgan model",
     "ttft": "TTFT",
     "requestsByAgent": "Agent bo'yicha so'rovlar"
+  },
+  "logs": {
+    "title": "Jurnal",
+    "description": "Serverning jonli jurnali. Sahifa ochiq turganda yangi yozuvlar kelib turadi.",
+    "pause": "Pauza",
+    "resume": "Davom ettirish",
+    "clear": "Jurnalni tozalash",
+    "cleared": "Server jurnali tozalandi",
+    "levelFilter": "Jurnal darajalari",
+    "levels": {
+      "debug": "Debug",
+      "info": "Info",
+      "warn": "Ogohlantirish",
+      "error": "Xato"
+    },
+    "countsHint": "Sanoqlar serverdagi butun jurnal buferi boʻyicha umumiy hisoblanadi, faqat ushbu filtrlarga mos yozuvlar boʻyicha emas.",
+    "searchPlaceholder": "Jurnal xabarlarini qidirish…",
+    "jumpToLatest": "Eng soʻnggilariga oʻtish",
+    "showMore": "Koʻproq koʻrsatish",
+    "showLess": "Kamroq koʻrsatish",
+    "buffered": "Buferdagi koʻpi bilan {max} yozuvdan {count} tasi koʻrsatilmoqda",
+    "emptyTitle": "Hozircha jurnal yozuvlari yoʻq",
+    "emptyDescription": "Server yozuvlarni yozgani sari ular shu yerda paydo boʻladi. Natija kutgan boʻlsangiz, daraja, provayder yoki qidiruv filtrlarini kengaytiring.",
+    "noLevelsTitle": "Daraja tanlanmagan",
+    "noLevelsDescription": "Jurnal chiqishini koʻrish uchun kamida bitta darajani yoqing.",
+    "loadFailed": "Server jurnalini yuklab boʻlmadi."
   },
   "playground": {
     "title": "O'yin maydonchasi",

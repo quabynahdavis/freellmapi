@@ -14,7 +14,9 @@
     "switchToChinese": "Passer au chinois",
     "switchToEnglish": "Passer à l'anglais",
     "modelsMenu": "Parcourir les types de modèles",
-    "agents": "Agents"
+    "agents": "Agents",
+    "logs": "Journaux",
+    "analyticsMenu": "Pages d'analytique"
   },
   "auth": {
     "createYourAccount": "Créez votre compte",
@@ -216,8 +218,8 @@
     "localOverride": "remplacement local",
     "displayName": "Nom affiché",
     "sizeLabel": "Niveau de capacité",
-    "sizeLabelHint": "Frontier/Large/Medium/Small déterminent l'axe d'intelligence. Les modèles sans niveau reconnu obtiennent 0.",
-    "sizeLabelNone": "Aucun (non noté)",
+    "sizeLabelHint": "Frontier/Large/Medium/Small déterminent l'axe d'intelligence : un niveau supérieur prime toujours sur un niveau inférieur, et au sein d'un même niveau le rang d'intelligence continue de faire bouger le score. Un modèle sans niveau reconnu obtient le score le plus bas sur cet axe, mais l'intelligence n'est qu'un axe sur trois : une bonne fiabilité et une bonne vitesse peuvent quand même lui valoir le routage.",
+    "sizeLabelNone": "Aucun (score d'intelligence le plus bas)",
     "contextWindow": "Contexte",
     "inFallback": "Dans la chaîne",
     "saveModelSettings": "Enregistrer les paramètres du modèle",
@@ -393,6 +395,7 @@
     "customTypeEmbedding": "Embedding",
     "customTypeImage": "Image",
     "customTypeAudio": "Audio",
+    "customTypeTranscription": "Transcription",
     "customBaseUrl": "URL de base",
     "customModels": "Modèles",
     "customModel": "Modèle",
@@ -409,6 +412,7 @@
     "addEmbeddingModel": "Ajouter un embedding",
     "addImageModel": "Ajouter un modèle d'image",
     "addAudioModel": "Ajouter un modèle audio",
+    "addTranscriptionModel": "Add transcription model",
     "addingCustom": "Ajout…",
     "discoverModels": "Récupérer les modèles",
     "probeNow": "Tester l'endpoint",
@@ -633,6 +637,32 @@
     "requestedModel": "Modèle demandé",
     "ttft": "TTFT",
     "requestsByAgent": "Requêtes par agent"
+  },
+  "logs": {
+    "title": "Journaux",
+    "description": "Journal du serveur en direct. Les nouvelles entrées arrivent tant que la page est ouverte.",
+    "pause": "Suspendre",
+    "resume": "Reprendre",
+    "clear": "Effacer les journaux",
+    "cleared": "Journal du serveur effacé",
+    "levelFilter": "Niveaux de journalisation",
+    "levels": {
+      "debug": "Debug",
+      "info": "Info",
+      "warn": "Avertissement",
+      "error": "Erreur"
+    },
+    "countsHint": "Les compteurs portent sur l'ensemble du tampon de journal du serveur, pas uniquement sur les entrées correspondant à ces filtres.",
+    "searchPlaceholder": "Rechercher dans les messages du journal…",
+    "jumpToLatest": "Aller aux plus récentes",
+    "showMore": "Afficher plus",
+    "showLess": "Afficher moins",
+    "buffered": "Affichage de {count} entrées sur un maximum de {max} en mémoire tampon",
+    "emptyTitle": "Aucune entrée de journal pour l'instant",
+    "emptyDescription": "Les entrées apparaissent ici au fur et à mesure que le serveur les écrit. Élargissez les filtres de niveau, de fournisseur ou de recherche si vous attendiez des résultats.",
+    "noLevelsTitle": "Aucun niveau sélectionné",
+    "noLevelsDescription": "Activez au moins un niveau pour voir le journal.",
+    "loadFailed": "Impossible de charger le journal du serveur."
   },
   "playground": {
     "title": "Bac à sable",

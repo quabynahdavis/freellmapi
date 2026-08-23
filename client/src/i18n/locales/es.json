@@ -14,7 +14,9 @@
     "switchToChinese": "Cambiar a chino",
     "switchToEnglish": "Cambiar a inglés",
     "modelsMenu": "Explorar tipos de modelos",
-    "agents": "Agentes"
+    "agents": "Agentes",
+    "logs": "Registros",
+    "analyticsMenu": "Páginas de analíticas"
   },
   "auth": {
     "createYourAccount": "Crea tu cuenta",
@@ -216,8 +218,8 @@
     "localOverride": "anulación local",
     "displayName": "Nombre visible",
     "sizeLabel": "Nivel de capacidad",
-    "sizeLabelHint": "Frontier/Large/Medium/Small determinan el eje de inteligencia. Los modelos sin un nivel reconocido puntúan 0.",
-    "sizeLabelNone": "Ninguno (sin puntuar)",
+    "sizeLabelHint": "Frontier/Large/Medium/Small fijan el eje de inteligencia: un nivel superior siempre supera a uno inferior y, dentro de un nivel, el rango de inteligencia sigue moviendo la puntuación. Un modelo sin un nivel reconocido obtiene la puntuación más baja en este eje, pero la inteligencia es solo uno de los tres ejes: con buena fiabilidad y velocidad todavía puede ganarse la ruta.",
+    "sizeLabelNone": "Ninguno (puntuación de inteligencia más baja)",
     "contextWindow": "Contexto",
     "inFallback": "En cadena",
     "saveModelSettings": "Guardar ajustes del modelo",
@@ -393,6 +395,7 @@
     "customTypeEmbedding": "Embedding",
     "customTypeImage": "Imagen",
     "customTypeAudio": "Audio",
+    "customTypeTranscription": "Transcription",
     "customBaseUrl": "URL base",
     "customModels": "Modelos",
     "customModel": "Modelo",
@@ -409,6 +412,7 @@
     "addEmbeddingModel": "Agregar embedding",
     "addImageModel": "Agregar modelo de imagen",
     "addAudioModel": "Agregar modelo de audio",
+    "addTranscriptionModel": "Add transcription model",
     "addingCustom": "Añadiendo…",
     "discoverModels": "Obtener modelos",
     "probeNow": "Probar el endpoint",
@@ -633,6 +637,32 @@
     "requestedModel": "Modelo solicitado",
     "ttft": "TTFT",
     "requestsByAgent": "Solicitudes por agente"
+  },
+  "logs": {
+    "title": "Registros",
+    "description": "Registro del servidor en vivo. Las entradas nuevas van llegando mientras la página está abierta.",
+    "pause": "Pausar",
+    "resume": "Reanudar",
+    "clear": "Borrar registros",
+    "cleared": "Registro del servidor borrado",
+    "levelFilter": "Niveles de registro",
+    "levels": {
+      "debug": "Debug",
+      "info": "Info",
+      "warn": "Aviso",
+      "error": "Error"
+    },
+    "countsHint": "Los recuentos corresponden a todo el búfer de registro del servidor, no solo a las entradas que coinciden con estos filtros.",
+    "searchPlaceholder": "Buscar en los mensajes del registro…",
+    "jumpToLatest": "Ir a lo más reciente",
+    "showMore": "Mostrar más",
+    "showLess": "Mostrar menos",
+    "buffered": "Mostrando {count} de hasta {max} entradas en el búfer",
+    "emptyTitle": "Aún no hay entradas de registro",
+    "emptyDescription": "Las entradas aparecen aquí a medida que el servidor las escribe. Amplía los filtros de nivel, proveedor o búsqueda si esperabas ver algo.",
+    "noLevelsTitle": "Ningún nivel seleccionado",
+    "noLevelsDescription": "Activa al menos un nivel para ver el registro.",
+    "loadFailed": "No se pudo cargar el registro del servidor."
   },
   "playground": {
     "title": "Entorno de pruebas",

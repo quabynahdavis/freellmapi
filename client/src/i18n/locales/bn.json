@@ -14,7 +14,9 @@
     "switchToChinese": "চাইনিজ এ স্যুইচ করুন",
     "switchToEnglish": "ইংরেজিতে স্যুইচ করুন",
     "modelsMenu": "মডেলের ধরন ব্রাউজ করুন",
-    "agents": "এজেন্ট"
+    "agents": "এজেন্ট",
+    "logs": "লগ",
+    "analyticsMenu": "বিশ্লেষণ পৃষ্ঠা"
   },
   "auth": {
     "createYourAccount": "আপনার অ্যাকাউন্ট তৈরি করুন",
@@ -216,8 +218,8 @@
     "localOverride": "স্থানীয় ওভাররাইড",
     "displayName": "প্রদর্শনের নাম",
     "sizeLabel": "সক্ষমতার স্তর",
-    "sizeLabelHint": "Frontier/Large/Medium/Small বুদ্ধিমত্তার অক্ষ নির্ধারণ করে। স্বীকৃত স্তর ছাড়া মডেল 0 স্কোর পায়।",
-    "sizeLabelNone": "কিছুই না (স্কোরবিহীন)",
+    "sizeLabelHint": "Frontier/Large/Medium/Small বুদ্ধিমত্তার অক্ষ নির্ধারণ করে: উঁচু স্তর সব সময় নিচু স্তরকে ছাড়িয়ে যায়, আর একই স্তরের ভিতরে বুদ্ধিমত্তার র‍্যাঙ্ক স্কোরকে নাড়াতে থাকে। স্বীকৃত স্তর ছাড়া মডেল এই অক্ষে সবচেয়ে কম স্কোর পায়, তবে বুদ্ধিমত্তা তিনটি অক্ষের মাত্র একটি — ভালো নির্ভরযোগ্যতা ও গতি থাকলে সেটি তবুও রুট জিততে পারে।",
+    "sizeLabelNone": "কিছুই না (সবচেয়ে কম বুদ্ধিমত্তার স্কোর)",
     "contextWindow": "প্রসঙ্গ",
     "inFallback": "শৃঙ্খলে",
     "saveModelSettings": "মডেল সেটিংস সংরক্ষণ করুন",
@@ -393,6 +395,7 @@
     "customTypeEmbedding": "এমবেডিং",
     "customTypeImage": "ছবি",
     "customTypeAudio": "অডিও",
+    "customTypeTranscription": "Transcription",
     "customBaseUrl": "বেস URL",
     "customModels": "মডেল",
     "customModel": "মডেল",
@@ -409,6 +412,7 @@
     "addEmbeddingModel": "এম্বেডিং যোগ করুন",
     "addImageModel": "ইমেজ মডেল যোগ করুন",
     "addAudioModel": "অডিও মডেল যোগ করুন",
+    "addTranscriptionModel": "Add transcription model",
     "addingCustom": "যোগ করা হচ্ছে...",
     "discoverModels": "মডেল আনুন",
     "probeNow": "এন্ডপয়েন্ট পরীক্ষা করুন",
@@ -633,6 +637,32 @@
     "requestedModel": "অনুরোধ করা মডেল",
     "ttft": "TTFT",
     "requestsByAgent": "এজেন্ট অনুযায়ী অনুরোধ"
+  },
+  "logs": {
+    "title": "লগ",
+    "description": "লাইভ সার্ভার লগ। পৃষ্ঠাটি খোলা থাকা অবস্থায় নতুন এন্ট্রি আসতে থাকে।",
+    "pause": "থামান",
+    "resume": "চালু করুন",
+    "clear": "লগ সাফ করুন",
+    "cleared": "সার্ভার লগ সাফ করা হয়েছে",
+    "levelFilter": "লগ লেভেল",
+    "levels": {
+      "debug": "ডিবাগ",
+      "info": "ইনফো",
+      "warn": "সতর্কতা",
+      "error": "ত্রুটি"
+    },
+    "countsHint": "গণনাগুলি সার্ভারের পুরো লগ বাফারের মোট, শুধু এই ফিল্টারের সাথে মেলা এন্ট্রিগুলির নয়।",
+    "searchPlaceholder": "লগ বার্তা অনুসন্ধান করুন...",
+    "jumpToLatest": "সর্বশেষে যান",
+    "showMore": "আরও দেখান",
+    "showLess": "কম দেখান",
+    "buffered": "সর্বোচ্চ {max} বাফার করা এন্ট্রির মধ্যে {count}টি দেখানো হচ্ছে",
+    "emptyTitle": "এখনো কোনো লগ এন্ট্রি নেই",
+    "emptyDescription": "সার্ভার যেমন লেখে, এন্ট্রিগুলি এখানে দেখা যাবে। আউটপুট আশা করে থাকলে লেভেল, প্রদানকারী বা অনুসন্ধান ফিল্টারের পরিসর বাড়ান।",
+    "noLevelsTitle": "কোনো লেভেল নির্বাচিত নয়",
+    "noLevelsDescription": "লগ আউটপুট দেখতে অন্তত একটি লেভেল চালু করুন।",
+    "loadFailed": "সার্ভার লগ লোড করা গেল না।"
   },
   "playground": {
     "title": "খেলার মাঠ",

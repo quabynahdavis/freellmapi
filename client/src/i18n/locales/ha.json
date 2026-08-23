@@ -14,7 +14,9 @@
     "switchToChinese": "Canja zuwa Sinanci",
     "switchToEnglish": "Canja zuwa Turanci",
     "modelsMenu": "Bincika nau'ikan samfuri",
-    "agents": "Wakilai"
+    "agents": "Wakilai",
+    "logs": "Logs",
+    "analyticsMenu": "Shafukan bincike"
   },
   "auth": {
     "createYourAccount": "Ƙirƙiri asusun ku",
@@ -216,8 +218,8 @@
     "localOverride": "wuce gona da iri",
     "displayName": "Sunan nuni",
     "sizeLabel": "Matakin iyawa",
-    "sizeLabelHint": "Frontier/Large/Medium/Small suna tafiyar da axis na hankali. Samfuran da ba su da sanannen mataki suna samun 0.",
-    "sizeLabelNone": "Babu (ba a kimanta ba)",
+    "sizeLabelHint": "Frontier/Large/Medium/Small suna saita axis na hankali: mataki mafi girma koyaushe yana doke ƙarami, kuma cikin mataki ɗaya matsayin hankali yana ci gaba da motsa maki. Samfurin da ba shi da sanannen mataki yana samun maki mafi ƙanƙanta a wannan axis, amma hankali ɗaya ne kawai daga cikin axis uku — ƙarfin dogaro da gudu na iya sa a zaɓe shi duk da haka.",
+    "sizeLabelNone": "Babu (mafi ƙanƙantar makin hankali)",
     "contextWindow": "Magana",
     "inFallback": "A cikin sarkar",
     "saveModelSettings": "Ajiye saitunan ƙira",
@@ -393,6 +395,7 @@
     "customTypeEmbedding": "Saka",
     "customTypeImage": "Hoto",
     "customTypeAudio": "Audio",
+    "customTypeTranscription": "Transcription",
     "customBaseUrl": "Tushen URL",
     "customModels": "Samfura",
     "customModel": "Samfura",
@@ -409,6 +412,7 @@
     "addEmbeddingModel": "Ƙara sakawa",
     "addImageModel": "Ƙara samfurin hoto",
     "addAudioModel": "Ƙara samfurin sauti",
+    "addTranscriptionModel": "Add transcription model",
     "addingCustom": "Ana ƙara…",
     "discoverModels": "Ɗauko samfura",
     "probeNow": "Gwada matattarar",
@@ -633,6 +637,32 @@
     "requestedModel": "Samfurin da ake nema",
     "ttft": "Saukewa: TTFT",
     "requestsByAgent": "Bukatu ta kowane wakili"
+  },
+  "logs": {
+    "title": "Logs",
+    "description": "Log ɗin uwar garke kai tsaye. Sabbin shigarwa suna zuwa yayin da shafin yake a buɗe.",
+    "pause": "Dakatar",
+    "resume": "Ci gaba",
+    "clear": "Share logs",
+    "cleared": "An share log ɗin uwar garke",
+    "levelFilter": "Matakan log",
+    "levels": {
+      "debug": "Debug",
+      "info": "Bayani",
+      "warn": "Gargaɗi",
+      "error": "Kuskure"
+    },
+    "countsHint": "Ƙidayar ita ce jimillar duk ma'ajin log ɗin da ke kan uwar garke, ba kawai shigarwar da ta dace da waɗannan matatun ba.",
+    "searchPlaceholder": "Bincika saƙonnin log…",
+    "jumpToLatest": "Tsallaka zuwa na baya-bayan nan",
+    "showMore": "Nuna ƙari",
+    "showLess": "Nuna ƙasa",
+    "buffered": "Ana nuna {count} daga cikin shigarwa {max} da aka ajiye a ma'aji",
+    "emptyTitle": "Babu shigarwar log tukuna",
+    "emptyDescription": "Shigarwa na bayyana nan yayin da uwar garken ke rubuta su. Faɗaɗa matatun mataki, mai samarwa ko bincike idan kana tsammanin fitarwa.",
+    "noLevelsTitle": "Ba a zaɓi kowane mataki ba",
+    "noLevelsDescription": "Kunna aƙalla mataki ɗaya don ganin fitarwar log.",
+    "loadFailed": "An kasa loda log ɗin uwar garke."
   },
   "playground": {
     "title": "filin wasa",

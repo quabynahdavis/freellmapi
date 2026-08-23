@@ -14,7 +14,9 @@
     "switchToChinese": "Overstappen naar Chinees",
     "switchToEnglish": "Overstap naar Engels",
     "modelsMenu": "Blader door modeltypes",
-    "agents": "Agenten"
+    "agents": "Agenten",
+    "logs": "Logs",
+    "analyticsMenu": "Analytics-pagina's"
   },
   "auth": {
     "createYourAccount": "Maak je account aan",
@@ -216,8 +218,8 @@
     "localOverride": "Lokale overruling",
     "displayName": "Weergavenaam",
     "sizeLabel": "Capaciteitsniveau",
-    "sizeLabelHint": "Frontier/Large/Medium/Small bepalen de intelligentie-as. Modellen zonder herkend niveau scoren 0.",
-    "sizeLabelNone": "Geen (zonder score)",
+    "sizeLabelHint": "Frontier/Large/Medium/Small bepalen de intelligentie-as: een hoger niveau verslaat altijd een lager niveau, en binnen een niveau blijft de intelligentierang de score verschuiven. Een model zonder herkend niveau scoort het laagst op deze as, maar intelligentie is slechts een van de drie assen — met goede betrouwbaarheid en snelheid kan het alsnog gerouteerd worden.",
+    "sizeLabelNone": "Geen (laagste intelligentiescore)",
     "contextWindow": "Context",
     "inFallback": "In keten",
     "saveModelSettings": "Bewaar modelinstellingen",
@@ -393,6 +395,7 @@
     "customTypeEmbedding": "Embedding",
     "customTypeImage": "Afbeelding",
     "customTypeAudio": "Audio",
+    "customTypeTranscription": "Transcription",
     "customBaseUrl": "Basis URL",
     "customModels": "Modellen",
     "customModel": "Model",
@@ -409,6 +412,7 @@
     "addEmbeddingModel": "Voeg embedding toe",
     "addImageModel": "Voeg beeldmodel toe",
     "addAudioModel": "Audiomodel toevoegen",
+    "addTranscriptionModel": "Add transcription model",
     "addingCustom": "En ik voeg toe...",
     "discoverModels": "Modellen ophalen",
     "probeNow": "Endpoint testen",
@@ -633,6 +637,32 @@
     "requestedModel": "Aangevraagd model",
     "ttft": "TTFT",
     "requestsByAgent": "Verzoeken per agent"
+  },
+  "logs": {
+    "title": "Logs",
+    "description": "Live serverlog. Nieuwe regels komen binnen zolang de pagina open staat.",
+    "pause": "Pauzeren",
+    "resume": "Hervatten",
+    "clear": "Logs wissen",
+    "cleared": "Serverlog gewist",
+    "levelFilter": "Logniveaus",
+    "levels": {
+      "debug": "Debug",
+      "info": "Info",
+      "warn": "Waarschuwing",
+      "error": "Fout"
+    },
+    "countsHint": "De aantallen gelden voor de volledige logbuffer op de server, niet alleen voor de regels die aan deze filters voldoen.",
+    "searchPlaceholder": "Zoek in logberichten…",
+    "jumpToLatest": "Naar de nieuwste",
+    "showMore": "Meer tonen",
+    "showLess": "Minder tonen",
+    "buffered": "{count} van maximaal {max} gebufferde regels getoond",
+    "emptyTitle": "Nog geen logregels",
+    "emptyDescription": "Regels verschijnen hier zodra de server ze schrijft. Verruim de filters voor niveau, aanbieder of zoekopdracht als je uitvoer verwachtte.",
+    "noLevelsTitle": "Geen niveaus geselecteerd",
+    "noLevelsDescription": "Zet minstens één niveau aan om loguitvoer te zien.",
+    "loadFailed": "Kan het serverlog niet laden."
   },
   "playground": {
     "title": "Speeltuin",

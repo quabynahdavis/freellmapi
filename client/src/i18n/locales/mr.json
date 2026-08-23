@@ -14,7 +14,9 @@
     "switchToChinese": "चीनी वर स्विच करा",
     "switchToEnglish": "इंग्रजीवर स्विच करा",
     "modelsMenu": "मॉडेल प्रकार ब्राउझ करा",
-    "agents": "एजंट"
+    "agents": "एजंट",
+    "logs": "लॉग",
+    "analyticsMenu": "विश्लेषण पृष्ठे"
   },
   "auth": {
     "createYourAccount": "तुमचे खाते तयार करा",
@@ -216,8 +218,8 @@
     "localOverride": "स्थानिक अधिलिखित",
     "displayName": "नाव प्रदर्शित करा",
     "sizeLabel": "क्षमता पातळी",
-    "sizeLabelHint": "Frontier/Large/Medium/Small बुद्धिमत्ता अक्ष ठरवतात. ओळखला जाणारा स्तर नसलेल्या मॉडेल्सना 0 गुण मिळतात.",
-    "sizeLabelNone": "काहीही नाही (गुणांकन नाही)",
+    "sizeLabelHint": "Frontier/Large/Medium/Small बुद्धिमत्ता अक्ष ठरवतात: वरचा स्तर नेहमी खालच्या स्तराच्या पुढे राहतो आणि एकाच स्तरात बुद्धिमत्ता क्रमांक गुण हलवत राहतो. ओळखला जाणारा स्तर नसलेल्या मॉडेलला या अक्षावर सर्वात कमी गुण मिळतात, पण बुद्धिमत्ता ही तीन अक्षांपैकी फक्त एक आहे — चांगली विश्वसनीयता आणि गती असल्यास ते तरीही निवडले जाऊ शकते.",
+    "sizeLabelNone": "काहीही नाही (सर्वात कमी बुद्धिमत्ता गुण)",
     "contextWindow": "संदर्भ",
     "inFallback": "साखळीत",
     "saveModelSettings": "मॉडेल सेटिंग्ज जतन करा",
@@ -393,6 +395,7 @@
     "customTypeEmbedding": "एम्बेडिंग",
     "customTypeImage": "प्रतिमा",
     "customTypeAudio": "ऑडिओ",
+    "customTypeTranscription": "Transcription",
     "customBaseUrl": "बेस URL",
     "customModels": "मॉडेल्स",
     "customModel": "मॉडेल",
@@ -409,6 +412,7 @@
     "addEmbeddingModel": "एम्बेडिंग जोडा",
     "addImageModel": "प्रतिमा मॉडेल जोडा",
     "addAudioModel": "ऑडिओ मॉडेल जोडा",
+    "addTranscriptionModel": "Add transcription model",
     "addingCustom": "जोडत आहे...",
     "discoverModels": "मॉडेल आणा",
     "probeNow": "एंडपॉइंटची चाचणी करा",
@@ -633,6 +637,32 @@
     "requestedModel": "मॉडेलची विनंती केली",
     "ttft": "TTFT",
     "requestsByAgent": "एजंटनुसार विनंत्या"
+  },
+  "logs": {
+    "title": "लॉग",
+    "description": "लाइव्ह सर्व्हर लॉग. पृष्ठ उघडे असेपर्यंत नवीन नोंदी येत राहतात.",
+    "pause": "थांबवा",
+    "resume": "पुन्हा सुरू करा",
+    "clear": "लॉग साफ करा",
+    "cleared": "सर्व्हर लॉग साफ केला",
+    "levelFilter": "लॉग स्तर",
+    "levels": {
+      "debug": "डीबग",
+      "info": "इन्फो",
+      "warn": "इशारा",
+      "error": "त्रुटी"
+    },
+    "countsHint": "मोजणी सर्व्हरवरील संपूर्ण लॉग बफरची एकूण आहे, फक्त या फिल्टरशी जुळणाऱ्या नोंदींची नाही.",
+    "searchPlaceholder": "लॉग संदेश शोधा…",
+    "jumpToLatest": "नवीनतमवर जा",
+    "showMore": "अधिक दाखवा",
+    "showLess": "कमी दाखवा",
+    "buffered": "जास्तीत जास्त {max} बफर केलेल्या नोंदींपैकी {count} दाखवत आहे",
+    "emptyTitle": "अद्याप कोणत्याही लॉग नोंदी नाहीत",
+    "emptyDescription": "सर्व्हर लिहीत जाईल तशा नोंदी येथे दिसतील. आउटपुटची अपेक्षा असल्यास स्तर, प्रदाता किंवा शोध फिल्टरची व्याप्ती वाढवा.",
+    "noLevelsTitle": "कोणताही स्तर निवडलेला नाही",
+    "noLevelsDescription": "लॉग आउटपुट पाहण्यासाठी किमान एक स्तर चालू करा.",
+    "loadFailed": "सर्व्हर लॉग लोड करता आला नाही."
   },
   "playground": {
     "title": "खेळाचे मैदान",

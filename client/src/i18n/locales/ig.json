@@ -14,7 +14,9 @@
     "switchToChinese": "Banye na Chinese",
     "switchToEnglish": "Banye na bekee",
     "modelsMenu": "Chọgharịa ụdị nlereanya",
-    "agents": "Ndị ejenti"
+    "agents": "Ndị ejenti",
+    "logs": "Ndekọ",
+    "analyticsMenu": "Ibe nchịkọta"
   },
   "auth": {
     "createYourAccount": "Mepụta akaụntụ gị",
@@ -216,8 +218,8 @@
     "localOverride": "mkpochapụ mpaghara",
     "displayName": "Aha ngosi",
     "sizeLabel": "Ọkwa ikike",
-    "sizeLabelHint": "Frontier/Large/Medium/Small na-achịkwa axis ọgụgụ isi. Ụdị na-enweghị ọkwa amaara ama na-enweta 0.",
-    "sizeLabelNone": "Ọ dịghị (enweghị akara)",
+    "sizeLabelHint": "Frontier/Large/Medium/Small na-akara axis ọgụgụ isi: ọkwa dị elu na-emeri ọkwa dị ala mgbe niile, n'ime otu ọkwa ọkwa ọgụgụ isi ka na-agbanwe akara. Ụdị na-enweghị ọkwa amaara ama na-enweta akara kacha ala na axis a, mana ọgụgụ isi bụ naanị otu n'ime axis atọ — ntụkwasị obi na ọsọ dị mma ka nwere ike ime ka a họrọ ya.",
+    "sizeLabelNone": "Ọ dịghị (akara ọgụgụ isi kacha ala)",
     "contextWindow": "Okwu",
     "inFallback": "Na yinye",
     "saveModelSettings": "Chekwa ntọala ụdị",
@@ -393,6 +395,7 @@
     "customTypeEmbedding": "Ntinye",
     "customTypeImage": "Onyonyo",
     "customTypeAudio": "Audio",
+    "customTypeTranscription": "Transcription",
     "customBaseUrl": "Ntọala URL",
     "customModels": "Ụdị",
     "customModel": "Nlereanya",
@@ -409,6 +412,7 @@
     "addEmbeddingModel": "Tinye ntinye",
     "addImageModel": "Tinye ihe onyonyo",
     "addAudioModel": "Tinye ụdị ọdịyo",
+    "addTranscriptionModel": "Add transcription model",
     "addingCustom": "Na-agbakwụnye…",
     "discoverModels": "Weta ụdị",
     "probeNow": "Nwalee njedebe",
@@ -633,6 +637,32 @@
     "requestedModel": "Ihe nlereanya achọrọ",
     "ttft": "TTFT",
     "requestsByAgent": "Arịrịọ site na ejenti"
+  },
+  "logs": {
+    "title": "Ndekọ",
+    "description": "Ndekọ sava dị ndụ. Ihe ndekọ ọhụrụ na-abata mgbe ibe a mepere emepe.",
+    "pause": "Kwụsịtụ",
+    "resume": "Gaa n'ihu",
+    "clear": "Kpochapụ ndekọ",
+    "cleared": "Ekpochapụla ndekọ sava",
+    "levelFilter": "Ọkwa ndekọ",
+    "levels": {
+      "debug": "Debug",
+      "info": "Ozi",
+      "warn": "Ịdọ aka ntị",
+      "error": "Njehie"
+    },
+    "countsHint": "Ọnụọgụgụ ndị a bụ ngụkọta nke ebe nchekwa ndekọ dum dị na sava, ọ bụghị naanị ihe ndekọ dabara na nzacha ndị a.",
+    "searchPlaceholder": "Chọọ ozi ndekọ…",
+    "jumpToLatest": "Wụga na nke ọhụrụ",
+    "showMore": "Gosi ihe ọzọ",
+    "showLess": "Gosi obere",
+    "buffered": "Na-egosi {count} n'ime ihe ndekọ {max} echekwara",
+    "emptyTitle": "Enweghị ihe ndekọ ruo ugbu a",
+    "emptyDescription": "Ihe ndekọ na-apụta ebe a ka sava na-ede ha. Gbasaa nzacha ọkwa, onye na-eweta ma ọ bụ ọchụchọ ma ọ bụrụ na ị tụrụ anya nsonaazụ.",
+    "noLevelsTitle": "Ahọrọghị ọkwa ọ bụla",
+    "noLevelsDescription": "Gbanye ma ọ dịkarịa ala otu ọkwa ka ị hụ ihe ndekọ.",
+    "loadFailed": "Enweghị ike ibugo ndekọ sava."
   },
   "playground": {
     "title": "Ebe egwuregwu",

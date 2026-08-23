@@ -14,7 +14,9 @@
     "switchToChinese": "චීන භාෂාවට මාරු වන්න",
     "switchToEnglish": "ඉංග්‍රීසි වලට මාරු වෙන්න",
     "modelsMenu": "ආකෘති වර්ග පිරික්සන්න",
-    "agents": "නියෝජිතයන්"
+    "agents": "නියෝජිතයන්",
+    "logs": "ලොග",
+    "analyticsMenu": "විශ්ලේෂණ පිටු"
   },
   "auth": {
     "createYourAccount": "ඔබගේ ගිණුම සාදන්න",
@@ -216,8 +218,8 @@
     "localOverride": "දේශීය අභිබවා යාම",
     "displayName": "සංදර්ශක නම",
     "sizeLabel": "හැකියා මට්ටම",
-    "sizeLabelHint": "Frontier/Large/Medium/Small බුද්ධි අක්ෂය තීරණය කරයි. හඳුනාගත් මට්ටමක් නැති ආකෘතිවලට ලකුණු 0 ලැබේ.",
-    "sizeLabelNone": "කිසිවක් නැත (ලකුණු නොකළ)",
+    "sizeLabelHint": "Frontier/Large/Medium/Small බුද්ධි අක්ෂය තීරණය කරයි: ඉහළ මට්ටමක් සැමවිටම පහළ මට්ටමක් අභිබවා යයි, එකම මට්ටමක් තුළ බුද්ධි ශ්‍රේණිය තවමත් ලකුණු වෙනස් කරයි. හඳුනාගත් මට්ටමක් නැති ආකෘතියකට මෙම අක්ෂයේ අඩුම ලකුණු ලැබේ, නමුත් බුද්ධිය අක්ෂ තුනෙන් එකක් පමණි — හොඳ විශ්වසනීයත්වයක් සහ වේගයක් තිබේ නම් එය තවමත් තෝරාගත හැකිය.",
+    "sizeLabelNone": "කිසිවක් නැත (අඩුම බුද්ධි ලකුණු)",
     "contextWindow": "සන්දර්භය",
     "inFallback": "දාමයේ",
     "saveModelSettings": "ආකෘති සැකසුම් සුරකින්න",
@@ -393,6 +395,7 @@
     "customTypeEmbedding": "කාවැද්දීම",
     "customTypeImage": "රූපය",
     "customTypeAudio": "ශ්රව්ය උපකරණ",
+    "customTypeTranscription": "Transcription",
     "customBaseUrl": "පදනම URL",
     "customModels": "ආකෘති",
     "customModel": "ආකෘතිය",
@@ -409,6 +412,7 @@
     "addEmbeddingModel": "කාවැද්දීම එකතු කරන්න",
     "addImageModel": "රූප ආකෘතිය එක් කරන්න",
     "addAudioModel": "ශ්රව්ය ආකෘතිය එක් කරන්න",
+    "addTranscriptionModel": "Add transcription model",
     "addingCustom": "එකතු කරමින්...",
     "discoverModels": "ආකෘති ලබාගන්න",
     "probeNow": "අන්ත ලක්ෂ්‍යය පරීක්ෂා කරන්න",
@@ -633,6 +637,32 @@
     "requestedModel": "ඉල්ලූ ආකෘතිය",
     "ttft": "TTFT",
     "requestsByAgent": "නියෝජිතයා අනුව ඉල්ලීම්"
+  },
+  "logs": {
+    "title": "ලොග",
+    "description": "සජීවී සේවාදායක ලොගය. පිටුව විවෘතව ඇති අතරතුර නව ඇතුළත් කිරීම් පැමිණේ.",
+    "pause": "විරාම කරන්න",
+    "resume": "නැවත ආරම්භ කරන්න",
+    "clear": "ලොග හිස් කරන්න",
+    "cleared": "සේවාදායක ලොගය හිස් කරන ලදී",
+    "levelFilter": "ලොග මට්ටම්",
+    "levels": {
+      "debug": "ඩීබග්",
+      "info": "තොරතුරු",
+      "warn": "අනතුරු ඇඟවීම",
+      "error": "දෝෂ"
+    },
+    "countsHint": "ගණන් සේවාදායකයේ ඇති මුළු ලොග බෆරයේ එකතුව මිස, මෙම පෙරහන්වලට ගැලපෙන ඇතුළත් කිරීම් පමණක් නොවේ.",
+    "searchPlaceholder": "ලොග පණිවිඩ සොයන්න...",
+    "jumpToLatest": "නවතම වෙත යන්න",
+    "showMore": "වැඩිපුර පෙන්වන්න",
+    "showLess": "අඩුවෙන් පෙන්වන්න",
+    "buffered": "උපරිම බෆර කළ ඇතුළත් කිරීම් {max} කින් {count} ක් පෙන්වයි",
+    "emptyTitle": "තවම ලොග ඇතුළත් කිරීම් නැත",
+    "emptyDescription": "සේවාදායකය ලියන පරිදි ඇතුළත් කිරීම් මෙහි දිස්වේ. ප්‍රතිදානයක් අපේක්ෂා කළේ නම් මට්ටම, සපයන්නා හෝ සෙවුම් පෙරහන් පුළුල් කරන්න.",
+    "noLevelsTitle": "මට්ටම් තෝරා නැත",
+    "noLevelsDescription": "ලොග ප්‍රතිදානය බැලීමට අවම වශයෙන් එක් මට්ටමක් සක්‍රීය කරන්න.",
+    "loadFailed": "සේවාදායක ලොගය පූරණය කළ නොහැකි විය."
   },
   "playground": {
     "title": "ක්රීඩා පිටිය",

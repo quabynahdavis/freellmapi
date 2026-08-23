@@ -14,7 +14,9 @@
     "switchToChinese": "Пребаци на кинески",
     "switchToEnglish": "Пребаците се на енглески",
     "modelsMenu": "Прегледајте типове модела",
-    "agents": "Агенти"
+    "agents": "Агенти",
+    "logs": "Логови",
+    "analyticsMenu": "Странице аналитике"
   },
   "auth": {
     "createYourAccount": "Креирајте свој налог",
@@ -216,8 +218,8 @@
     "localOverride": "локално надјачавање",
     "displayName": "Име за приказ",
     "sizeLabel": "Ниво способности",
-    "sizeLabelHint": "Frontier/Large/Medium/Small одређују осу интелигенције. Модели без препознатог нивоа добијају 0.",
-    "sizeLabelNone": "Ниједан (без оцене)",
+    "sizeLabelHint": "Frontier/Large/Medium/Small одређују осу интелигенције: виши ниво увек надмашује нижи, а унутар истог нивоа ранг интелигенције и даље помера резултат. Модел без препознатог нивоа добија најнижи резултат на овој оси, али интелигенција је само једна од три осе — уз добру поузданост и брзину и даље може бити изабран.",
+    "sizeLabelNone": "Ниједан (најнижи резултат интелигенције)",
     "contextWindow": "Контекст",
     "inFallback": "У ланцу",
     "saveModelSettings": "Сачувајте подешавања модела",
@@ -393,6 +395,7 @@
     "customTypeEmbedding": "Ембеддинг",
     "customTypeImage": "Слика",
     "customTypeAudio": "Аудио",
+    "customTypeTranscription": "Transcription",
     "customBaseUrl": "База URL",
     "customModels": "Модели",
     "customModel": "Модел",
@@ -409,6 +412,7 @@
     "addEmbeddingModel": "Додајте уграђивање",
     "addImageModel": "Додајте модел слике",
     "addAudioModel": "Додајте аудио модел",
+    "addTranscriptionModel": "Add transcription model",
     "addingCustom": "Додавање…",
     "discoverModels": "Преузми моделе",
     "probeNow": "Тестирај крајњу тачку",
@@ -633,6 +637,32 @@
     "requestedModel": "Тражени модел",
     "ttft": "TTFT",
     "requestsByAgent": "Захтеви по агенту"
+  },
+  "logs": {
+    "title": "Логови",
+    "description": "Лог сервера уживо. Нови уноси стижу док је страница отворена.",
+    "pause": "Паузирај",
+    "resume": "Настави",
+    "clear": "Обриши логове",
+    "cleared": "Лог сервера обрисан",
+    "levelFilter": "Нивои логовања",
+    "levels": {
+      "debug": "Дебаг",
+      "info": "Инфо",
+      "warn": "Упозорење",
+      "error": "Грешка"
+    },
+    "countsHint": "Бројеви се односе на цео бафер лога на серверу, а не само на уносе који одговарају овим филтерима.",
+    "searchPlaceholder": "Претражите поруке лога…",
+    "jumpToLatest": "Скочи на најновије",
+    "showMore": "Прикажи више",
+    "showLess": "Прикажи мање",
+    "buffered": "Приказано {count} од највише {max} сачуваних уноса",
+    "emptyTitle": "Још нема уноса у логу",
+    "emptyDescription": "Уноси се појављују овде чим их сервер упише. Проширите филтере нивоа, провајдера или претраге ако сте очекивали излаз.",
+    "noLevelsTitle": "Није изабран ниједан ниво",
+    "noLevelsDescription": "Укључите бар један ниво да бисте видели садржај лога.",
+    "loadFailed": "Није могуће учитати лог сервера."
   },
   "playground": {
     "title": "Игралиште",

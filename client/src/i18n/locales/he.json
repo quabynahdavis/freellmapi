@@ -14,7 +14,9 @@
     "switchToChinese": "מעבר לסינית",
     "switchToEnglish": "מעבר לאנגלית",
     "modelsMenu": "דפדוף בסוגי דגמים",
-    "agents": "סוכנים"
+    "agents": "סוכנים",
+    "logs": "יומן",
+    "analyticsMenu": "דפי אנליטיקה"
   },
   "auth": {
     "createYourAccount": "צור את החשבון שלך",
@@ -216,8 +218,8 @@
     "localOverride": "עקיפה מקומית",
     "displayName": "שם תצוגה",
     "sizeLabel": "דרגת יכולת",
-    "sizeLabelHint": "Frontier/Large/Medium/Small קובעים את ציר המודיעין. דגמים ללא דרגה מוכרת מקבלים 0.",
-    "sizeLabelNone": "ללא (ללא ניקוד)",
+    "sizeLabelHint": "Frontier/Large/Medium/Small קובעים את ציר המודיעין: דרגה גבוהה תמיד גוברת על נמוכה, ובתוך אותה דרגה דירוג המודיעין עדיין מזיז את הניקוד. דגם ללא דרגה מוכרת מקבל את הניקוד הנמוך ביותר בציר הזה, אך המודיעין הוא רק אחד משלושה צירים — אמינות ומהירות גבוהות עדיין יכולות לזכות אותו בניתוב.",
+    "sizeLabelNone": "ללא (ניקוד המודיעין הנמוך ביותר)",
     "contextWindow": "הקשר",
     "inFallback": "בשרשרת",
     "saveModelSettings": "שמירת הגדרות מודל",
@@ -393,6 +395,7 @@
     "customTypeEmbedding": "הטמעה",
     "customTypeImage": "תמונה",
     "customTypeAudio": "אודיו",
+    "customTypeTranscription": "Transcription",
     "customBaseUrl": "בסיס URL",
     "customModels": "דגמים",
     "customModel": "מודל",
@@ -409,6 +412,7 @@
     "addEmbeddingModel": "הוסף הטמעה",
     "addImageModel": "מודל התמונה הוסף",
     "addAudioModel": "הוסף מודל אודיו",
+    "addTranscriptionModel": "Add transcription model",
     "addingCustom": "מוסיף...",
     "discoverModels": "משיכת מודלים",
     "probeNow": "בדיקת נקודת הקצה",
@@ -633,6 +637,32 @@
     "requestedModel": "מודל מבוקש",
     "ttft": "TTFT",
     "requestsByAgent": "בקשות לפי סוכן"
+  },
+  "logs": {
+    "title": "יומן",
+    "description": "יומן השרת בזמן אמת. רשומות חדשות מגיעות כל עוד הדף פתוח.",
+    "pause": "השהה",
+    "resume": "המשך",
+    "clear": "נקה יומן",
+    "cleared": "יומן השרת נוקה",
+    "levelFilter": "רמות יומן",
+    "levels": {
+      "debug": "ניפוי באגים",
+      "info": "מידע",
+      "warn": "אזהרה",
+      "error": "שגיאה"
+    },
+    "countsHint": "הספירות מתייחסות לכל מאגר היומן שבשרת, ולא רק לרשומות שתואמות למסננים האלה.",
+    "searchPlaceholder": "חיפוש בהודעות היומן...",
+    "jumpToLatest": "מעבר לאחרונות",
+    "showMore": "הצג עוד",
+    "showLess": "הצג פחות",
+    "buffered": "מוצגות {count} מתוך עד {max} רשומות במאגר",
+    "emptyTitle": "אין עדיין רשומות ביומן",
+    "emptyDescription": "רשומות יופיעו כאן ככל שהשרת יכתוב אותן. אם ציפית לפלט, הרחב את מסנני הרמה, הספק או החיפוש.",
+    "noLevelsTitle": "לא נבחרו רמות",
+    "noLevelsDescription": "הפעל לפחות רמה אחת כדי לראות את פלט היומן.",
+    "loadFailed": "לא ניתן לטעון את יומן השרת."
   },
   "playground": {
     "title": "מגרש משחקים",
