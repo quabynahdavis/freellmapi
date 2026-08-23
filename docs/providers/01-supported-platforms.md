@@ -1,12 +1,12 @@
 # Supported platforms
 
-The `Platform` union in [`shared/types.ts` (line 59)](../../shared/types.ts) is the single source of truth for platform identity; the runtime registry in [`server/src/providers/index.ts`](../../server/src/providers/index.ts) must match it. The union currently declares **39 members**:
+The `Platform` union in [`shared/types.ts` (line 59)](../../shared/types.ts) is the single source of truth for platform identity; the runtime registry in [`server/src/providers/index.ts`](../../server/src/providers/index.ts) must match it. The union currently declares **41 members**:
 
-- **37 built-in platforms** registered as adapters at startup,
-- plus the **`custom`** placeholder (a real OpenAI-compatible adapter built per API key, since its base URL is user-supplied), giving **38 entries** in the registry map,
+- **39 built-in platforms** registered as adapters at startup,
+- plus the **`custom`** placeholder (a real OpenAI-compatible adapter built per API key, since its base URL is user-supplied), giving **40 entries** in the registry map,
 - plus **`sambanova`**, retained in the type union but no longer registered — it was dropped in V23 (June 2026) when its free tier was permanently retired (every chat call returns 402 "payment method required" once the one-time $5 trial credit lapses).
 
-Of the 37 built-in platforms, **7 use dedicated native adapters** and **30 ride `OpenAICompatProvider`** against a provider-specific base URL. Three platforms are registered keyless (`kilo`, `ovh`, and `aihorde`, which auto-configures with its documented anonymous sentinel key). The public catalog headline in the README counts ~29 free providers / 251 model families / 358 free endpoints — fewer than the union because several registered gateways keep their free rosters in the hosted catalog rather than shipping them to every binary.
+Of the 39 built-in platforms, **7 use dedicated native adapters** and **32 ride `OpenAICompatProvider`** against a provider-specific base URL. Three platforms are registered keyless (`kilo`, `ovh`, and `aihorde`, which auto-configures with its documented anonymous sentinel key). The public catalog headline in the README counts ~29 free providers / 251 model families / 358 free endpoints — fewer than the union because several registered gateways keep their free rosters in the hosted catalog rather than shipping them to every binary.
 
 ## Catalog
 
@@ -44,6 +44,8 @@ Of the 37 built-in platforms, **7 use dedicated native adapters** and **30 ride 
 | `nara` | NaraRouter | Keyed | OpenAI-compat | Free plan additionally requires Telegram channel/link verification; live-probed 2026-07-09. |
 | `sealion` | SEA-LION (AI Singapore) | Keyed | OpenAI-compat | First-party API; Google sign-in, no card, no region wall; 10 RPM recurring free tier. |
 | `orcarouter` | OrcaRouter | Keyed | OpenAI-compat | Recurring `$0` free aliases with intentionally unpublished limits (#896): 429 is a clean quota signal because free routes never fall back to paid models. |
+| `unorouter` | UnoRouter | Keyed | OpenAI-compat | Free models carry `:free` suffix; per-minute rate limit (429 on cap). `GET /v1/models` public (200 no key) but 401 on wrong key; default key validation works. Catalog rows in hosted catalog (premium now, free after 30-day age gate). |
+| `xkiro` | xKiro | Keyed | OpenAI-compat | Free plan: 5M tokens/day on free models (Mistral, MiniMax, DeepSeek families); paid models 403. `GET /v1/models` public (200 no key), so `validateUrl` points to `/v1/usage` which 401s on missing/invalid key. Accepts Bearer or `x-api-key`. Catalog rows in hosted catalog (premium now, free after 30-day age gate). |
 | `modelscope` | ModelScope (Alibaba) | Keyed | Native (`ModelScopeProvider`) | Calls require binding to an Alibaba Cloud CHINA-site account with real-name verification; `GET /v1/models` accepts garbage tokens so validation uses a 1-token chat probe; retired models answer 429 "insufficient balance" (#581). |
 | `qianfan` | Baidu Qianfan | Keyed | OpenAI-compat | ERNIE-Speed/Lite/Tiny free indefinitely via pay-as-you-go billing bounded by rate limits; Chinese real-name auth required (#936). |
 | `volcengine` | Volcengine Ark (ByteDance) | Keyed | OpenAI-compat | Recurring daily per-model reward quota of 2M tokens/day/model for individual developers, on top of a one-time 500K new-user grant; real-name auth required (#936). |

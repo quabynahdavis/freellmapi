@@ -4,6 +4,8 @@ Revision history for `docs/providers/`, listing the upstream commits that shaped
 
 | Commit | Date | Summary |
 | --- | --- | --- |
+| `ef4519a` | 2026-08-23 | feat(providers): add xkiro.com as OpenAI-compatible provider (#967) |
+| `68ddca4` | 2026-08-23 | feat(providers): add UnoRouter (unorouter.com) as OpenAI-compatible provider (#875) |
 | `df1000a` | 2026-08-20 | Qianfan/Volcengine Ark/LongCat/iFlytek Spark (#936) — four Chinese domestic OpenAI-compat platforms. |
 | `00268be` | 2026-08-18 | B.AI gateway (#918). |
 | `fba4b3d` | 2026-08-15 | OrcaRouter (#896). |
