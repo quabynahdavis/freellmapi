@@ -31,6 +31,8 @@ docs, CHANGELOG):
 | [docs/deployment/](docs/deployment/OVERVIEW.md) | [../../../docs/deployment/](../../../docs/deployment/) | Docker operations: image, Compose quickstart, persistence, healthchecks, upgrades, and backups. |
 | [docs/providers/](docs/providers/OVERVIEW.md) | [../../../docs/providers/](../../../docs/providers/) | Provider layer: supported platforms catalog, quotas/cooldowns/key health, and how to add a new provider. |
 | [docs/testing/](docs/testing/OVERVIEW.md) | [../../../docs/testing/](../../../docs/testing/) | Test matrix across workspaces, server suite conventions, and the coding-agent compatibility suite. |
+| [docs/logs/](docs/logs/OVERVIEW.md) | [../../../docs/logs/](../../../docs/logs/) | Live server log viewer in the dashboard: two-tier store, polling API, level counts, clear endpoint, env vars, redaction integration. |
+| [docs/architecture/](docs/architecture/OVERVIEW.md) | [../../../docs/architecture/](../../../docs/architecture/) | Deep-dive server architecture: bandit router, quota/cooldown engine, streaming pipeline, degraded mode, catalog sync, observability. |
 
 Pages not listed here have no translation yet; they link to their English
 originals by design.

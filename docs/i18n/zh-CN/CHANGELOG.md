@@ -4,6 +4,7 @@ Doc revision history for `docs/i18n/zh-CN/`. Most recent first.
 
 | Date | Commit | Change |
 | --- | --- | --- |
+| 2026-08-23 | `e82f85f` | docs(i18n): translate logs/ and architecture/ domains to zh-CN |
 | 2026-08-23 | [`2331045`](https://github.com/tashfeenahmed/freellmapi/commit/2331045) | docs(providers): add unorouter and xkiro to platform catalog |
 | 2026-08-23 | [`453de80`](https://github.com/tashfeenahmed/freellmapi/commit/453de80) | docs(providers): document xkiro 5M tokens/day and unorouter per-min RPM in quotas |
 | 2026-08-23 | [`acb1511`](https://github.com/tashfeenahmed/freellmapi/commit/acb1511) | docs(env): add FREEAPI_PROXY_LOCAL_DESTINATIONS, SERVER_LOGS_RETENTION_DAYS/MAX_ROWS |
