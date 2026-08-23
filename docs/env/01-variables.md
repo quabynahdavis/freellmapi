@@ -3,6 +3,7 @@
 Every variable FreeLLMAPI reads from `.env`, grouped by concern. Defaults and descriptions are derived only from the comments and values in [`.env.example`](../../.env.example). Variables shown commented out in `.env.example` are optional; their documented default is listed here.
 
 - [Server & binding](#server--binding)
+- [Outbound proxies (local destinations)](#outbound-proxies-local-destinations)
 - [Security & encryption](#security--encryption)
 - [Rate limits](#rate-limits)
 - [Routing overrides, timeouts & failover](#routing-overrides-timeouts--failover)
@@ -21,6 +22,12 @@ Related reading: [02-security-and-keys.md](02-security-and-keys.md) expands on `
 | `HOST_BIND` | `127.0.0.1` | Docker only: which host interface the container's port is published on. The default keeps the dashboard/API reachable only from the machine running Docker; set `0.0.0.0` to open it to the LAN (e.g. a Raspberry Pi at `http://192.168.1.x:3001`) — only on a trusted network, since the proxy is single-user and guarded only by the unified API key. |
 | `DASHBOARD_ORIGINS` | `localhost:5173`, `127.0.0.1:5173`, `[::1]:5173` allowed | Comma-separated extra origins allowed to call the API from a browser. Only needed if you serve the dashboard from a different host than the API (e.g. `http://my-server.local`). |
 | `CSP_UPGRADE_INSECURE_REQUESTS` | Auto (unset) | Controls the Content-Security-Policy `upgrade-insecure-requests` directive (#682). Unset: emit only when the request arrives over TLS or behind an HTTPS reverse proxy (`X-Forwarded-Proto: https`), so plain-HTTP LAN installs stay renderable. `true`: force the directive on even over plain HTTP (rarely useful). `false`: force it off even behind HTTPS (e.g. mixed-content reverse proxies). |
+
+## Outbound proxies (local destinations)
+
+| Variable | Default | Purpose |
+| --- | --- | --- |
+| `FREEAPI_PROXY_LOCAL_DESTINATIONS` | `false` | Allow proxying localhost/LAN destinations (Ollama, llama.cpp, LM Studio). By default local and LAN destinations (localhost, 127.0.0.0/8, ::1, 0.0.0.0, RFC1918/ULA/CGNAT addresses) always bypass the outbound proxy — a remote proxy has no route back to your own machine. Set to `true` only when proxying them is the point, e.g. an `ssh -D` dynamic tunnel where `http://127.0.0.1:11434` through the SOCKS proxy is meant to reach the **remote** host's Ollama. |
 
 ## Security & encryption
 
@@ -92,6 +99,8 @@ In Docker, `127.0.0.1` is the container, not your machine — see [03-outbound-p
 | `REQUEST_ANALYTICS_RETENTION_DAYS` | `90` | Request analytics retention in days. Set to `0` to disable this limit. |
 | `REQUEST_ANALYTICS_MAX_ROWS` | `100000` | Request analytics row cap. Set to `0` to disable this limit. |
 | `REQUEST_ANALYTICS_LOG_CLIENT` | `true` | Per-request caller identity (client IP + User-Agent) recorded into request analytics and shown in the dashboard "Recent calls" table. Set to `false` to store nulls instead (aggregate analytics unaffected). |
+| `SERVER_LOGS_RETENTION_DAYS` | `7` | Persisted server logs behind the dashboard's log viewer. Only warn/error lines are written to the database (the live view is an in-memory ring), so these bounds are far tighter than the analytics ones above. Set to `0` to disable this limit. |
+| `SERVER_LOGS_MAX_ROWS` | `50000` | Persisted server logs row cap. Set to `0` to disable this limit. |
 | `FREEAPI_DB_PATH` | Default location next to the server build | Optional SQLite location override. Useful on hosts where only one directory is mounted persistently, or to keep the DB outside `server/data`. Example: `/app/server/data/freellmapi.db`. |
 | `FREEAPI_DB_BACKUP_PATH` | Unset | Optional encrypted SQLite backup target (file path). On startup, FreeLLMAPI restores this backup if the configured DB file is missing; while running, it uploads a fresh backup periodically. |
 | `FREEAPI_DB_BACKUP_URL` | Unset | HTTP(S) backup target, alternative to the path above. |
