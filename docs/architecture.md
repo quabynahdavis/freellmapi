@@ -1,6 +1,6 @@
 # Architecture & internals
 
-[← Back to README](../README.md) · [Documentation index](README.md)
+[← Back to README](../README.md) · [Documentation index](README.md) · [Deep-dive domain](architecture/OVERVIEW.md)
 
 How the router decides, what to expect from stacked free tiers, and where the boundaries are.
 
@@ -10,6 +10,19 @@ How the router decides, what to expect from stacked free tiers, and where the bo
 - [Not yet supported](#not-yet-supported)
 - [Limitations](#limitations)
 - [Terms of Service review](#terms-of-service-review)
+
+## Deep-dive reference
+
+For implementation-level detail, see the [architecture domain](architecture/OVERVIEW.md):
+
+| Topic | Document |
+|-------|----------|
+| Thompson-sampling bandit router, reliability posteriors, factor weights, 10% explore | [`01-routing-and-bandit-scoring.md`](architecture/01-routing-and-bandit-scoring.md) |
+| RPM/RPD/TPM/TPD accounting, concurrency leases, cooldown ladder, probe recovery, limit learning | [`02-quota-and-cooldown-engine.md`](architecture/02-quota-and-cooldown-engine.md) |
+| SSE-only streaming, OpenAI/Anthropic/Gemini compat, Responses API shim, mid-stream errors | [`03-streaming-pipeline.md`](architecture/03-streaming-pipeline.md) |
+| Degraded-mode state machine, hedging/abort, X-Fallback-Detail, bare classification failover | [`04-degraded-mode-and-failover.md`](architecture/04-degraded-mode-and-failover.md) |
+| Live signed catalog sync, model-age gate, premium/free tiers, migration vs hosted | [`05-catalog-sync.md`](architecture/05-catalog-sync.md) |
+| Server logs viewer (ring + persisted), /api/logs API, request analytics, redaction | [`06-observability.md`](architecture/06-observability.md) |
 
 ## How it works
 
