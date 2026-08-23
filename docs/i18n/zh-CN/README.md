@@ -46,7 +46,7 @@
 - [参与贡献](#参与贡献)
 - [免责声明](#免责声明)
 
-**指南：** [安装与部署](docs/install.md) · [API 参考](docs/api.md) · [客户端与编程智能体](../../clients.md) · [提示词压缩](../../compression.md) · [架构与内部实现](../../architecture.md) · [文档索引](docs/README.md) · [贡献者指南](../../../CONTRIBUTING.md)
+**指南：** [安装与部署](docs/install.md) · [API 参考](docs/api.md) · [客户端与编程智能体](../../clients/01-agent-clients.md) · [提示词压缩](../../compression/01-compression-pipeline.md) · [架构与内部实现](../../architecture.md) · [文档索引](docs/README.md) · [贡献者指南](../../../CONTRIBUTING.md)
 
 > 「安装与部署」和「API 参考」已有中文版。「客户端与编程智能体」「提示词压缩」「架构与内部实现」目前只有英文版，上面的链接直接指向英文原文。完整的翻译状态见 [这里](../README.md#status)。
 
@@ -127,9 +127,9 @@
 
 </div>
 
-其中大多数一条命令就能配好：`npx freellmapi setup-claude`、`setup-codex`、`setup-aider`，还有另外十几个生成器。它们会拉取你当前的实时目录，备份已有配置，并且绝不覆盖你已经写好的内容。Claude Code 和 Codex 另有零留存启动器（`freellmapi launch`、`freellmapi launch-codex`），只把凭据注入子进程。Zed 和 JetBrains AI 通过可选的 [Ollama 模拟](../../clients.md#ollama-clients) 接入；Gemini CLI 走它自己的 `/v1beta` 协议。
+其中大多数一条命令就能配好：`npx freellmapi setup-claude`、`setup-codex`、`setup-aider`，还有另外十几个生成器。它们会拉取你当前的实时目录，备份已有配置，并且绝不覆盖你已经写好的内容。Claude Code 和 Codex 另有零留存启动器（`freellmapi launch`、`freellmapi launch-codex`），只把凭据注入子进程。Zed 和 JetBrains AI 通过可选的 [Ollama 模拟](../../clients/01-agent-clients.md#ollama-clients) 接入；Gemini CLI 走它自己的 `/v1beta` 协议。
 
-各工具的具体配方、setup CLI 参考、给无法发送请求头的客户端用的可撤销 URL 令牌，以及 MCP 服务，都在 **[客户端与编程智能体 →](../../clients.md)**
+各工具的具体配方、setup CLI 参考、给无法发送请求头的客户端用的可撤销 URL 令牌，以及 MCP 服务，都在 **[客户端与编程智能体 →](../../clients/01-agent-clients.md)**
 
 ## 横向对比
 
@@ -151,11 +151,11 @@
 - **统一模型与配置档** —— 同一个模型在多家提供方上会合并成一个条目，并在组内严格故障转移；命名的回退链配置档（比如一条编程链、一条视觉链）可以在仪表盘里切换，也可以按请求用 `auto:<profile>` 指定。
 - **按密钥的限流跟踪** —— 以 `(平台, 模型, 密钥)` 为单位的 RPM/RPD/TPM/TPD 计数器，会学习提供方公布的上限，让路由始终不越线。
 - **自更新的模型目录** —— 路由器每天两次从 freellmapi.co 同步经过签名的目录：新模型、额度变更和提供方的怪癖修复都会自动生效。[Premium →](#premium-实时目录)
-- **粘性会话与上下文交接** —— 对话会在同一个模型上停留 30 分钟；如果中途确实换了模型，可选的精简交接说明能让话题保持连贯。[详情 →](../../clients.md#context-handoff)
-- **提示词压缩（可选开启）** —— 一条共享且失败即放行的请求流程，可以在缓存查找和路由之前对提示词去重、过滤工具输出、压紧重复的 JSON，并裁掉过时的上下文。[详情 →](../../compression.md)
+- **粘性会话与上下文交接** —— 对话会在同一个模型上停留 30 分钟；如果中途确实换了模型，可选的精简交接说明能让话题保持连贯。[详情 →](../../clients/01-agent-clients.md#context-handoff)
+- **提示词压缩（可选开启）** —— 一条共享且失败即放行的请求流程，可以在缓存查找和路由之前对提示词去重、过滤工具输出、压紧重复的 JSON，并裁掉过时的上下文。[详情 →](../../compression/01-compression-pipeline.md)
 - **密钥加密存储，对外只有一个令牌** —— 提供方密钥以 AES-256-GCM 加密存放在 SQLite 中，每次请求时在内存里解密；你的应用自始至终只看到一个统一的 `freellmapi-…` bearer 令牌。
 - **管理仪表盘与分析** —— React 界面用来管理密钥、调整链路顺序、使用试验台，并查看 24 小时到 90 天窗口的 p50/p95/首个词元用时分析；带登录保护，支持明暗主题和 [60 种语言](#语言)。
-- **MCP 服务与交互式文档** —— 智能体可以通过 `/mcp` 查询可用模型、提供方健康状况和路由策略；`/v1/docs` 提供一个零依赖的 OpenAPI 浏览器。[编程智能体 →](../../clients.md)
+- **MCP 服务与交互式文档** —— 智能体可以通过 `/mcp` 查询可用模型、提供方健康状况和路由策略；`/v1/docs` 提供一个零依赖的 OpenAPI 浏览器。[编程智能体 →](../../clients/01-agent-clients.md)
 - **运维上的便利** —— 可选的响应缓存、加密的数据库备份、定期密钥健康检查、密钥批量导入导出、声明式启动配置。[安装与部署 →](docs/install.md)
 - **能跑 Node 20+ 的地方都能跑** —— Windows、macOS、Linux 服务器，或者一块小小的 ARM 单板机（树莓派也行）。在 PM2 / systemd 或你惯用的守护进程下，空闲时常驻内存约 40 MB。
 
@@ -187,7 +187,7 @@ curl -fsSL https://freellmapi.co/install.sh | bash
 
 ## 兼容 OpenAI 的客户端
 
-任何能指定 OpenAI 兼容 base URL 的东西都能用：把它设成 `http://localhost:3001/v1`，配上仪表盘里的统一密钥。**Claude Code**、**Codex CLI**、**Cline / Roo Code**、**Continue**（含行内补全）、**Aider**、**opencode** 和 **Cursor** 在 **[docs/clients.md](../../clients.md)** 里各有一段简短配方。此外路由器本身还兼作 MCP 服务，你的智能体可以在会话中随时查询它。
+任何能指定 OpenAI 兼容 base URL 的东西都能用：把它设成 `http://localhost:3001/v1`，配上仪表盘里的统一密钥。**Claude Code**、**Codex CLI**、**Cline / Roo Code**、**Continue**（含行内补全）、**Aider**、**opencode** 和 **Cursor** 在 **[docs/clients/01-agent-clients.md](../../clients/01-agent-clients.md)** 里各有一段简短配方。此外路由器本身还兼作 MCP 服务，你的智能体可以在会话中随时查询它。
 
 最快的配置方式是根据你服务器上实际可用的模型生成：
 
@@ -224,7 +224,7 @@ FreeLLMAPI 在设计上是本地优先、单用户的。你的提供方密钥留
 
 翻译文件以扁平 JSON 的形式放在 [`client/src/i18n/locales/`](../../../client/src/i18n/locales)。想修某个字符串，直接改对应语言 JSON 里的值即可。想加一门语言，复制 `en.json`、翻译其中的值，再到 `client/src/i18n/locale-config.ts` 注册这个语言（托盘文案还需要改 `desktop/src/i18n.ts`）；`npm test` 会检查每种语言的键和占位符是否对齐。欢迎提 PR。
 
-中文的术语约定见 [docs/translating.md](../../translating.md)，提交翻译前请先过一遍，这样 README 和仪表盘里的说法能对得上。
+中文的术语约定见 [docs/i18n/01-translating.md](../01-translating.md)，提交翻译前请先过一遍，这样 README 和仪表盘里的说法能对得上。
 
 ## Premium 实时目录
 

@@ -9,7 +9,7 @@ original elsewhere in the repository and is expected to lag slightly behind it.
 
 Translation of the dashboard UI strings is a separate concern and lives in
 `client/src/i18n/locales/`. The shared terminology rules that apply to both are
-in [../translating.md](../translating.md).
+in [01-translating.md](01-translating.md).
 
 ## Conventions
 
@@ -35,5 +35,5 @@ in [../translating.md](../translating.md).
 
 ## Related
 
-- [../translating.md](../translating.md) - dashboard locale strings and the settled zh-CN terminology table (applies here too).
+- [01-translating.md](01-translating.md) - dashboard locale strings and the settled zh-CN terminology table (applies here too).
 - Root [README.md](../../README.md) - carries the language-toggle bar linking to these translations.

@@ -8,7 +8,7 @@ mirrors an English original at the same position in the tree, with
 `docs/i18n/zh-CN/` removed from the path.
 
 Terminology follows the settled zh-CN table in
-[../../translating.md](../../translating.md) so these docs and the dashboard UI
+[../01-translating.md](../01-translating.md) so these docs and the dashboard UI
 use the same words (提供方, 词元, 令牌, ...).
 
 ## File index

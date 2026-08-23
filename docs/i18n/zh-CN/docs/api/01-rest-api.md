@@ -225,7 +225,7 @@ HTTP 头只能携带可打印的 ASCII 字符，所以模型 id 里超出这个�
 
 可选开启的响应缓存能按请求用 `X-FreeLLM-Cache: on|off` 开关。它是一个针对完全相同的非流式请求做精确匹配的内存 LRU（以整个请求的规范化 SHA-256 为键，带 TTL 和温度门槛，节省量统计显示在仪表盘上）。默认关闭；缓存命中不消耗任何提供方额度。
 
-启用[提示词压缩](../../../compression.md)后，`X-FreeLLM-Compress: off|on|lossless|standard|aggressive` 可以对单次请求关闭或调低已配置的模式，但不能高于运维方配置的模式。响应会报告实际生效的模式和预估节省量，例如 `X-FreeLLM-Compress: standard; saved~=1840`。
+启用[提示词压缩](../../../compression/01-compression-pipeline.md)后，`X-FreeLLM-Compress: off|on|lossless|standard|aggressive` 可以对单次请求关闭或调低已配置的模式，但不能高于运维方配置的模式。响应会报告实际生效的模式和预估节省量，例如 `X-FreeLLM-Compress: standard; saved~=1840`。
 
 ## 嵌入
 

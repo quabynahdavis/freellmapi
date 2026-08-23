@@ -5,7 +5,7 @@ a file that lives elsewhere in the repo, and it is expected to lag a little
 behind. That is fine, as long as it is honest about it.
 
 This is separate from the dashboard UI strings, which live in
-`client/src/i18n/locales/` and are covered by [../translating.md](../translating.md).
+`client/src/i18n/locales/` and are covered by [01-translating.md](01-translating.md).
 Read that file too if you are translating into Chinese, because the terminology
 table there applies here as well. A README that calls a provider `提供商` while
 the dashboard calls it `提供方` is worse than no translation.
@@ -33,8 +33,8 @@ too.
 | `docs/README.md` | ✅ |
 | `docs/install.md` | ✅ |
 | `docs/api.md` | ✅ |
-| `docs/clients.md` | English |
-| `docs/compression.md` | English |
+| `docs/clients/01-agent-clients.md` | English |
+| `docs/compression/01-compression-pipeline.md` | English |
 | `docs/architecture.md` | English |
 
 Untranslated pages are not a gap to apologise for. Link to the English original
