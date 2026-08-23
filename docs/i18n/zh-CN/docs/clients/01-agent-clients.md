@@ -2,7 +2,7 @@
 
 # 客户端与编程智能体
 
-[← 返回 README](../README.md) · [文档索引](README.md)
+[← 返回 README](../README.md) · [文档索引](../README.md)
 
 - [OpenAI 兼容客户端](#openai-兼容客户端)
 - [编程智能体](#编程智能体)

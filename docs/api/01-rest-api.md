@@ -1,8 +1,8 @@
-**English** · [简体中文](i18n/zh-CN/docs/api.md)
+**English** · [简体中文](../i18n/zh-CN/docs/api/01-rest-api.md)
 
 # API reference
 
-[← Back to README](../README.md) · [Documentation index](README.md)
+[← Back to README](../README.md) · [Documentation index](../README.md)
 
 Any OpenAI-compatible client works (Anthropic / Claude clients too — see [Anthropic / Claude clients](#anthropic--claude-clients)). Base URL `http://localhost:3001/v1`, unified key from the dashboard's Keys page. An interactive OpenAPI viewer covering every proxy endpoint is served at `GET /v1/docs`; the spec itself lives at `GET /v1/openapi.json`.
 
@@ -272,7 +272,7 @@ HTTP headers only carry printable ASCII, so a model id with characters outside t
 
 The opt-in response cache can be toggled per request with `X-FreeLLM-Cache: on|off` — an exact-match in-memory LRU for identical non-streaming requests (canonical SHA-256 keys over the full request, TTL and temperature gates, saved-token stats on the dashboard). Off by default; cache hits consume zero provider quota.
 
-When [prompt compression](compression/01-compression-pipeline.md) is enabled, `X-FreeLLM-Compress: off|on|lossless|standard|aggressive` can disable or lower the configured mode for one request. It cannot raise the operator's configured mode. The response reports the effective mode and estimated savings, for example `X-FreeLLM-Compress: standard; saved~=1840`.
+When [prompt compression](../compression/01-compression-pipeline.md) is enabled, `X-FreeLLM-Compress: off|on|lossless|standard|aggressive` can disable or lower the configured mode for one request. It cannot raise the operator's configured mode. The response reports the effective mode and estimated savings, for example `X-FreeLLM-Compress: standard; saved~=1840`.
 
 ## Embeddings
 

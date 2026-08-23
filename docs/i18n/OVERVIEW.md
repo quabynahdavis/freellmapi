@@ -18,7 +18,7 @@ in [01-translating.md](01-translating.md).
   English original, and adding it back yields the translation.
 - **Language toggle.** The root README and every translated README carry a
   centered language bar near the top (above the hero screenshot) linking the
-  available editions, e.g. `**English** · [简体中文](docs/i18n/zh-CN/README.md)`.
+  available editions, e.g. `**English** · [简体中文](zh-CN/README.md)`.
   When a locale is added, its link goes into this bar on every README.
 - **Translate prose, not markup.** Badges, code blocks, endpoint paths,
   environment variables, and model ids stay untouched; relative asset and doc

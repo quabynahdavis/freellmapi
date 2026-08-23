@@ -1,6 +1,6 @@
 # Clients & coding agents
 
-[← Back to README](../README.md) · [Documentation index](README.md)
+[← Back to README](../README.md) · [Documentation index](../README.md)
 
 - [OpenAI-compatible clients](#openai-compatible-clients)
 - [Coding agents](#coding-agents)

@@ -6,6 +6,7 @@ Revision history for `docs/`, derived from git commits touching this directory. 
 
 | Commit | Date | Summary |
 | --- | --- | --- |
+| `0e515ac` | 2026-08-23 | docs(meta): fix broken links from 2026-08-23 doc updates — 24 links fixed across 16 files (api/compression/clients/i18nzh) |
 | `1a0ce48` | 2026-08-23 | feat(cli): setup-dsh — configure DeepSeek Harness in one command (#995) |
 | `cf0c216` | 2026-08-23 | perf(compression): early-exit protected-span check in the per-line hot path (#990) |
 | `74df985` | 2026-08-23 | Server log viewer in the dashboard, under an Analytics nav menu (#993) |

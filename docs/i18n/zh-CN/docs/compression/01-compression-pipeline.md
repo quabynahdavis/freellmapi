@@ -2,7 +2,7 @@
 
 # 提示词压缩
 
-[← 返回 README](../README.md) · [文档索引](README.md) · [API 参考](api.md)
+[← 返回 README](../README.md) · [文档索引](../README.md) · [API 参考](../api/01-rest-api.md)
 
 长的编程智能体会话反复发送系统提示词、文件读取、命令输出和工具 schema。FreeLLMAPI 能在缓存查找、词元预算和路由之前先压缩请求上下文，这样路由器看到的是缩减后的估算值，更多小上下文模型就能保持符合条件。提供方响应绝不重写。
 

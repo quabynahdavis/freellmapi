@@ -46,7 +46,7 @@
 - [参与贡献](#参与贡献)
 - [免责声明](#免责声明)
 
-**指南：** [安装与部署](docs/install.md) · [API 参考](docs/api.md) · [客户端与编程智能体](../../clients/01-agent-clients.md) · [提示词压缩](../../compression/01-compression-pipeline.md) · [架构与内部实现](../../architecture.md) · [文档索引](docs/README.md) · [贡献者指南](../../../CONTRIBUTING.md)
+**指南：** [安装与部署](docs/install.md) · [API 参考](docs/api/01-rest-api.md) · [客户端与编程智能体](../../clients/01-agent-clients.md) · [提示词压缩](../../compression/01-compression-pipeline.md) · [架构与内部实现](../../architecture.md) · [文档索引](docs/README.md) · [贡献者指南](../../../CONTRIBUTING.md)
 
 > 「安装与部署」和「API 参考」已有中文版。「客户端与编程智能体」「提示词压缩」「架构与内部实现」目前只有英文版，上面的链接直接指向英文原文。完整的翻译状态见 [这里](../README.md#status)。
 
@@ -141,10 +141,10 @@
 
 ![功能概览](../../../repo-assets/features.png)
 
-- **OpenAI 的全部接口** —— `/v1/chat/completions`、`/v1/responses`（Codex CLI 需要它）、`/v1/completions`（编辑器的幽灵文本补全）、`/v1/images/generations`、`/v1/audio/speech`、`/v1/embeddings` 和 `/v1/models`，流式与非流式均可，来自官方 SDK 或任何 OpenAI 兼容客户端都行。[API 参考 →](docs/api.md)
-- **Anthropic Messages API** —— `/v1/messages` 在同一套路由之上讲 Anthropic 的协议，所以 **Claude Code** 和官方 Anthropic SDK 可以直接跑在你的免费池上。[详情 →](docs/api.md#anthropic-与-claude-客户端)
+- **OpenAI 的全部接口** —— `/v1/chat/completions`、`/v1/responses`（Codex CLI 需要它）、`/v1/completions`（编辑器的幽灵文本补全）、`/v1/images/generations`、`/v1/audio/speech`、`/v1/embeddings` 和 `/v1/models`，流式与非流式均可，来自官方 SDK 或任何 OpenAI 兼容客户端都行。[API 参考 →](docs/api/01-rest-api.md)
+- **Anthropic Messages API** —— `/v1/messages` 在同一套路由之上讲 Anthropic 的协议，所以 **Claude Code** 和官方 Anthropic SDK 可以直接跑在你的免费池上。[详情 →](docs/api/01-rest-api.md#anthropic-与-claude-客户端)
 - **原生 Gemini 与 Ollama 接口** —— Gemini CLI 可以用 `/v1beta`（`generateContent`、流式、词元计数、模型列表）；可选的 Ollama 模拟则为 Zed、JetBrains 以及其他本地模型客户端提供 NDJSON 的 chat/generate、标签、元数据和嵌入。
-- **Fusion（多模型合成）** —— 请求虚拟模型 `fusion`，路由器会把你的提示词并行分发给一组风格各异的免费模型，再由一个评审模型从这些草稿中合成出一个答案。[详情 →](docs/api.md#fusion-多模型合成)
+- **Fusion（多模型合成）** —— 请求虚拟模型 `fusion`，路由器会把你的提示词并行分发给一组风格各异的免费模型，再由一个评审模型从这些草稿中合成出一个答案。[详情 →](docs/api/01-rest-api.md#fusion-多模型合成)
 - **图像生成与文本转语音** —— `/v1/images/generations` 和 `/v1/audio/speech` 会在提供媒体模型的提供方之间路由，也包括自定义的 OpenAI 兼容媒体端点。
 - **工具调用与结构化输出** —— OpenAI 风格的 `tools` 可在各提供方之间往返（纯文本形式的工具调用会被救回成真正的 `tool_calls`），另有 `response_format`、`seed`、`logprobs`、惩罚项以及其余采样参数按提供方透传。
 - **智能路由，六种策略** —— 实时的每模型速度、能力、稳定性评分决定你的链路顺序；遇到 429/5xx 时自动转移到下一个模型，并带冷却和密钥轮换。[路由详解 →](../../architecture.md#routing-in-detail)
@@ -261,7 +261,7 @@ print(resp.choices[0].message.content)
 print("Routed via:", resp.headers.get("x-routed-via"))
 ```
 
-流式、`auto:*` 路由策略、工具调用、视觉输入、Gemini 的 Google 搜索接地、嵌入，以及 Anthropic Messages 接口，连同各自的 curl 和 Python 示例，全都在 **[docs/api.md](docs/api.md)**。每个响应都带一个 `X-Routed-Via: <平台>/<模型>` 头，你可以据此看出实际是哪家提供方处理的。
+流式、`auto:*` 路由策略、工具调用、视觉输入、Gemini 的 Google 搜索接地、嵌入，以及 Anthropic Messages 接口，连同各自的 curl 和 Python 示例，全都在 **[docs/api/01-rest-api.md](docs/api/01-rest-api.md)**。每个响应都带一个 `X-Routed-Via: <平台>/<模型>` 头，你可以据此看出实际是哪家提供方处理的。
 
 ## 截图
 

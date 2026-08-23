@@ -18,7 +18,7 @@ use the same words (提供方, 词元, 令牌, ...).
 | [README.md](README.md) | [../../../README.md](../../../README.md) | Project overview: what the gateway does, supported providers, quick start, and configuration - the full root README in Simplified Chinese. |
 | [docs/README.md](docs/README.md) | [../../../docs/README.md](../../../docs/README.md) | Documentation index page listing every guide in the docs tree. |
 | [docs/install.md](docs/install.md) | [../../../docs/install.md](../../../docs/install.md) | Installation guide covering Docker Compose, local setup, and desktop app installs. |
-| [docs/api.md](docs/api.md) | [../../../docs/api.md](../../../docs/api.md) | API reference for the OpenAI-compatible `/v1` endpoints, authentication, and request formats. |
+| [docs/api/01-rest-api.md](docs/api/01-rest-api.md) | [../../../docs/api/01-rest-api.md](../../../docs/api/01-rest-api.md) | API reference for the OpenAI-compatible `/v1` endpoints, authentication, and request formats. |
 
 ### Translated domain subtrees
 

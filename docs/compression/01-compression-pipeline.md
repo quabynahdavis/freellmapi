@@ -1,6 +1,6 @@
 # Prompt compression
 
-[← Back to README](../README.md) · [Documentation index](README.md) · [API reference](api.md)
+[← Back to README](../README.md) · [Documentation index](../README.md) · [API reference](../api/01-rest-api.md)
 
 Long coding-agent sessions repeatedly send system prompts, file reads, command output, and tool schemas. FreeLLMAPI can shrink that request context before cache lookup, token budgeting, and routing, so the router sees the reduced estimate and more small-context models remain eligible. Provider responses are never rewritten.
 
