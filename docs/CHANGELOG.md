@@ -2,6 +2,19 @@
 
 Revision history for `docs/`, derived from git commits touching this directory. Most recent first.
 
+## 2026-08-23
+
+| Commit | Date | Summary |
+| --- | --- | --- |
+| `1a0ce48` | 2026-08-23 | feat(cli): setup-dsh — configure DeepSeek Harness in one command (#995) |
+| `cf0c216` | 2026-08-23 | perf(compression): early-exit protected-span check in the per-line hot path (#990) |
+| `74df985` | 2026-08-23 | Server log viewer in the dashboard, under an Analytics nav menu (#993) |
+| `96b6f75` | 2026-08-22 | docs(meta): index providers/testing domains and log today's additions |
+| `676ae20` | 2026-08-22 | docs(testing): add test matrix and compatibility-suite documentation |
+| `b21ec10` | 2026-08-22 | docs(providers): add platform catalog and integration guides |
+| `abe6b00` | 2026-08-22 | docs(deployment): add Docker operations and maintenance domain |
+| `ac0a9ce` | 2026-08-22 | docs(env): add runtime configuration reference domain |
+
 ## 2026-08-22
 
 | Commit | Date | Summary |

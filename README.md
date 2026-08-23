@@ -53,7 +53,7 @@ Your router updates its own model catalog from a signed feed: new free models, q
 - [Contributing](#contributing)
 - [Disclaimer](#disclaimer)
 
-**Guides:** [Install & deploy](docs/install.md) · [API reference](docs/api.md) · [Clients & coding agents](docs/clients.md) · [Prompt compression](docs/compression.md) · [Architecture & internals](docs/architecture.md) · [Documentation index](docs/README.md) · [Contributor guide](CONTRIBUTING.md)
+**Guides:** [Install & deploy](docs/install.md) · [API reference](docs/api.md) · [Clients & coding agents](docs/clients/01-agent-clients.md) · [Prompt compression](docs/compression/01-compression-pipeline.md) · [Architecture & internals](docs/architecture.md) · [Documentation index](docs/README.md) · [Contributor guide](CONTRIBUTING.md)
 
 ## Why this exists
 
@@ -133,9 +133,9 @@ The full, always-current list lives at **[freellmapi.co/models](https://freellma
 
 </div>
 
-Most of these configure themselves with one command — `npx freellmapi setup-claude`, `setup-codex`, `setup-aider`, `setup-dsh` (DeepSeek Harness), and ten more generators that fetch your live catalog, back up existing config, and never clobber what's already there. Claude Code and Codex also get zero-persistence launchers (`freellmapi launch`, `freellmapi launch-codex`) that inject credentials into the child process only. Zed and JetBrains AI connect through the opt-in [Ollama emulation](docs/clients.md#ollama-clients); Gemini CLI speaks its native wire on `/v1beta`.
+Most of these configure themselves with one command — `npx freellmapi setup-claude`, `setup-codex`, `setup-aider`, `setup-dsh` (DeepSeek Harness), and ten more generators that fetch your live catalog, back up existing config, and never clobber what's already there. Claude Code and Codex also get zero-persistence launchers (`freellmapi launch`, `freellmapi launch-codex`) that inject credentials into the child process only. Zed and JetBrains AI connect through the opt-in [Ollama emulation](docs/clients/01-agent-clients.md#ollama-clients); Gemini CLI speaks its native wire on `/v1beta`.
 
-Per-tool recipes, the setup CLI reference, revocable URL tokens for headerless clients, and the MCP server all live in **[Clients & coding agents →](docs/clients.md)**
+Per-tool recipes, the setup CLI reference, revocable URL tokens for headerless clients, and the MCP server all live in **[Clients & coding agents →](docs/clients/01-agent-clients.md)**
 
 ## How it compares
 
@@ -157,11 +157,11 @@ Based on public documentation, July 2026 — corrections welcome.
 - **Unified models & profiles** — the same model on several providers collapses into one entry with strict in-group failover; named fallback-chain profiles (a coding chain, a vision chain) switch from the dashboard or per request via `auto:<profile>`.
 - **Per-key rate tracking** — RPM/RPD/TPM/TPD counters per `(platform, model, key)` that learn providers' reported ceilings, so routing always stays under every cap.
 - **Self-updating model catalog** — the router syncs a signed catalog from freellmapi.co twice a day: new models, quota changes, and provider quirk fixes land automatically. [Premium →](#premium-live-catalog)
-- **Sticky sessions & context handoff** — conversations stay on one model for 30 minutes; an optional compact handoff note keeps the thread coherent when a mid-chat switch does happen. [Details →](docs/clients.md#context-handoff)
-- **Prompt compression (opt-in)** — a shared, fail-open request pipeline can deduplicate prompts, filter tool output, compact repeated JSON, and trim stale context before cache lookup and routing. [Details →](docs/compression.md)
+- **Sticky sessions & context handoff** — conversations stay on one model for 30 minutes; an optional compact handoff note keeps the thread coherent when a mid-chat switch does happen. [Details →](docs/clients/01-agent-clients.md#context-handoff)
+- **Prompt compression (opt-in)** — a shared, fail-open request pipeline can deduplicate prompts, filter tool output, compact repeated JSON, and trim stale context before cache lookup and routing. [Details →](docs/compression/01-compression-pipeline.md)
 - **Encrypted keys, one token out** — provider keys are AES-256-GCM encrypted in SQLite and decrypted in-memory per request; your apps only ever see a single unified `freellmapi-…` bearer token.
 - **Admin dashboard & analytics** — React UI to manage keys, reorder the chain, run a playground, and read p50/p95/TTFT analytics over 24h–90d windows; login-gated, dark/light themes, [60 languages](#languages).
-- **MCP server & interactive docs** — agents can introspect usable models, provider health, and routing strategy over `/mcp`; a dependency-free OpenAPI viewer lives at `/v1/docs`. [Coding agents →](docs/clients.md)
+- **MCP server & interactive docs** — agents can introspect usable models, provider health, and routing strategy over `/mcp`; a dependency-free OpenAPI viewer lives at `/v1/docs`. [Coding agents →](docs/clients/01-agent-clients.md)
 - **Ops niceties** — opt-in response cache, encrypted DB backups, periodic key health checks, bulk key import/export, declarative startup config. [Install & deploy →](docs/install.md)
 - **Runs anywhere Node 20+ runs** — Windows, macOS, Linux servers, or a small ARM SBC (Raspberry Pi included). ~40 MB RSS at idle behind PM2 / systemd / whatever supervisor you prefer.
 
@@ -193,7 +193,7 @@ A native menu-bar app lives in [`desktop/`](./desktop): the entire router + dash
 
 ## Works with OpenAI-compatible clients
 
-Anything that can target an OpenAI-compatible base URL works: set it to `http://localhost:3001/v1` with the unified key from the dashboard. **Claude Code**, **Codex CLI**, **Cline / Roo Code**, **Continue** (including inline autocomplete), **Aider**, **opencode**, and **Cursor** each have a short recipe in **[docs/clients.md](docs/clients.md)** — and the router doubles as an MCP server your agents can introspect mid-session.
+Anything that can target an OpenAI-compatible base URL works: set it to `http://localhost:3001/v1` with the unified key from the dashboard. **Claude Code**, **Codex CLI**, **Cline / Roo Code**, **Continue** (including inline autocomplete), **Aider**, **opencode**, and **Cursor** each have a short recipe in **[docs/clients/01-agent-clients.md](docs/clients/01-agent-clients.md)** — and the router doubles as an MCP server your agents can introspect mid-session.
 
 The fastest setup is generated from the models available on your live server:
 
