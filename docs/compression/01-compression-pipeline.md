@@ -49,6 +49,11 @@ When `autoTriggerEstTokens` is configured and an uncompressed request crosses th
 
 The pipeline is fail-open. Every engine runs independently, and its output is discarded if it grows the request, throws an exception, or fails a fidelity gate. The gate requires:
 
+> **Perf note (cf0c216):** The protected-span check now early-exits when a span is
+> already known to be preserved, avoiding redundant work in the per-line hot path.
+
+- all distinct numeric literals and diff hunks to survive;
+
 - all distinct numeric literals and diff hunks to survive;
 - every explicit constraint, security instruction, and error line to survive;
 - at least 90% of JSON keys to survive;
