@@ -28,6 +28,11 @@ npm run test:migrations -w server # migration roundtrip only
 
 `test:migrations` 只瞄准一个文件——[`src/__tests__/db/migrate/roundtrip.test.ts`](../../../../../server/src/__tests__/db/migrate/roundtrip.test.ts)——把每条已记录的迁移上滚再下滚，证明往返无损。动过 `src/db/migrate/` 下面的任何东西之后都要跑它。
 
+2026 年 8 月新增的测试文件，扩充了覆盖率：
+- `src/__tests__/routes/logs.test.ts` —— 服务器日志查看器的持久化与 API
+- `src/__tests__/routes/custom-transcription.test.ts` —— 自定义 STT 模型注册与转写用法
+- `src/__tests__/lib/provider-identity.test.ts` —— 自定义端点身份分类（#889）
+
 ### Client (`client/package.json`)
 
 ```

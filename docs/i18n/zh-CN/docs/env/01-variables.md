@@ -5,6 +5,7 @@
 FreeLLMAPI 从 `.env` 读取的全部变量，按主题分组。默认值和说明仅依据 [`.env.example`](../../../../../.env.example) 中的注释与取值推导而来。在 `.env.example` 中以注释形式出现的变量是可选的；此处列出的是它们文档记载的默认值。
 
 - [服务器与绑定](#服务器与绑定)
+- [出站代理（本地目的地）](#出站代理本地目的地)
 - [安全与加密](#安全与加密)
 - [限流](#限流)
 - [路由覆盖、超时与故障转移](#路由覆盖超时与故障转移)
@@ -23,6 +24,12 @@ FreeLLMAPI 从 `.env` 读取的全部变量，按主题分组。默认值和说�
 | `HOST_BIND` | `127.0.0.1` | 仅 Docker 有效：容器的端口发布在宿主机的哪个接口上。默认值让仪表盘/API 只能从运行 Docker 的那台机器访问；设为 `0.0.0.0` 可对局域网开放（例如树莓派上的 `http://192.168.1.x:3001`）——只在可信网络上这么做，因为这个代理是单用户的，唯一的防护就是统一 API 密钥。 |
 | `DASHBOARD_ORIGINS` | 允许 `localhost:5173`、`127.0.0.1:5173`、`[::1]:5173` | 额外允许从浏览器调用 API 的来源，逗号分隔。只有当仪表盘部署在与 API 不同的主机上时才需要（例如 `http://my-server.local`）。 |
 | `CSP_UPGRADE_INSECURE_REQUESTS` | 自动（未设置） | 控制 Content-Security-Policy 的 `upgrade-insecure-requests` 指令（#682）。未设置：仅当请求经 TLS 到达、或位于 HTTPS 反向代理之后（`X-Forwarded-Proto: https`）时才输出该指令，纯 HTTP 的局域网安装仍可正常渲染。`true`：即使走纯 HTTP 也强制开启该指令（很少有用）。`false`：即使在 HTTPS 之后也强制关闭（例如存在混合内容的反向代理）。 |
+
+## 出站代理（本地目的地）
+
+| 变量 | 默认值 | 用途 |
+| --- | --- | --- |
+| `FREEAPI_PROXY_LOCAL_DESTINATIONS` | `false` | 允许代理 localhost/局域网目的地（Ollama、llama.cpp、LM Studio）。默认情况下本地和局域网目的地（localhost、127.0.0.0/8、::1、0.0.0.0、RFC1918/ULA/CGNAT 地址）总是绕过出站代理——远程代理没有路由回你自己的机器。仅当代理它们才是目的时设为 `true`，例如 `ssh -D` 动态隧道，其中经由 SOCKS 代理的 `http://127.0.0.1:11434` 本意是要到达**远程**主机的 Ollama。 |
 
 ## 安全与加密
 
@@ -94,6 +101,8 @@ FreeLLMAPI 从 `.env` 读取的全部变量，按主题分组。默认值和说�
 | `REQUEST_ANALYTICS_RETENTION_DAYS` | `90` | 请求分析的留存天数。设为 `0` 取消此限制。 |
 | `REQUEST_ANALYTICS_MAX_ROWS` | `100000` | 请求分析的行数上限。设为 `0` 取消此限制。 |
 | `REQUEST_ANALYTICS_LOG_CLIENT` | `true` | 把每次请求的调用者身份（客户端 IP + User-Agent）记入请求分析，并显示在仪表盘的「最近调用」表里。设为 `false` 则改存 null（聚合分析不受影响）。 |
+| `SERVER_LOGS_RETENTION_DAYS` | `7` | 仪表盘日志查看器后面的持久化服务器日志。只有 warn/error 行会写入数据库（实时视图是内存环），所以这些界限比上面的分析界限紧得多。设为 `0` 取消此限制。 |
+| `SERVER_LOGS_MAX_ROWS` | `50000` | 持久化服务器日志的行数上限。设为 `0` 取消此限制。 |
 | `FREEAPI_DB_PATH` | 默认位置，紧邻 server 构建产物 | 可选的 SQLite 位置覆盖。适合只有某一个目录做了持久化挂载的主机，或者想把数据库放到 `server/data` 之外的场景。示例：`/app/server/data/freellmapi.db`。 |
 | `FREEAPI_DB_BACKUP_PATH` | 未设置 | 可选的加密 SQLite 备份目标（文件路径）。启动时若配置的数据库文件缺失，FreeLLMAPI 会恢复这份备份；运行期间则定期上传新的备份。 |
 | `FREEAPI_DB_BACKUP_URL` | 未设置 | HTTP(S) 备份目标，上面路径的替代方案。 |

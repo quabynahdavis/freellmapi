@@ -2,13 +2,13 @@
 
 # 支持的平台
 
-[`shared/types.ts`（第 59 行）](../../../../../shared/types.ts) 中的 `Platform` 联合类型是平台身份的唯一事实来源；[`server/src/providers/index.ts`](../../../../../server/src/providers/index.ts) 中的运行时注册表必须与它保持一致。联合类型目前声明了 **39 个成员**：
+[`shared/types.ts`（第 59 行）](../../../../../shared/types.ts) 中的 `Platform` 联合类型是平台身份的唯一事实来源；[`server/src/providers/index.ts`](../../../../../server/src/providers/index.ts) 中的运行时注册表必须与它保持一致。联合类型目前声明了 **41 个成员**：
 
-- **37 个内置平台**，启动时注册为适配器；
-- 加上 **`custom`** 占位（一个按 API 密钥逐个构建的真实 OpenAI 兼容适配器，因为它的 base URL 由用户提供），注册表共 **38 个条目**；
+- **39 个内置平台**，启动时注册为适配器；
+- 加上 **`custom`** 占位（一个按 API 密钥逐个构建的真实 OpenAI 兼容适配器，因为它的 base URL 由用户提供），注册表共 **40 个条目**；
 - 再加 **`sambanova`**——保留在类型联合中但不再注册：它在 V23（2026 年 6 月）被移除，当时它的免费额度被永久收回（一次性 $5 试用额度用完后，每次聊天调用都返回 402「需要绑定支付方式」）。
 
-37 个内置平台中，**7 个使用专属原生适配器**，**30 个搭载 `OpenAICompatProvider`** 对着各自提供方专属的 base URL。三个平台以免密钥方式注册（`kilo`、`ovh`，以及 `aihorde`——它用文档记载的匿名哨兵密钥自动配置）。README 里的公开目录招牌数字约为 29 家免费提供方 / 251 个模型系列 / 358 个免费端点——比联合类型少，因为若干已注册的网关把免费名册放在托管目录里维护，而不是随每个二进制一起发布。
+39 个内置平台中，**7 个使用专属原生适配器**，**32 个搭载 `OpenAICompatProvider`** 对着各自提供方专属的 base URL。三个平台以免密钥方式注册（`kilo`、`ovh`，以及 `aihorde`——它用文档记载的匿名哨兵密钥自动配置）。README 里的公开目录招牌数字约为 29 家免费提供方 / 251 个模型系列 / 358 个免费端点——比联合类型少，因为若干已注册的网关把免费名册放在托管目录里维护，而不是随每个二进制一起发布。
 
 ## 目录
 
@@ -46,6 +46,8 @@
 | `nara` | NaraRouter | 带密钥 | OpenAI 兼容 | 免费计划额外要求 Telegram 频道/链接验证；2026 年 7 月 9 日做过线上探测。 |
 | `sealion` | SEA-LION (AI Singapore) | 带密钥 | OpenAI 兼容 | 第一方 API；Google 登录、无需信用卡、没有地区墙；免费档每月循环 10 RPM。 |
 | `orcarouter` | OrcaRouter | 带密钥 | OpenAI 兼容 | 循环 `$0` 免费别名，限额刻意不予公布（#896）：429 是干净的额度信号，因为免费路由从不回退到付费模型。 |
+| `unorouter` | UnoRouter | 带密钥 | OpenAI 兼容 | 免费模型带 `:free` 后缀；每分钟限流（达上限即 429）。`GET /v1/models` 公开（无密钥也返回 200），但错误密钥会得到 401；默认密钥校验有效。目录行在托管目录中（目前是付费，30 天观察期后转免费）。 |
+| `xkiro` | xKiro | 带密钥 | OpenAI 兼容 | 免费计划：免费模型（Mistral、MiniMax、DeepSeek 系列）每日 500 万词元；付费模型返回 403。`GET /v1/models` 公开（无密钥返回 200），所以 `validateUrl` 指向 `/v1/usage`，缺失或无效密钥时返回 401。接受 Bearer 或 `x-api-key`。目录行在托管目录中（目前是付费，30 天观察期后转免费）。 |
 | `modelscope` | ModelScope (Alibaba) | 带密钥 | 原生（`ModelScopeProvider`） | 调用需要绑定完成实名的阿里云中国站账号；`GET /v1/models` 接受任意垃圾令牌，所以校验采用单词元聊天探测；退役模型以 429「余额不足」回应（#581）。 |
 | `qianfan` | Baidu Qianfan | 带密钥 | OpenAI 兼容 | ERNIE-Speed/Lite/Tiny 以按量计费封顶于限流规则的方式长期免费；需要中国实名认证（#936）。 |
 | `volcengine` | Volcengine Ark (ByteDance) | 带密钥 | OpenAI 兼容 | 个人开发者在一次性 50 万词元新用户赠金之外，还有每模型每日 200 万词元的循环奖励额度；需要实名认证（#936）。 |
