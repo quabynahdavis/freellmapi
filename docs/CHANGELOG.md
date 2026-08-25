@@ -8,7 +8,7 @@ Revision history for `docs/`, derived from git commits touching this directory. 
 | --- | --- | --- |
 | `60d03d6` | 2026-08-25 | docs(api): document video platforms (pollinations/huggingface, 5-min bound, fal queue), free-tier budget API (`GET /api/free-tier`, pool-deduped), and backups API (`GET /api/backups`, DUMP_FORMAT=1, sha256 fingerprint) |
 | `b7482d4` | 2026-08-25 | docs(fallback): add named-chains domain — chain lifecycle, empty-chain authoritative 400 (`activeChainOrThrow`, e852ff1), `auto:<name>` in `GET /v1/models` (cc1e985), `profiles.auto_include_new_models` (b3bf20f), named-chain manager UI (8bb2004) |
-| `6e7fc28` | 2026-08-25 | docs(observability): dedupe 06-observability.md against logs viewer, cross-link both ways, add desktop `freeapi.log` file-logger note (90aaa5b) |
+| `5a77e44` | 2026-08-25 | docs(observability): dedupe 06-observability.md against logs viewer, cross-link both ways, add desktop `freeapi.log` file-logger note (90aaa5b) |
 | `f4135a3` | 2026-08-25 | docs(providers): refresh free-tier numbers to 34 providers / 474 families / 635 endpoints (~7.4B tokens/month) in providers/OVERVIEW.md and providers/01-supported-platforms.md |
 
 ## 2026-08-23
