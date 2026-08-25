@@ -2,6 +2,10 @@
 
 Doc revision history for `docs/architecture/`, seeded from commits touching architecture-relevant code.
 
+## 2026-08-25
+
+- **docs(observability): dedupe 06-observability.md against logs/01-server-logs-viewer.md** — the operator-facing log viewer, polling API, env vars, and client implementation now live solely in the logs domain; the observability deep-dive keeps the internals (ingest path, structured provider logs, boot preload, schema) and cross-links both ways. Added the desktop `freeapi.log` file-logger note (90aaa5b).
+
 ## 2026-08-23 — Routing, Quota & Chain Overhaul
 
 - **547692a** feat(router): make the headroom guardrail thresholds tunable (#989)

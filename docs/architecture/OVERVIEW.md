@@ -11,7 +11,7 @@ This directory contains deep-dive documentation for the server-side architecture
 | [`03-streaming-pipeline.md`](03-streaming-pipeline.md) | SSE-only streaming (zero WebSockets), OpenAI chat/completions, Anthropic Messages tool_use block rendering, Gemini `/v1beta`, Responses API shim, error handling mid-stream |
 | [`04-degraded-mode-and-failover.md`](04-degraded-mode-and-failover.md) | Degraded-mode state machine (f412e97), hedging/abort on retry budget expiry (1d2226a), X-Fallback-Detail header (8cb75ac), bare safe/unsafe classification failover (a961d93) |
 | [`05-catalog-sync.md`](05-catalog-sync.md) | Live signed catalog sync from freellmapi.co, model-age gate (30 days), premium/free tiers, migration seeding vs hosted catalog |
-| [`06-observability.md`](06-observability.md) | Server logs viewer (ring buffer + persisted warn/error), `/api/logs` API, request analytics, log redaction |
+| [`06-observability.md`](06-observability.md) | Observability internals: server-logs ingest path, structured provider logs, boot preload, request analytics, log redaction, attempt tracing, health/routing-trace headers, desktop `freeapi.log` file logger. The operator-facing log viewer and polling API live in [logs/](../logs/01-server-logs-viewer.md). |
 | [`CHANGELOG.md`](CHANGELOG.md) | Doc revision history for this domain, seeded from architecture-relevant commits |
 
 ## Navigation

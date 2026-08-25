@@ -4,17 +4,9 @@
 
 ## 1. Server Logs Viewer (`server-logs.ts`)
 
-### Two-Tier Storage
+> **User-facing guide:** the dashboard viewer, its two-tier store, the polling API (`/api/logs`, `/api/logs/counts`, `/api/logs/clear`), environment variables, and the React client implementation are documented in **[`logs/01-server-logs-viewer.md`](../logs/01-server-logs-viewer.md)**. This section covers the internals that guide deliberately omits.
 
-| Tier | Capacity | Persistence | Levels | Purpose |
-|------|----------|-------------|--------|---------|
-| **Ring buffer** | 1000 entries | In-memory only | All (trace, debug, info, warn, error) | Live dashboard view, polling |
-| **SQLite table** | Unbounded (1-day retention via usage prune) | Persisted | **warn, error only** | Survives restart, historical analysis |
-
-- **Single ID space**: `id` assigned at ingest (not by SQLite), seeded from `MAX(id)` at init so IDs increase across restarts. Dashboard polls with `sinceId` cursor that works for both tiers.
-- **Noise filter**: `NOISE_RE` drops `GET /api/logs` and `GET /api/ping` access-log lines (prevents self-feeding buffer).
-- **Message cap**: 6000 chars, truncated with `… [truncated]` suffix.
-- **Source extraction**: Derived from `[Tag]` prefix in message (e.g. `[Health]`, `[CooldownProbe]`, `[Proxy]`) — no call-site annotation needed.
+The store keeps a 1000-entry in-memory ring (all levels) plus a persisted `server_logs` SQLite table (warn/error only) behind a single `sinceId`-based id space. For the operator-facing contract (tier capacities, retention, cursor semantics, request/response shape) see the [Server Logs Viewer guide](../logs/01-server-logs-viewer.md#two-tier-store) and its [API contract](../logs/01-server-logs-viewer.md#api-contract).
 
 ### Ingest Path
 
@@ -53,33 +45,13 @@ On first ingest (or explicit `initServerLogs()` call):
 2. Preload latest 200 persisted rows (newest-first, reversed to oldest-first in ring).
 3. Re-stamp any pre-DB ring entries **above** persisted max (IDs unique across tiers).
 
-### API (`GET /api/logs`)
+### Querying & Maintenance
 
-```typescript
-queryLogs({
-  levels?: ServerLogLevel[],    // filter (trace folded into debug)
-  q?: string,                   // full-text search (message + provider + source + event)
-  provider?: string,            // exact provider filter
-  sinceId?: number,             // cursor (returns entries > sinceId)
-  limit?: number                // 1..500 (default 200)
-}): ServerLogEntry[]
-```
+The public query API (`queryLogs({ levels, q, provider, sinceId, limit })`), level-count badges (`levelCounts()`), and clear/reset behavior (`clearLogs()`, `resetServerLogsForTest()`) are specified in the [Server Logs Viewer API contract](../logs/01-server-logs-viewer.md#api-contract). The ID counter is preserved across `clearLogs()` so a dashboard cursor never sees duplicate ids.
 
-- Walks ring **backwards** so `limit` bounds work, not just result size.
-- Returns oldest→newest.
-- `currentMaxId()` → highest ID handed out (for cursor even when filtered empty).
+### Desktop file logger
 
-### Level Counts (Dashboard Badges)
-
-```typescript
-levelCounts(): { debug: number; info: number; warn: number; error: number }
-```
-- `trace` folded into `debug` (4 badges total).
-
-### Clear / Reset
-
-- `clearLogs()` — empties ring + `DELETE FROM server_logs`. **ID counter NOT reset** (dashboard cursor would see duplicate IDs).
-- `resetServerLogsForTest()` — test seam: drops everything + counter + seed state.
+The desktop app has no terminal attached, so it tees every console line to a **file logger** (`desktop/src/logger.ts`, added in `90aaa5b`) instead of relying on the in-memory ring: `<data dir>/logs/freeapi.log`, plus one rotated `freeapi.log.1` at 1 MB each. The same redaction wrapper feeds both the ring (server) and the file (desktop), so secrets never reach the file either. The desktop's password-reset code appears here — see the [Install & deploy FAQ](../install.md#where-are-the-logs).
 
 ---
 

@@ -22,7 +22,7 @@ For implementation-level detail, see the [architecture domain](architecture/OVER
 | SSE-only streaming, OpenAI/Anthropic/Gemini compat, Responses API shim, mid-stream errors | [`03-streaming-pipeline.md`](architecture/03-streaming-pipeline.md) |
 | Degraded-mode state machine, hedging/abort, X-Fallback-Detail, bare classification failover | [`04-degraded-mode-and-failover.md`](architecture/04-degraded-mode-and-failover.md) |
 | Live signed catalog sync, model-age gate, premium/free tiers, migration vs hosted | [`05-catalog-sync.md`](architecture/05-catalog-sync.md) |
-| Server logs viewer (ring + persisted), /api/logs API, request analytics, redaction | [`06-observability.md`](architecture/06-observability.md) |
+| Observability internals: log ingest, request analytics, redaction, attempt tracing, headers; the operator-facing log viewer + polling API are in [`logs/`](logs/01-server-logs-viewer.md) | [`06-observability.md`](architecture/06-observability.md) |
 
 ## How it works
 

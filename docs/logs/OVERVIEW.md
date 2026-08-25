@@ -2,11 +2,15 @@
 
 ## Scope
 
-This domain documents the live server log viewer in the dashboard. It covers the
+This domain documents the operator-facing server log viewer in the dashboard: the
 two-tier storage architecture (in-memory ring buffer + persisted warn/error
 entries), the polling API contract with cursor-based pagination and filtering,
-level counts and clear endpoints, configuration via environment variables, and
-integration with the existing log redaction pipeline.
+level counts and clear endpoints, configuration via environment variables,
+integration with the log redaction pipeline, and the React client implementation.
+
+For the implementation internals (ingest path, structured provider-log metadata,
+boot preload, the underlying database schema, and the desktop `freeapi.log` file
+logger), see the [Observability deep-dive](../architecture/06-observability.md).
 
 ## File index
 
