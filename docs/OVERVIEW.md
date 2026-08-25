@@ -2,9 +2,9 @@
 
 ## Scope
 
-This directory holds FreeLLMAPI's user-facing documentation: how to install and deploy the gateway, the OpenAI-compatible API reference, the router's architecture and honest limitations, integration recipes for clients and coding agents, the prompt compression pipeline, the server logs viewer, and the guide for translating the dashboard and docs.
+This file is the domain index for `docs/` — a complete file map of every guide and domain folder (install, API, clients, compression, architecture deep-dives, env, deployment, providers, testing, fallback, logs, i18n). It lists where each document lives and how the domain folders relate.
 
-The root [README](../README.md) is the product overview; this directory contains the detailed guides. [README.md](README.md) here is the documentation index.
+For getting started as a user, see [README.md](README.md) (the user entry point); for the product overview, see the root [README](../README.md).
 
 ## File index
 

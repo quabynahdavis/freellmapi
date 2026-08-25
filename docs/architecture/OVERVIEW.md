@@ -1,6 +1,8 @@
 # Architecture Domain — Overview & File Index
 
-This directory contains deep-dive documentation for the server-side architecture of FreeLLMAPI. The root [`architecture.md`](../architecture.md) remains the high-level index; these files expand each subsystem with implementation detail.
+## Scope
+
+This domain holds the implementation deep-dives for FreeLLMAPI's server-side architecture. Each file expands one subsystem with source pointers, scoring formulas, state machines and commit-tagged history. For the high-level summary — what the system is, how a request flows, honest limitations and the provider ToS review — see the high-level index [`architecture.md`](../architecture.md).
 
 ## File Index
 
@@ -13,6 +15,10 @@ This directory contains deep-dive documentation for the server-side architecture
 | [`05-catalog-sync.md`](05-catalog-sync.md) | Live signed catalog sync from freellmapi.co, model-age gate (30 days), premium/free tiers, migration seeding vs hosted catalog |
 | [`06-observability.md`](06-observability.md) | Observability internals: server-logs ingest path, structured provider logs, boot preload, request analytics, log redaction, attempt tracing, health/routing-trace headers, desktop `freeapi.log` file logger. The operator-facing log viewer and polling API live in [logs/](../logs/01-server-logs-viewer.md). |
 | [`CHANGELOG.md`](CHANGELOG.md) | Doc revision history for this domain, seeded from architecture-relevant commits |
+
+## How deep-dives fit
+
+The root [`architecture.md`](../architecture.md) stays the high-level index (two-paragraph system summary, request-flow diagram, limitations and ToS). The files above are the deep-dives: start with `01` (bandit scoring & routing) and `02` (quota & cooldown) for the router core, then `03`/`04` for streaming and degraded-mode failover, `05` for catalog sync and `06` for observability internals. The operator-facing logs viewer and polling API are documented separately in [`logs/`](../logs/01-server-logs-viewer.md) and cross-linked from `06`.
 
 ## Navigation
 
