@@ -6,7 +6,7 @@ This domain documents FreeLLMAPI's OpenAI-compatible HTTP surface and its Anthro
 
 | File | Scope |
 |------|-------|
-| [`01-rest-api.md`](01-rest-api.md) | OpenAI-compatible endpoints (`/v1/chat/completions`, `/v1/responses`, `/v1/embeddings`, `/v1/models`, streaming, tool calling, vision, Gemini grounding, response headers) and the Anthropic Messages surface (`/v1/messages`). |
+| [`01-rest-api.md`](01-rest-api.md) | OpenAI-compatible endpoints (`/v1/chat/completions`, `/v1/responses`, `/v1/embeddings`, `/v1/models`, streaming, tool calling, vision, video, Gemini grounding, response headers), the Anthropic Messages surface (`/v1/messages`), the pool-deduped free-tier budget API (`/api/free-tier`), and the encrypted backups API (`/api/backups`). |
 | [`CHANGELOG.md`](CHANGELOG.md) | Doc revision history for this domain, seeded from API-relevant commits. |
 
 ## Navigation
