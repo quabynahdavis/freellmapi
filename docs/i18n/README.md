@@ -32,7 +32,7 @@ too.
 | `README.md` | ✅ |
 | `docs/README.md` | ✅ |
 | `docs/install.md` | ✅ |
-| `docs/api.md` | ✅ |
+| `docs/api/01-rest-api.md` | ✅ |
 | `docs/clients/01-agent-clients.md` | English |
 | `docs/compression/01-compression-pipeline.md` | English |
 | `docs/architecture.md` | English |
@@ -55,8 +55,8 @@ that someone will trust and act on.
   and CLI commands stay exactly as they are. So do product names, endpoint paths,
   environment variables, and model ids.
 - **Fix the relative paths.** A translated README sits three directories deep, so
-  `repo-assets/x.png` becomes `../../../repo-assets/x.png` and `docs/api.md`
-  becomes `../../api.md`. Broken image links are the most common mistake here.
+  `repo-assets/x.png` becomes `../../../repo-assets/x.png` and `docs/api/01-rest-api.md`
+  becomes `../../api/01-rest-api.md`. Broken image links are the most common mistake here.
 - **Do not copy the contributor avatar list.** It changes with nearly every merge
   and nobody wants to update it in six languages. Keep the heading so the
   section structure still matches one-to-one, and link out to the English

@@ -2,6 +2,12 @@
 
 Revision history for `docs/`, derived from git commits touching this directory. Most recent first.
 
+## 2026-08-25
+
+| Commit | Date | Summary |
+| --- | --- | --- |
+| `TBD` | 2026-08-25 | docs: fix broken links from 2026-08-23 reorganization — `api.md`→`api/01-rest-api.md`, `clients.md`→`clients/01-agent-clients.md`, `compression.md`→`compression/01-compression-pipeline.md`; update `docs/i18n/README.md` status table and path example; scaffold `docs/api/` domain (`OVERVIEW.md`+`CHANGELOG.md`) and `i18n/zh-CN` mirrors |
+
 ## 2026-08-23
 
 | Commit | Date | Summary |
