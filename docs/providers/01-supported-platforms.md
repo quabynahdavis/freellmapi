@@ -6,7 +6,7 @@ The `Platform` union in [`shared/types.ts` (line 59)](../../shared/types.ts) is 
 - plus the **`custom`** placeholder (a real OpenAI-compatible adapter built per API key, since its base URL is user-supplied), giving **40 entries** in the registry map,
 - plus **`sambanova`**, retained in the type union but no longer registered — it was dropped in V23 (June 2026) when its free tier was permanently retired (every chat call returns 402 "payment method required" once the one-time $5 trial credit lapses).
 
-Of the 39 built-in platforms, **7 use dedicated native adapters** and **32 ride `OpenAICompatProvider`** against a provider-specific base URL. Three platforms are registered keyless (`kilo`, `ovh`, and `aihorde`, which auto-configures with its documented anonymous sentinel key). The public catalog headline in the README counts ~29 free providers / 251 model families / 358 free endpoints — fewer than the union because several registered gateways keep their free rosters in the hosted catalog rather than shipping them to every binary.
+Of the 39 built-in platforms, **7 use dedicated native adapters** and **32 ride `OpenAICompatProvider`** against a provider-specific base URL. Three platforms are registered keyless (`kilo`, `ovh`, and `aihorde`, which auto-configures with its documented anonymous sentinel key). The public catalog headline in the README counts ~34 free providers / 474 model families / 635 free endpoints (~7.4 billion tokens/month of listed capacity) — fewer than the union because several registered gateways keep their free rosters in the hosted catalog rather than shipping them to every binary.
 
 ## Catalog
 
