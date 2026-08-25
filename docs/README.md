@@ -6,11 +6,10 @@ The root [README](../README.md) is the product overview; the detailed guides liv
 
 ## Guides
 
-- **[Install & deploy](install.md)** — quick start, Docker Compose, local development, declarative startup config, the Docker image, backups, the desktop app, and where your data lives.
-- **[API reference](api/01-rest-api.md)** — chat completions, `auto:*` routing strategies, streaming, tool calling, vision, Gemini Google Search grounding, embeddings, response headers, and the Anthropic Messages surface.
-- **[Clients & coding agents](clients/01-agent-clients.md)** — OpenAI-compatible clients, recipes for Claude Code / Codex CLI / Cline / Continue / Aider / opencode / Cursor, the MCP server, editor autocomplete, and Context Handoff.
-- **[Prompt compression](compression/01-compression-pipeline.md)** — request-side modes, safeguards, per-request controls, custom tool-output filters, statistics, and preview APIs.
-- **[Server logs viewer](logs/01-server-logs-viewer.md)** — live dashboard panel, two-tier store (ring buffer + persisted warn/error), polling API, level filtering, and configuration.
+- **[Install & deploy](install.md)** — quick start, Docker Compose, local development, declarative startup config, the Docker image, backups, the desktop app, where your data lives, and an FAQ on password resets, logs and uninstalling.
+- **[API reference](api.md)** — chat completions, `auto:*` routing strategies, streaming, tool calling, vision, Gemini Google Search grounding, embeddings, response headers, and the Anthropic Messages surface.
+- **[Clients & coding agents](clients.md)** — OpenAI-compatible clients, recipes for Claude Code / Codex CLI / Cline / Continue / Aider / opencode / Cursor, the MCP server, editor autocomplete, and Context Handoff.
+- **[Prompt compression](compression.md)** — request-side modes, safeguards, per-request controls, custom tool-output filters, statistics, and preview APIs.
 - **[Architecture & internals](architecture.md)** — how the router works, routing and operational details, what's not supported, honest limitations, and the provider Terms-of-Service review.
 
 ## More

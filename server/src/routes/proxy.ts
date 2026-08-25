@@ -6,7 +6,7 @@ import type { ChatMessage, ChatToolCall, ModelListRow, TokenUsage } from '@freel
 import { routeRequest, resolveRoutingChain, resolveModelGroupCandidates, resolveStickyPreference, recordRateLimitHit, recordSuccess, hasEnabledVisionModel, hasEnabledToolsModel, hasOtherUsableKey, routingReserveTokens, type RouteResult, type ResolvedChain, type ChainRow } from '../services/router.js';
 import { recordRequest, recordTokens, setCooldown, getCooldownDurationForLimit, PAYMENT_REQUIRED_COOLDOWN_MS, MODEL_FORBIDDEN_COOLDOWN_MS, learnLimitFromError } from '../services/ratelimit.js';
 import { runEmbeddings, EmbeddingsError } from '../services/embeddings.js';
-import { runImageGeneration, runSpeech, runTranscription, MediaError, MAX_TRANSCRIPTION_BYTES } from '../services/media.js';
+import { runImageGeneration, runVideoGeneration, runSpeech, runTranscription, MediaError, MAX_TRANSCRIPTION_BYTES } from '../services/media.js';
 import multer from 'multer';
 import { getDb } from '../db/index.js';
 import { resolveAuth, prependSystemPrompt, type ResolvedAuth } from '../lib/system-prompt.js';
@@ -31,6 +31,7 @@ import type { Platform } from '@freellmapi/shared/types.js';
 import { inferQuotaPoolKey, type QuotaObservationContext } from '../services/provider-quota.js';
 import { isUnifyEnabled, getModelGroups, resolveRequestedIdForDispatch } from '../services/model-groups.js';
 import { buildModelListing } from '../services/model-listing.js';
+import { claudeFamilyDiscoveryEntries } from '../services/anthropic-map.js';
 import { compressRequest, formatCompressionHeader } from '../services/compression/pipeline.js';
 
 export const proxyRouter = Router();
@@ -310,6 +311,59 @@ proxyRouter.get('/models', (req: Request, res: Response) => {
   const onlyAvailable = q === '1' || q === 'true' || q === 'yes';
   const listed = onlyAvailable ? allListed.filter(m => m.available === 1) : allListed;
 
+  // Named fallback chains (#960/#895): every user-defined profile is exposed
+  // as an `auto:<name>` model so a client can pick a specific fallback chain
+  // per request (auto:my-group) instead of only the active one. Available iff
+  // at least one model in that profile's chain can serve a request right now.
+  const profileRows = getDb().prepare(`
+    SELECT p.id, p.name,
+           EXISTS (
+             SELECT 1
+             FROM profile_models pm
+             JOIN models m ON m.id = pm.model_db_id AND m.enabled = 1
+             WHERE pm.profile_id = p.id AND pm.enabled = 1
+               AND EXISTS (
+                 SELECT 1 FROM api_keys k
+                 WHERE k.platform = m.platform AND k.enabled = 1
+                   AND (m.key_id IS NULL OR k.id = m.key_id)
+               )
+           ) AS usable,
+           (SELECT MAX(m2.context_window)
+            FROM profile_models pm2
+            JOIN models m2 ON m2.id = pm2.model_db_id AND m2.enabled = 1
+            WHERE pm2.profile_id = p.id AND pm2.enabled = 1) AS max_ctx
+    FROM profiles p
+    WHERE p.type = 'custom'
+    ORDER BY p.sort_order, p.id
+  `).all() as { id: number; name: string; usable: number; max_ctx: number | null }[];
+
+  // Claude-family discovery entries (#880). The Anthropic-shaped GET /v1/models
+  // in routes/anthropic.ts already lists one id per Claude family so clients
+  // that only accept Claude-looking ids can discover anything at all — but that
+  // handler only answers when the caller sends an `anthropic-version` header.
+  // Claude Desktop's gateway picker fetches this path WITHOUT that header, so
+  // it fell through to the OpenAI-shaped listing below and still saw zero
+  // Claude-shaped ids. Emit the same entries here, from the same builder, so
+  // both shapes agree on what the gateway will serve. Listed only when
+  // something can actually serve them, and never when the id would collide
+  // with a real catalog row.
+  const listedIds = new Set(listed.map(m => m.id));
+  const claudeFamilyEntries = allListed.some(m => m.available === 1)
+    ? claudeFamilyDiscoveryEntries()
+      .filter(a => !listedIds.has(a.id))
+      .map(a => ({
+        id: a.id,
+        object: 'model' as const,
+        created: 0,
+        owned_by: 'freellmapi',
+        name: a.displayName,
+        context_window: autoContextWindow,
+        context_length: autoContextWindow,
+        available: true,
+        unavailable_reason: null,
+      }))
+    : [];
+
   res.json({
     object: 'list',
     data: [
@@ -339,6 +393,18 @@ proxyRouter.get('/models', (req: Request, res: Response) => {
         available: autoContextWindow != null,
         unavailable_reason: autoContextWindow != null ? null : 'no_models',
       },
+      ...claudeFamilyEntries,
+      ...profileRows.map(p => ({
+        id: `auto:${p.name.toLowerCase()}`,
+        object: 'model',
+        created: 0,
+        owned_by: 'freellmapi',
+        name: `Auto: ${p.name} (named fallback chain)`,
+        context_window: p.max_ctx,
+        context_length: p.max_ctx,
+        available: p.usable === 1,
+        unavailable_reason: p.usable === 1 ? null : 'no_models',
+      })),
       ...listed.map(m => ({
         id: m.id,
         object: 'model',
@@ -626,6 +692,65 @@ proxyRouter.post('/images/generations', async (req: Request, res: Response) => {
     const status = err instanceof MediaError ? err.status : 502;
     const httpStatus = status >= 400 && status < 600 ? status : 502;
     res.status(httpStatus).json({ error: { message: `image generation error: ${err?.message ?? 'unknown'}`, type: mediaErrorType(status) } });
+  }
+});
+
+// Text-to-video generation. Providers may use a synchronous binary response
+// (Pollinations) or an asynchronous queue internally (Hugging Face/fal.ai), but
+// this gateway presents one bounded request and returns the completed MP4.
+const VideoBody = z.object({
+  model: z.string().optional(),
+  prompt: z.string().min(1),
+  duration: z.number().int().min(1).max(120).optional(),
+  aspect_ratio: z.enum(['16:9', '9:16']).optional(),
+  image: z.string().url().optional(),
+  seed: z.number().int().min(-1).max(2_147_483_647).optional(),
+  audio: z.boolean().optional(),
+});
+
+proxyRouter.post('/videos/generations', async (req: Request, res: Response) => {
+  if (!requireInferenceAuth(req, res)) return;
+  const parsed = VideoBody.safeParse(req.body);
+  if (!parsed.success) {
+    res.status(400).json({
+      error: {
+        message: 'Invalid request: `prompt` is required and video options must use supported values',
+        type: 'invalid_request_error',
+      },
+    });
+    return;
+  }
+  // A video job runs for minutes, so a caller that hangs up must actually stop
+  // the work: without this the gateway would keep polling the provider and then
+  // fail over to a second one, both charged to the operator, for a response
+  // nobody is waiting for. 'close' also fires on normal completion, which
+  // writableEnded distinguishes.
+  const clientAbort = new AbortController();
+  res.on('close', () => {
+    if (!res.writableEnded) clientAbort.abort();
+  });
+  try {
+    const result = await runVideoGeneration(parsed.data.model, {
+      prompt: parsed.data.prompt,
+      duration: parsed.data.duration,
+      aspectRatio: parsed.data.aspect_ratio,
+      image: parsed.data.image,
+      seed: parsed.data.seed,
+      audio: parsed.data.audio,
+    }, clientAbort.signal);
+    res.setHeader('Content-Type', result.contentType);
+    res.setHeader('Cache-Control', 'no-store');
+    res.setHeader('X-Provider', safeHeaderValue(result.platform));
+    res.setHeader('X-Model', safeHeaderValue(result.modelId));
+    res.send(result.video);
+  } catch (err: any) {
+    // Nothing to report to a socket that is already gone.
+    if (clientAbort.signal.aborted || res.writableEnded) return;
+    const status = err instanceof MediaError ? err.status : 502;
+    const httpStatus = status >= 400 && status < 600 ? status : 502;
+    res.status(httpStatus).json({
+      error: { message: `video generation error: ${err?.message ?? 'unknown'}`, type: mediaErrorType(status) },
+    });
   }
 });
 

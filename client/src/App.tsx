@@ -33,6 +33,7 @@ import ModelDetailPage from '@/pages/ModelDetailPage'
 import FusionPage from '@/pages/FusionPage'
 import EmbeddingsPage from '@/pages/EmbeddingsPage'
 import ImagePage from '@/pages/ImagePage'
+import VideoPage from '@/pages/VideoPage'
 import AudioPage from '@/pages/AudioPage'
 import MediaDetailPage from '@/pages/MediaDetailPage'
 import EmbeddingDetailPage from '@/pages/EmbeddingDetailPage'
@@ -63,13 +64,14 @@ const navItems = [
   { to: '/premium', labelKey: 'nav.premium' },
 ]
 
-// The five modality pages behind "Models"; surfaced in the nav dropdown and
+// The modality pages behind "Models"; surfaced in the nav dropdown and
 // the mobile submenu so Fusion/Embeddings/Image/Audio are discoverable without
 // first landing on the chat table.
 const modelItems = [
   { to: '/models/chat', labelKey: 'models.chatModelsTab' },
   { to: '/models/embeddings', labelKey: 'models.embeddingsTab' },
   { to: '/models/image', labelKey: 'models.imageTab' },
+  { to: '/models/video', labelKey: 'models.videoTab' },
   { to: '/models/audio', labelKey: 'models.audioTab' },
   { to: '/models/fusion', labelKey: 'models.fusionTab' },
 ]
@@ -374,12 +376,24 @@ const FULL_BLEED_ROUTES = new Set(['/playground'])
 
 // The shell's content container. A full-bleed route drops the max-width and the
 // padding and becomes a flex child that fills the rest of the screen; every
-// other route keeps the exact classes it always had.
+// other route gets a centred column that is always exactly max-w-6xl wide.
+//
+// `w-full` is load-bearing, not decoration. This <main> is an item of a COLUMN
+// flex container, so its cross axis is the horizontal one — and flexbox only
+// stretches an item across the cross axis when neither cross-axis margin is
+// auto (CSS Flexbox §9.6). `mx-auto` sets both, so without an explicit width
+// the column shrink-to-fits its content instead: the page is only ever as wide
+// as the widest thing that has finished rendering. On a page that fills in from
+// several independent queries — Analytics fires ten — that turns every arriving
+// response into a visible horizontal jump as the column re-fits, and pages
+// whose content never reaches 72rem (Analytics, Premium) settle narrower than
+// they were designed to be. A definite width makes the column 72rem from the
+// first paint, and `mx-auto` goes back to only centring it.
 function PageContainer({ children }: { children: ReactNode }) {
   const location = useLocation()
   const fullBleed = FULL_BLEED_ROUTES.has(location.pathname)
   return (
-    <main className={fullBleed ? 'flex min-h-0 flex-1 flex-col' : 'mx-auto max-w-6xl px-6 py-8'}>
+    <main className={fullBleed ? 'flex min-h-0 flex-1 flex-col' : 'mx-auto w-full max-w-6xl px-6 py-8'}>
       {children}
     </main>
   )
@@ -410,6 +424,8 @@ function App() {
                       <Route path="/models/embeddings/:id" element={<EmbeddingDetailPage />} />
                       <Route path="/models/image" element={<ImagePage />} />
                       <Route path="/models/image/:id" element={<MediaDetailPage modality="image" />} />
+                      <Route path="/models/video" element={<VideoPage />} />
+                      <Route path="/models/video/:id" element={<MediaDetailPage modality="video" />} />
                       <Route path="/models/audio" element={<AudioPage />} />
                       <Route path="/models/audio/:id" element={<MediaDetailPage modality="audio" />} />
                       <Route path="/models/transcription/:id" element={<MediaDetailPage modality="transcription" />} />

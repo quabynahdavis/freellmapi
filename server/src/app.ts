@@ -18,8 +18,10 @@ import { embeddingsRouter } from './routes/embeddings.js';
 import { mediaRouter } from './routes/media.js';
 import { analyticsRouter } from './routes/analytics.js';
 import { healthRouter } from './routes/health.js';
+import { freeTierRouter } from './routes/free-tier.js';
 import { settingsRouter } from './routes/settings.js';
 import { premiumRouter } from './routes/premium.js';
+import { backupsRouter } from './routes/backups.js';
 import { cacheRouter } from './routes/cache.js';
 import { compressionRouter } from './routes/compression.js';
 import { authRouter } from './routes/auth.js';
@@ -244,8 +246,13 @@ export function createApp(config?: Config) {
   app.use('/api/media', requireAuth, mediaRouter);
   app.use('/api/analytics', requireAuth, analyticsRouter);
   app.use('/api/health', requireAuth, healthRouter);
+  app.use('/api/free-tier', requireAuth, freeTierRouter);
   app.use('/api/settings', requireAuth, settingsRouter);
   app.use('/api/premium', requireAuth, premiumRouter);
+  // Database dumps and restores. Dashboard-session gated: the dump files carry
+  // encrypted provider keys and every routing setting, so the unified /v1 key
+  // must not open this surface.
+  app.use('/api/backups', requireAuth, backupsRouter);
   app.use('/api/cache', requireAuth, cacheRouter);
   app.use('/api/compression', requireAuth, compressionRouter);
   app.use('/api/update', requireAuth, updateRouter);
