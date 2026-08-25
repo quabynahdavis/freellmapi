@@ -13,6 +13,8 @@ effective = base × headroomFactor × rateLimitFactor               (guardrail m
 
 The **weights** come from a selectable strategy (`balanced` / `smartest` / `fastest` / `reliable` / `custom` / `priority`). The default is `balanced` (0.5 / 0.25 / 0.25). Operators can switch strategies from the dashboard or via `PUT /api/fallback/routing`.
 
+Key selection within a model is driven by a separate `KeySelectionStrategy` (`auto` / `least-remaining`), independent of the model-ranking bandit so the two concerns don't interfere (#919, #930).
+
 ---
 
 ## 2. Chain Construction
@@ -105,12 +107,23 @@ Custom models are seeded at the catalog median tier ("unknown" = no opinion, not
 
 ```
 remaining = 1 - usedTokens / budgetTokens
-if remaining >= 0.2:  factor = 1.0
-else:                 factor = 0.1 + 0.9 * (remaining / 0.2)   # linear ramp to floor 0.1
+if remaining >= rampStart:  factor = 1.0
+else:                       factor = floor + (1 - floor) * (remaining / rampStart)
 ```
 
 - `budgetTokens` = `monthly_token_budget` × `usableKeyCount(platform)` — pools N keys' free tiers.
 - Unknown budget (0 or NULL) → factor = 1 (no opinion).
+
+### Tunable Headroom Thresholds (env / settings: `routing_headroom_ramp_start`, `routing_headroom_floor`)
+
+The ramp is now operator-tunable via `GET/PUT /api/settings/headroom` (#989, #899). The thresholds are read **once per chain** instead of per model:
+
+| Setting | Default | Purpose |
+|---------|---------|---------|
+| `rampStart` (`HEADROOM_RAMP_START`) | 0.2 (20% remaining) | Fraction at which demotion begins |
+| `floor` (`HEADROOM_FLOOR`) | 0.1 (10% of score) | Score floor at 0 remaining budget |
+
+Out-of-range / non-finite operator input falls back to the default rather than silently clamping to a legal-but-unintended value. The **same** ramp and thresholds also drive the rate-window headroom guardrail (see #8) — a single pair of operator-tuned thresholds governs both.
 
 ### Rate-Limit Factor (live penalty)
 
@@ -120,6 +133,39 @@ factor = 1 - (penalty / 10) * 0.6   # at max penalty, keeps 40% of score
 ```
 
 - Demotes hard but never excludes — model recovers as penalty decays.
+
+### Rate-Window Headroom Factor (RPD/TPD/RPM/TPM demotion, #899)
+
+The monthly-budget guardrail only has an opinion about models that declare a `monthly_token_budget`. The far more common free-tier shape is a per-day request or token cap (RPD/TPD plus per-minute RPM/TPM), which was previously **binary**: the hard gates reject at 100% and the router happily keeps a model pinned at #1 until the very request that exhausts it, then eats a 429 and falls through.
+
+The fix: the same tunable ramp, driven by **live window utilization** instead of monthly tokens:
+
+```
+usedFraction = consumed / limit   (0 = idle, 1 = exhausted)  — worst of the four windows
+factor = headroomRamp(1 - usedFraction, opts)                — same tunable thresholds
+```
+
+- `usedFraction` is memoized inside `ratelimit.ts` as a **5-second snapshot** (`WINDOW_USAGE_TTL_MS = 5000`) — one grouped scan of `rate_limit_usage` plus one read of `api_keys`, shared by every entry of every chain. The hard gates are unaffected — they still read live counts.
+- `null` means the model declares no window limits, or has no routable key to measure — factor = 1 (no opinion).
+- **Combined headroom**: the router takes `Math.min(monthlyHeadroom, windowHeadroom)` — the **worse** of the two, never their product (which would push a model low on both to floor², below the operator-configured floor).
+
+The chosen key is the **eligible key with the most headroom** (the one the router would pick NEXT), not the worst key — a platform with one exhausted key and one idle key routes perfectly well (#921).
+
+### Peak-Hours Adjustment (opt-in, #760, #909)
+
+During an operator-declared peak window, free relays are congested, so a model's raw throughput is a weaker signal than its reliability: part of the speed weight is moved onto reliability.
+
+| Parameter | Default | Purpose |
+|-----------|---------|---------|
+| `enabled` | `false` | Opt-in by design — routing that silently changes with the wall clock is impossible to reason about |
+| `startHour` / `endHour` | 18 / 6 (spans midnight) | Window in the operator's IANA timezone |
+| `timezone` | `UTC` | IANA name; read via `Intl` (never `Date#getHours`, since the host is frequently UTC while the traffic it serves is not) |
+
+- **Shift amount**: `PEAK_SPEED_TO_RELIABILITY = 0.6` (60% of the speed weight moves onto reliability).
+- **Exempt strategies** (`PEAK_EXEMPT_STRATEGIES`): `fastest` and `reliable` are **exempt** — they are the two ends of the speed↔reliability axis, and an operator who picked one has already decided which end they want. `priority` and `custom` are also never rewritten (the operator's explicit choice).
+- The adjustment applies only to the mixed presets (`balanced`, `smartest`), where trading some speed for reliability stays inside the span the presets already describe.
+- `peakAdjustedWeights()` returns `{ weights, adjusted }` — the dashboard labels the weight summary from the `adjusted` flag.
+- `startHour === endHour` is an **empty** window (not 24-hour) — an operator who drags both ends to the same value means "nothing".
 
 ---
 
@@ -202,6 +248,20 @@ When enabled, logical models (e.g. `glm-4.7`) collapse multiple providers into o
 | custom   | user-tuned (normalized) | | |
 | priority | manual order + 429 penalty (dense rank + penalty) | | |
 
+### Key Selection Strategy (#919, #930)
+
+Independent of the routing strategy on purpose — model ranking and key selection are independent choices, and folding this into the strategy enum would make switching key policy also switch (or disable) the model bandit.
+
+| Strategy | Behavior |
+|----------|----------|
+| `auto` (default) | Per-key bandit score when ≥2 keys have recorded data, else round-robin |
+| `least-remaining` | Additionally rank by observed remaining quota — roomiest key first, so the key nearest its cap is held back instead of being the next to 429 |
+
+- `least-remaining` layers **on top** of the existing order (bandit ranking when there's data, else the round-robin rotation) — ties fall back to that order instead of rowid.
+- Account-scoped pools (`<platform>::account`) are **skipped** for remaining-quota weighting, since every key reports the same shared number and reordering would only churn the rotation (#919).
+- Reads quota headroom through the cached platform-filtered `getKeyQuotaHeadroom()` query.
+- A key the quota tracker has never seen gets a neutral `UNKNOWN_QUOTA_HEADROOM = 0.5` — no opinion, not a reason to prefer or avoid.
+
 ---
 
 ## 13. Key Functions (router.ts)
@@ -212,7 +272,13 @@ When enabled, logical models (e.g. `glm-4.7`) collapse multiple providers into o
 | `orderChain(chain, strategy, sampled)` | Orders chain by strategy; `sampled=true` for live routing, `false` for stable dashboard |
 | `scoreChainEntry(...)` | Computes five axes + guardrails → final score |
 | `orderKeysByScore(entry, keys)` | Per-key Thompson ordering |
+| `orderKeysByRemainingQuota(entry, ordered)` | Re-sorts by observed remaining quota (roomiest first) |
+| `quotaWeightingApplies(entry)` | Whether remaining-quota weighting is meaningful for this chain entry |
 | `resolveRoutingChain(modelString)` | Parses `auto`, `auto:smart`, `auto:profile-name` |
+| `getKeySelectionStrategy()` / `setKeySelectionStrategy(s)` | Read/write the `key_selection_strategy` setting |
+| `getHeadroomThresholds()` / `setHeadroomThresholds(rampStart, floor)` | Read/write tunable headroom thresholds |
+| `getPeakHoursConfig()` / `setPeakHoursConfig(patch)` | Read/write peak-hours settings |
+| `getActiveRoutingWeights()` | Active weight vector + whether peak adjustment moved it |
 | `recordRateLimitHit/recordModelFailure/recordSuccess` | Penalty mutations |
 | `summarizeExhaustion(diag, soonestResetMs)` | Client-safe exhaustion message |
 
@@ -228,6 +294,15 @@ When enabled, logical models (e.g. `glm-4.7`) collapse multiple providers into o
 | `speedScore(tok/s, ttfbMs)` | Blended [0,1] speed |
 | `intelligenceComposite(sizeLabel, rank)` | Tier-first composite |
 | `intelligenceScore(composite, min, max)` | Min-max normalize |
-| `headroomFactor(used, budget)` | Quota guardrail multiplier |
+| `headroomFactor(used, budget, opts?)` | Quota guardrail multiplier (tunable thresholds) |
+| `rateWindowHeadroomFactor(usedFraction, opts?)` | Live window-utilization guardrail |
 | `rateLimitFactor(penalty)` | Penalty guardrail multiplier |
 | `combineScore(inputs, weights)` | Convex base × guardrails |
+| `peakAdjustedWeights(base, strategy, config, now)` | Peak-hours reweighting + whether it fired |
+| `isPeakHours(config, now)` | Whether `now` falls inside the configured window |
+
+---
+
+## 15. Cache Key v4 (#901)
+
+The exact-match response cache key is now at **version 4**. Default-valued sampling params (`top_p: 1`, `n: 1`, `presence_penalty: 0`, `frequency_penalty: 0`) are normalized down to `undefined` so a client that always serializes the full param set shares a cache entry with one that omits the defaults. `reasoning_effort` and `compression` were also added to the key. Bump version when changing the key shape — `v: 4` is embedded in the canonical JSON.

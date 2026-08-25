@@ -52,11 +52,37 @@ Some providers enforce **one quota across the whole account**, not per model:
 
 ### Provider Quota Keys (pooling across models)
 
-`inferQuotaPoolKey(platform, modelId)` → string like `openrouter::free`, `google::project`, `nvidia::account`. Used by analytics to attribute usage to the correct shared bucket.
+`inferQuotaPoolKey(platform, modelId)` → string like `openrouter::free`, `google::project`, `nvidia::account`. Used by analytics and routing to attribute usage to the correct shared bucket.
+
+- Per-platform `inferPoolForPlatform()` maps each platform to its pool key shape. Aggregators with a single shared free pool (`routeway`, `bazaarlink`, `unorouter`, `orcarouter`, `xkiro`, `anyapi`, `navy`, `nara`, `sealion`, `aion`, `requesty`) get one pool; `openrouter` distinguishes `:free` from `:account`; others default to `::account` or `::<modelId>`.
+- `isSharedPool(platform)` returns the list of platforms that enforce one quota across the whole account — used by analytics and the `least-remaining` key selection (which skips `::account` pools since every key reports the same number).
+- `provider-quota.ts` also exposes `getKeyQuotaHeadroom(platform)` → a cached, platform-filtered read of `provider_quota_state` (5s TTL, confidence ≥ 0.7 floor, expired windows treated as full) that the router's `least-remaining` strategy reads to rank keys by remaining budget.
 
 ---
 
-## 3. Cooldown Ladder & Provenance
+## 3. Window Utilization Snapshot (for the routing guardrail, #899)
+
+The hard gates (`canMakeRequest` / `canUseTokens`) answer a yes/no question on the hot path. The router also needs a **graded** signal — "how much of its window quota has this model already burned" — so it can steer traffic away from a model at 95% of its daily cap before that cap actually rejects anything. This is the input to `rateWindowHeadroomFactor` in `scoring.ts`.
+
+### 5-Second Snapshot (`modelWindowUsedFraction`)
+
+Cost is the whole design constraint: this runs per chain entry per request, and the naive shape is four counts per model × key. So it is:
+
+- **One grouped scan** of `rate_limit_usage` (replaces four counts per model × key) plus one read of `api_keys`, **memoised for 5 seconds** (`WINDOW_USAGE_TTL_MS = 5000`) and shared by every entry of every chain.
+- Per-entry work is then pure in-memory arithmetic over the model's own limit columns (which the router already has in hand).
+- The hard gates above are **unaffected** — they still read live counts, so nothing here can let a request through a real limit.
+
+### Key Selection
+
+The chosen key is the **eligible key with the most headroom** (the one the router would pick NEXT), not the worst key on the account — a platform with one exhausted key and one idle key routes perfectly well (#921). In-flight leases are deliberately **not** counted: they close the check-then-act race on the hard gates; this is a steering signal averaged over a whole window, and folding a per-request quantity into a cached snapshot would buy noise, not accuracy.
+
+### Pressure Calculation
+
+A key metered on several windows takes the **worst** of them (the binding constraint is what 429s). Returns `null` (no opinion) when the model declares no window limits, has no routable key to measure, or the database is unreachable.
+
+---
+
+## 4. Cooldown Ladder & Provenance
 
 ### Sources (CooldownSource)
 
@@ -102,7 +128,7 @@ Provider-stated reset wins; everything past it is our guess.
 
 ---
 
-## 4. Learning Real Limits from Error Bodies (#798)
+## 5. Learning Real Limits from Error Bodies (#798)
 
 When a provider rejects with its real limit in the body, we **persist it** so pre-checks stop us before the next 413/429.
 
@@ -118,7 +144,7 @@ learnLimitFromError(modelDbId, err) → writes to models.tpm_limit if NULL or lo
 
 ---
 
-## 5. Cooldown-Probe Early Recovery (`cooldown-probe.ts`)
+## 6. Cooldown-Probe Early Recovery (`cooldown-probe.ts`)
 
 ### Goal
 
@@ -140,7 +166,7 @@ Heuristic cooldowns are pessimistic. When the provider recovers sooner (minute w
 
 ---
 
-## 6. Key Functions (ratelimit.ts)
+## 7. Key Functions (ratelimit.ts)
 
 | Function | Purpose |
 |----------|---------|
@@ -159,10 +185,12 @@ Heuristic cooldowns are pessimistic. When the provider recovers sooner (minute w
 | `parseProviderLimit(message)` | Extract `{kind, limit}` from error body |
 | `learnLimitFromError(modelDbId, err)` | Persist if tightens |
 | `getSoonestCooldownExpiry()` | For `Retry-After` header + exhaustion message |
+| `modelWindowUsedFraction(model, limits, now)` | 0..1 binding-window utilization (5s snapshot) |
+| `invalidateWindowUsage()` | Drop the memoised window snapshot (tests) |
 
 ---
 
-## 7. Key Functions (cooldown-probe.ts)
+## 8. Key Functions (cooldown-probe.ts)
 
 | Function | Purpose |
 |----------|---------|
@@ -173,7 +201,7 @@ Heuristic cooldowns are pessimistic. When the provider recovers sooner (minute w
 
 ---
 
-## 8. Persistence Schema (relevant tables)
+## 9. Persistence Schema (relevant tables)
 
 ```sql
 -- Per-(platform,model,key) usage events
@@ -202,7 +230,7 @@ CREATE TABLE server_logs (
 
 ---
 
-## 9. Environment Variables
+## 10. Environment Variables
 
 | Variable | Default | Purpose |
 |----------|---------|---------|
@@ -220,7 +248,7 @@ CREATE TABLE server_logs (
 
 ---
 
-## 10. Flow Diagram: Request → Quota Check → Dispatch → Account
+## 11. Flow Diagram: Request → Quota Check → Dispatch → Account
 
 ```
 routeRequest()

@@ -2,6 +2,52 @@
 
 Doc revision history for `docs/architecture/`, seeded from commits touching architecture-relevant code.
 
+## 2026-08-23 — Routing, Quota & Chain Overhaul
+
+- **547692a** feat(router): make the headroom guardrail thresholds tunable (#989)
+  - `GET/PUT /api/settings/headroom` exposes `rampStart` and `floor` — operators can tune without a code change
+  - Thresholds read once per chain (not per model) to avoid uncached `getSetting` per model per request
+  - `HEADROOM_RAMP_START` / `HEADROOM_FLOOR` in `scoring.ts`, persisted as `routing_headroom_ramp_start` / `routing_headroom_floor`
+  - Out-of-range / non-finite input falls back to defaults rather than silently clamping
+
+- **45a05c7** feat(router): demote models burning through rpd/tpd windows (#1001)
+  - `rateWindowHeadroomFactor(usedFraction, opts)` — same tunable ramp driven by live rpm/rpd/tpm/tpd utilization instead of monthly tokens
+  - `modelWindowUsedFraction()` in `ratelimit.ts`: one grouped scan of `rate_limit_usage` + one `api_keys` read, memoised for 5s (`WINDOW_USAGE_TTL_MS`)
+  - Router takes `Math.min(monthlyHeadroom, windowHeadroom)` — the worse of the two, never their product
+  - Chosen key = eligible key with the MOST headroom (the one the router would pick next)
+
+- **c4c0221** feat(router): add a least-remaining key selection strategy (#930)
+  - New `key_selection_strategy` setting (`auto` / `least-remaining`), independent of the routing strategy
+  - `orderKeysByRemainingQuota()` re-sorts by observed remaining quota — roomiest key first
+  - Skips account-scoped pools (`<platform>::account`) where every key reports the same number
+  - Reads quota headroom through cached `getKeyQuotaHeadroom()`; unobserved keys get neutral 0.5
+
+- **f9af5f7** feat(router): add an opt-in peak-hours routing adjustment (#909)
+  - Off by default; configurable window (`startHour`/`endHour`) and IANA `timezone` read via `Intl`
+  - `peakAdjustedWeights()` shifts 60% of speed weight onto reliability during the window
+  - Exempt strategies: `fastest`, `reliable` (ends of the axis), plus `priority`/`custom` (operator's explicit choice)
+  - Dashboard labels adjusted weights from the `adjusted` flag
+
+- **e852ff1** fix(fallback): make a fallback chain mean itself, empty or not (#1023)
+  - A profile is now authoritative whenever one is active — empty chain reads as "catalog, nothing turned on yet"
+  - Saving upserts into the chain; routing follows the same rule (empty active chain routes nothing)
+  - Playground offers every custom chain as its `auto:<name>` id
+
+- **b3bf20f** feat(fallback): let a fallback chain be built by hand and stay that way (#1004)
+  - Chains can start empty; `auto_include_new_models` flag keeps catalog sync from refilling curated chains
+  - Routing table gets enable-all / disable-all
+
+- **8bb2004** feat(fallback): add a named chain manager to the Fallback page (#988)
+  - Collapsed accordion for creating, renaming, deleting named fallback chains, showing the `auto:<name>` id clients send
+
+- **d03021e** fix(cache): normalize default-valued sampling params in the cache key (#901)
+  - `top_p: 1`, `n: 1`, zero penalties → normalized to `undefined`, sharing a cache entry with requests that omit them
+  - Cache key version bumped to **v4**; `reasoning_effort` and `compression` added to the key
+
+- **a9b8774** feat(server): add database backups with safe restore (#999)
+  - Backups service, routes, migration, collapsed Backups section under Keys
+  - Auth tables excluded; restore checks schema + encryption key fingerprint, runs in one transaction with pre-restore snapshot
+
 ## 2026-08-23 — Domain Expansion
 
 - **Commit (this PR)**: `docs(architecture): expand into deep-dive domain`
