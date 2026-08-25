@@ -15,6 +15,7 @@ The root [README](../README.md) is the product overview; the detailed guides liv
 ## More
 
 - [Android with Termux](install/android-termux.md) — experimental local installation using Node's built-in SQLite driver.
+- [Fallback chains](fallback/01-named-chains.md) — named fallback-chain lifecycle, empty-chain authoritative 400, `auto:<name>` routing, and catalog-sync backfill.
 - [Docker deployment](../docker/README.md) — container configuration and persistent storage.
 - [Desktop app](../desktop/README.md) — build and package the Electron application.
 - [Contributor guide](../CONTRIBUTING.md) — development loop, testing expectations, and contribution policy.

@@ -29,5 +29,6 @@ The root [README](../README.md) is the product overview; this directory contains
 | [i18n/](i18n/OVERVIEW.md) | Translated documentation tree (zh-CN); see its own [OVERVIEW.md](i18n/OVERVIEW.md). |
 | [install/](install/OVERVIEW.md) | Platform-specific installation guides; see its own [OVERVIEW.md](install/OVERVIEW.md). |
 | [logs/](logs/OVERVIEW.md) | Server logs viewer: live dashboard panel, two-tier store, polling API, and configuration; see its own [OVERVIEW.md](logs/OVERVIEW.md). |
+| [fallback/](fallback/OVERVIEW.md) | Named fallback chains: chain lifecycle, empty-chain authoritative 400, `auto:<name>` discovery, catalog-sync backfill (`auto_include_new_models`); see its own [OVERVIEW.md](fallback/OVERVIEW.md). |
 
 > `index.html` and `success.html` are static website assets shipped with the docs directory, not markdown documentation.
