@@ -33,6 +33,8 @@ docs, CHANGELOG):
 | [../en/testing/](../en/testing/OVERVIEW.md) | [../../../../en/testing/](../../../../en/testing/) | Test matrix across workspaces, server suite conventions, and the coding-agent compatibility suite. |
 | [../en/logs/](../en/logs/OVERVIEW.md) | [../../../../en/logs/](../../../../en/logs/) | Live server log viewer in the dashboard: two-tier store, polling API, level counts, clear endpoint, env vars, redaction integration. |
 | [../en/architecture/](../en/architecture/OVERVIEW.md) | [../../../../en/architecture/](../../../../en/architecture/) | Deep-dive server architecture: bandit router, quota/cooldown engine, streaming pipeline, degraded mode, catalog sync, observability. |
+| [../en/cli/](../en/cli/OVERVIEW.md) | [../../../../en/cli/](../../../../en/cli/) | Setup CLI: `setup-*` generators, config-file merge layer, zero-persistence launchers and `doctor`. |
+| [../en/desktop/](../en/desktop/OVERVIEW.md) | [../../../../en/desktop/](../../../../en/desktop/) | Desktop app: Electron shape, file logging and update delivery. |
 
 Pages not listed here have no translation yet; they link to their English
 originals by design.
