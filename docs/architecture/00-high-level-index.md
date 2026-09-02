@@ -1,12 +1,12 @@
 # Architecture & internals
 
-[← Back to README](../README.md) · [Documentation index](README.md) · [Deep-dive domain](architecture/OVERVIEW.md)
+[← Back to README](../../README.md) · [Documentation index](../README.md) · [Deep-dive domain](OVERVIEW.md)
 
 FreeLLMAPI is a self-hosted OpenAI-compatible gateway that stacks the free tiers of ~34 providers behind a single `freellmapi-…` bearer token. An Express proxy exposes `/v1/chat/completions` (plus `/v1/responses`, `/v1/messages`, `/v1/completions`, `/v1/embeddings` and `/v1/models`) and, per request, the router selects the best healthy model that is under all of its rate limits, decrypts its upstream key in memory, and streams the response back.
 
 Because no single free tier is generous enough to live on, the router treats the catalog as a pooled fallback chain: it scores live reliability, speed, capability and headroom via a Thompson-sampling bandit, enforces RPM/RPD/TPM/TPD and provider-wide caps with a persistent ledger, and fails over across up to 20 attempts within a wall-clock budget. When the top of the chain exhausts its daily caps the endpoint gracefully degrades to the next healthy tier and resets at UTC midnight.
 
-See [OVERVIEW.md](architecture/OVERVIEW.md) for deep-dives.
+See [OVERVIEW.md](OVERVIEW.md) for deep-dives.
 
 - [How it works](#how-it-works)
 - [Not yet supported](#not-yet-supported)
@@ -47,7 +47,7 @@ See [OVERVIEW.md](architecture/OVERVIEW.md) for deep-dives.
 - **Tool-call rescue** (`server/src/lib/tool-call-rescue.ts`) — models that emit tool calls as plain text instead of structured JSON are rescued into real `tool_calls` automatically, and tool requests only route to models that actually support them.
 - **Key import & export** — bulk-import keys by pasting a `.env` file (with preview and per-key selection), export back out as JSON, `.env`, or CSV.
 
-> Routing strategies, bandit scoring, quota and cooldown accounting, streaming, degraded-mode failover and the provider catalog are covered at implementation depth in the deep-dives — See [OVERVIEW.md](architecture/OVERVIEW.md) for deep-dives.
+> Routing strategies, bandit scoring, quota and cooldown accounting, streaming, degraded-mode failover and the provider catalog are covered at implementation depth in the deep-dives — See [OVERVIEW.md](OVERVIEW.md) for deep-dives.
 
 ## Not yet supported
 

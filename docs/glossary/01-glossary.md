@@ -2,7 +2,7 @@
 
 | Term | Meaning |
 | --- | --- |
-| **Headroom** | Remaining quota for a model/key before rate limit: `1 − max(RPM/RPD/TPM/TPD used)`. `0`=exhausted, `1`=full. Tunable via `HEADROOM_RAMP_START`/`HEADROOM_FLOOR` (`architecture/01-routing-and-bandit-scoring.md`). |
+| **Headroom** | Remaining quota for a model/key before rate limit: `1 − max(RPM/RPD/TPM/TPD used)`. `0`=exhausted, `1`=full. Tunable via `HEADROOM_RAMP_START`/`HEADROOM_FLOOR` (`../architecture/01-routing-and-bandit-scoring.md`). |
 | **RPD / TPD** | Requests / tokens per day — daily quota windows (`ratelimit.ts:modelWindowUsedFraction`, 5s TTL). |
 | **RPM / TPM** | Requests / tokens per minute — short-window quota. |
 | **Pool key** | Shared quota pool identifier (`provider-quota.ts:inferQuotaPoolKey`), e.g. `openrouter::free`, `google::project`, `custom::key123`. Keys in the same pool share one allowance. |
@@ -15,4 +15,4 @@
 | **`FREEAPI_SHOT`** | Desktop capture mode flag in `desktop/src/main.ts` for screenshots. |
 | **`freellmapi-…`** | Pooled fallback chain identifier — the gateway's single logical model that fans out over the fallback ladder. |
 
-See also: [Architecture](architecture/OVERVIEW.md), [Routing & bandit scoring](architecture/01-routing-and-bandit-scoring.md), [Quota & cooldown](architecture/02-quota-and-cooldown-engine.md).
+See also: [Architecture](../architecture/OVERVIEW.md), [Routing & bandit scoring](../architecture/01-routing-and-bandit-scoring.md), [Quota & cooldown](../architecture/02-quota-and-cooldown-engine.md).

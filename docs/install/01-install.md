@@ -1,8 +1,8 @@
-**English** · [简体中文](i18n/zh-CN/docs/install.md)
+**English** · [简体中文](../i18n/zh-CN/docs/install.md)
 
 # Install & deploy
 
-[← Back to README](../README.md) · [Documentation index](README.md)
+[← Back to README](../README.md) · [Documentation index](../README.md)
 
 Everything about getting FreeLLMAPI running: the one-liner, Docker Compose, local development, declarative config, production builds, the desktop app, where your data lives, and how to reset a password, read the logs, or uninstall.
 
@@ -27,7 +27,7 @@ Prefer to read before you pipe to bash? [The script is here](https://freellmapi.
 
 On Windows, the easiest path is the desktop **[`.exe` installer from Releases](https://github.com/tashfeenahmed/freellmapi/releases/latest)** ([below](#desktop-app)); the Docker steps work in WSL or any bash shell.
 
-On Android, see the experimental [Termux installation guide](install/android-termux.md). It uses Node's built-in SQLite driver and does not require the Android NDK.
+On Android, see the experimental [Termux installation guide](02-android-termux.md). It uses Node's built-in SQLite driver and does not require the Android NDK.
 
 Open http://localhost:3001, add your provider keys on the **Keys** page, reorder the **Fallback Chain** to taste, and grab your unified API key from the **Keys** page header. That unified key is what you point your OpenAI SDK at.
 
@@ -218,7 +218,7 @@ before migrations run. While the server is running it uploads a fresh encrypted
 backup periodically. If `FREEAPI_DB_BACKUP_KEY` is omitted, the app uses
 `ENCRYPTION_KEY` for the backup envelope too.
 
-More Docker operations and examples live in [docker/README.md](../docker/README.md).
+More Docker operations and examples live in [docker/README.md](../../docker/README.md).
 
 ## Desktop app
 
@@ -241,7 +241,7 @@ npm run desktop:dist:win      # Windows → "desktop/dist-electron/FreeLLMAPI Se
 
 > Locally built apps are unsigned, so Windows SmartScreen may warn on first run
 > ("More info" → "Run anyway"); the macOS build launches without Gatekeeper prompts.
-> Full instructions in [desktop/README.md](../desktop/README.md).
+> Full instructions in [desktop/README.md](../../desktop/README.md).
 
 ## Credentials and where your data lives
 

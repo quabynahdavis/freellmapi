@@ -18,7 +18,7 @@ One directory per locale, named with the same code the dashboard uses
 ```
 docs/i18n/<locale>/README.md        translation of  /README.md
 docs/i18n/<locale>/docs/README.md   translation of  /docs/README.md
-docs/i18n/<locale>/docs/install.md  translation of  /docs/install.md
+docs/i18n/<locale>/docs/install.md  translation of  /docs/install/01-install.md
 ```
 
 The mirror is deliberate. Given any translated file you can find its English
@@ -31,11 +31,11 @@ too.
 | --- | --- |
 | `README.md` | ✅ |
 | `docs/README.md` | ✅ |
-| `docs/install.md` | ✅ |
+| `docs/install/01-install.md` | ✅ |
 | `docs/api/01-rest-api.md` | ✅ |
 | `docs/clients/01-agent-clients.md` | English |
 | `docs/compression/01-compression-pipeline.md` | English |
-| `docs/architecture.md` | English |
+| `docs/architecture/00-high-level-index.md` | English |
 
 Untranslated pages are not a gap to apologise for. Link to the English original
 and leave it, rather than shipping a stale translation of a 300-line reference

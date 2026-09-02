@@ -48,7 +48,7 @@
 - [参与贡献](#参与贡献)
 - [免责声明](#免责声明)
 
-**指南：** [安装与部署](docs/install.md) · [API 参考](docs/api/01-rest-api.md) · [客户端与编程智能体](../../clients/01-agent-clients.md) · [提示词压缩](../../compression/01-compression-pipeline.md) · [架构与内部实现](../../architecture.md) · [文档索引](docs/README.md) · [贡献者指南](../../../CONTRIBUTING.md)
+**指南：** [安装与部署](../../install/01-install.md) · [API 参考](docs/api/01-rest-api.md) · [客户端与编程智能体](../../clients/01-agent-clients.md) · [提示词压缩](../../compression/01-compression-pipeline.md) · [架构与内部实现](../../architecture/00-high-level-index.md) · [文档索引](docs/README.md) · [贡献者指南](../../../CONTRIBUTING.md)
 
 > 「安装与部署」和「API 参考」已有中文版。「客户端与编程智能体」「提示词压缩」「架构与内部实现」目前只有英文版，上面的链接直接指向英文原文。完整的翻译状态见 [这里](../README.md#status)。
 
@@ -149,7 +149,7 @@
 - **Fusion（多模型合成）** —— 请求虚拟模型 `fusion`，路由器会把你的提示词并行分发给一组风格各异的免费模型，再由一个评审模型从这些草稿中合成出一个答案。[详情 →](docs/api/01-rest-api.md#fusion-多模型合成)
 - **图像生成与文本转语音** —— `/v1/images/generations` 和 `/v1/audio/speech` 会在提供媒体模型的提供方之间路由，也包括自定义的 OpenAI 兼容媒体端点。
 - **工具调用与结构化输出** —— OpenAI 风格的 `tools` 可在各提供方之间往返（纯文本形式的工具调用会被救回成真正的 `tool_calls`），另有 `response_format`、`seed`、`logprobs`、惩罚项以及其余采样参数按提供方透传。
-- **智能路由，六种策略** —— 实时的每模型速度、能力、稳定性评分决定你的链路顺序；遇到 429/5xx 时自动转移到下一个模型，并带冷却和密钥轮换。[路由详解 →](../../architecture.md#routing-in-detail)
+- **智能路由，六种策略** —— 实时的每模型速度、能力、稳定性评分决定你的链路顺序；遇到 429/5xx 时自动转移到下一个模型，并带冷却和密钥轮换。[路由详解 →](../../architecture/00-high-level-index.md#routing-in-detail)
 - **统一模型与配置档** —— 同一个模型在多家提供方上会合并成一个条目，并在组内严格故障转移；命名的回退链配置档（比如一条编程链、一条视觉链）可以在仪表盘里切换，也可以按请求用 `auto:<profile>` 指定。
 - **按密钥的限流跟踪** —— 以 `(平台, 模型, 密钥)` 为单位的 RPM/RPD/TPM/TPD 计数器，会学习提供方公布的上限，让路由始终不越线。
 - **自更新的模型目录** —— 路由器每天两次从 freellmapi.co 同步经过签名的目录：新模型、额度变更和提供方的怪癖修复都会自动生效。[Premium →](#premium-实时目录)
@@ -158,10 +158,10 @@
 - **密钥加密存储，对外只有一个令牌** —— 提供方密钥以 AES-256-GCM 加密存放在 SQLite 中，每次请求时在内存里解密；你的应用自始至终只看到一个统一的 `freellmapi-…` bearer 令牌。
 - **管理仪表盘与分析** —— React 界面用来管理密钥、调整链路顺序、使用试验台，并查看 24 小时到 90 天窗口的 p50/p95/首个词元用时分析；带登录保护，支持明暗主题和 [60 种语言](#语言)。
 - **MCP 服务与交互式文档** —— 智能体可以通过 `/mcp` 查询可用模型、提供方健康状况和路由策略；`/v1/docs` 提供一个零依赖的 OpenAPI 浏览器。[编程智能体 →](../../clients/01-agent-clients.md)
-- **运维上的便利** —— 可选的响应缓存、加密的数据库备份、定期密钥健康检查、密钥批量导入导出、声明式启动配置。[安装与部署 →](docs/install.md)
+- **运维上的便利** —— 可选的响应缓存、加密的数据库备份、定期密钥健康检查、密钥批量导入导出、声明式启动配置。[安装与部署 →](../../install/01-install.md)
 - **能跑 Node 20+ 的地方都能跑** —— Windows、macOS、Linux 服务器，或者一块小小的 ARM 单板机（树莓派也行）。在 PM2 / systemd 或你惯用的守护进程下，空闲时常驻内存约 40 MB。
 
-项目范围是刻意收窄的，参见 [尚不支持的部分](../../architecture.md#not-yet-supported)。
+项目范围是刻意收窄的，参见 [尚不支持的部分](../../architecture/00-high-level-index.md#not-yet-supported)。
 
 ## 快速开始
 
@@ -175,9 +175,9 @@ curl -fsSL https://freellmapi.co/install.sh | bash
 
 打开 http://localhost:3001 ，在 **密钥** 页添加你的提供方密钥，按喜好调整 **回退链** 的顺序，然后在 **密钥** 页顶部拿到你的统一 API 密钥。这个统一密钥就是你的 OpenAI SDK 要指向的东西。
 
-在 Windows 上，最省事的方式是下面提到的桌面版 **[Releases 里的 `.exe` 安装包](https://github.com/tashfeenahmed/freellmapi/releases/latest)**。Android 上可参考实验性的 [Termux 指南](../../install/android-termux.md)。
+在 Windows 上，最省事的方式是下面提到的桌面版 **[Releases 里的 `.exe` 安装包](https://github.com/tashfeenahmed/freellmapi/releases/latest)**。Android 上可参考实验性的 [Termux 指南](../../install/02-android-termux.md)。
 
-其余内容，包括 Docker Compose、本地开发、声明式启动配置、生产构建、局域网访问和备份，都在 **[docs/install.md](docs/install.md)**。
+其余内容，包括 Docker Compose、本地开发、声明式启动配置、生产构建、局域网访问和备份，都在 **[docs/install.md](../../install/01-install.md)**。
 
 ## 桌面应用
 
@@ -185,7 +185,7 @@ curl -fsSL https://freellmapi.co/install.sh | bash
 
 ![FreeLLMAPI 桌面应用](../../../repo-assets/desktop.png)
 
-**[从 Releases 下载](https://github.com/tashfeenahmed/freellmapi/releases/latest)** —— 每个版本都附带 macOS 的 `.dmg` 和 Windows 的 `.exe` 安装包。不需要注册账号或设置密码：你唯一需要的凭据就是托盘悬浮窗里的统一 API 密钥。从源码构建的步骤，以及数据存放位置，见 [docs/install.md](docs/install.md#桌面应用)。
+**[从 Releases 下载](https://github.com/tashfeenahmed/freellmapi/releases/latest)** —— 每个版本都附带 macOS 的 `.dmg` 和 Windows 的 `.exe` 安装包。不需要注册账号或设置密码：你唯一需要的凭据就是托盘悬浮窗里的统一 API 密钥。从源码构建的步骤，以及数据存放位置，见 [docs/install.md](../../install/01-install.md#桌面应用)。
 
 ## 兼容 OpenAI 的客户端
 
@@ -295,11 +295,11 @@ print("Routed via:", resp.headers.get("x-routed-via"))
 
 ![一个请求进去，最合适的免费模型出来 —— 带实时评分、冷却和额度跟踪的回退链](../../../repo-assets/router-flow.png)
 
-一个请求进去，最合适的免费模型出来：路由器挑出优先级最高、密钥健康且未超出任何限流的模型，在内存中解密密钥并调用提供方；遇到 429/5xx 就让那个密钥进入冷却，然后重试你链路上的下一个模型。组件走查、路由内部实现和运维细节都在 **[docs/architecture.md](../../architecture.md)**。
+一个请求进去，最合适的免费模型出来：路由器挑出优先级最高、密钥健康且未超出任何限流的模型，在内存中解密密钥并调用提供方；遇到 429/5xx 就让那个密钥进入冷却，然后重试你链路上的下一个模型。组件走查、路由内部实现和运维细节都在 **[docs/architecture.md](../../architecture/00-high-level-index.md)**。
 
 ## 局限性
 
-叠加免费额度是有实实在在的代价的：没有前沿模型，延迟不稳定，没有 SLA。而且到了一天的后半段，顶级模型陆续触及当日上限，这个端点的实际智能水平会下滑，然后在 UTC 午夜重置。在拿它做任何正经东西之前，请先读一遍 **[docs/architecture.md#limitations](../../architecture.md#limitations)** 里那份诚实的清单。
+叠加免费额度是有实实在在的代价的：没有前沿模型，延迟不稳定，没有 SLA。而且到了一天的后半段，顶级模型陆续触及当日上限，这个端点的实际智能水平会下滑，然后在 UTC 午夜重置。在拿它做任何正经东西之前，请先读一遍 **[docs/architecture.md#limitations](../../architecture/00-high-level-index.md#limitations)** 里那份诚实的清单。
 
 ## 参与贡献
 
@@ -321,7 +321,7 @@ print("Routed via:", resp.headers.get("x-routed-via"))
 
 **本项目用于个人实验和学习，不适用于生产环境。** 免费额度的存在是为了让开发者拿来做原型；它们不是稳定、有支持的推理基础设施，也不该被当成这种东西。如果你要在 FreeLLMAPI 之上做真正的产品，上线前请换成付费 API。你和每家上游提供方之间的关系，受你注册账号时接受的条款约束；流量经由本项目代理时这些条款依然适用，遵守它们是你的责任。
 
-各家提供方的服务条款如何看待一个个人的、单用户的代理，在 2026 年 5 月逐家审查过，结论在 [docs/architecture.md#terms-of-service-review](../../architecture.md#terms-of-service-review)。
+各家提供方的服务条款如何看待一个个人的、单用户的代理，在 2026 年 5 月逐家审查过，结论在 [docs/architecture.md#terms-of-service-review](../../architecture/00-high-level-index.md#terms-of-service-review)。
 
 ## 许可证
 

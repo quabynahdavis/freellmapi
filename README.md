@@ -21,7 +21,7 @@ Aggregate free tiers from dozens of providers, plus custom OpenAI-compatible cha
   <a href="https://play.google.com/store/apps/details?id=co.freellmapi.app"><img src="repo-assets/badges/play-store.svg" height="60" alt="Get it on Google Play"></a>
   <a href="https://github.com/tashfeenahmed/freellmapi/releases/latest"><img src="repo-assets/badges/macos.svg" height="60" alt="Download for macOS"></a>
   <a href="https://github.com/tashfeenahmed/freellmapi/releases/latest"><img src="repo-assets/badges/windows.svg" height="60" alt="Download for Windows"></a>
-  <a href="docs/install.md#docker-compose"><img src="repo-assets/badges/docker.svg" height="60" alt="Self-host with Docker"></a>
+  <a href="docs/install/01-install.md#docker-compose"><img src="repo-assets/badges/docker.svg" height="60" alt="Self-host with Docker"></a>
 </p>
 
 ![FreeLLMAPI dashboard — Models page with the monthly token budget](repo-assets/github-hero.png)
@@ -54,7 +54,7 @@ Your router updates its own model catalog from a signed feed: new free models, q
 - [Contributing](#contributing)
 - [Disclaimer](#disclaimer)
 
-**Guides:** [Install & deploy](docs/install.md) · [API reference](docs/api/01-rest-api.md) · [Clients & coding agents](docs/clients/01-agent-clients.md) · [Prompt compression](docs/compression/01-compression-pipeline.md) · [Architecture & internals](docs/architecture.md) · [Documentation index](docs/README.md) · [Contributor guide](CONTRIBUTING.md)
+**Guides:** [Install & deploy](docs/install/01-install.md) · [API reference](docs/api/01-rest-api.md) · [Clients & coding agents](docs/clients/01-agent-clients.md) · [Prompt compression](docs/compression/01-compression-pipeline.md) · [Architecture & internals](docs/architecture/00-high-level-index.md) · [Documentation index](docs/README.md) · [Contributor guide](CONTRIBUTING.md)
 
 ## Why this exists
 
@@ -157,7 +157,7 @@ Based on public documentation, July 2026 — corrections welcome.
 - **Fusion (multi-model synthesis)** — request the virtual `fusion` model and the router fans your prompt out to a panel of diverse free models in parallel, then a judge model synthesizes one answer from the drafts. [Details →](docs/api/01-rest-api.md#fusion-multi-model-synthesis)
 - **Image, video & speech generation** — `/v1/images/generations`, `/v1/videos/generations`, and `/v1/audio/speech` route across the providers that serve media models; images and speech also accept custom OpenAI-compatible media endpoints. Video jobs are normalized across synchronous and queued providers and return a completed MP4.
 - **Tool calling & structured outputs** — OpenAI-style `tools` round-trip across providers (plain-text tool calls are rescued into real `tool_calls`), plus `response_format`, `seed`, `logprobs`, penalties, and the rest of the sampling params passed through per provider.
-- **Smart routing, six strategies** — live per-model speed/capability/reliability scores rank your chain; automatic fallover retries the next model on 429/5xx with cooldowns and key rotation. [Routing in detail →](docs/architecture.md#routing-in-detail)
+- **Smart routing, six strategies** — live per-model speed/capability/reliability scores rank your chain; automatic fallover retries the next model on 429/5xx with cooldowns and key rotation. [Routing in detail →](docs/architecture/00-high-level-index.md#routing-in-detail)
 - **Unified models & profiles** — the same model on several providers collapses into one entry with strict in-group failover; named fallback-chain profiles (a coding chain, a vision chain) switch from the dashboard or per request via `auto:<profile>`.
 - **Per-key rate tracking** — RPM/RPD/TPM/TPD counters per `(platform, model, key)` that learn providers' reported ceilings, so routing always stays under every cap.
 - **Self-updating model catalog** — the router syncs a signed catalog from freellmapi.co twice a day: new models, quota changes, and provider quirk fixes land automatically. Free installs track the monthly snapshot, which each model joins 30 days after it lands in the live feed; premium routers get it same-day. [Premium →](#premium-live-catalog)
@@ -166,10 +166,10 @@ Based on public documentation, July 2026 — corrections welcome.
 - **Encrypted keys, one token out** — provider keys are AES-256-GCM encrypted in SQLite and decrypted in-memory per request; your apps only ever see a single unified `freellmapi-…` bearer token.
 - **Admin dashboard & analytics** — React UI to manage keys, reorder the chain, run a playground, and read p50/p95/TTFT analytics over 24h–90d windows; login-gated, dark/light themes, [60 languages](#languages).
 - **MCP server & interactive docs** — agents can introspect usable models, provider health, and routing strategy over `/mcp`; a dependency-free OpenAPI viewer lives at `/v1/docs`. [Coding agents →](docs/clients/01-agent-clients.md)
-- **Ops niceties** — opt-in response cache, encrypted DB backups, periodic key health checks, bulk key import/export, declarative startup config. [Install & deploy →](docs/install.md)
+- **Ops niceties** — opt-in response cache, encrypted DB backups, periodic key health checks, bulk key import/export, declarative startup config. [Install & deploy →](docs/install/01-install.md)
 - **Runs anywhere Node 20+ runs** — Windows, macOS, Linux servers, or a small ARM SBC (Raspberry Pi included). ~40 MB RSS at idle behind PM2 / systemd / whatever supervisor you prefer.
 
-The scope is deliberately narrow — see [what's not supported yet](docs/architecture.md#not-yet-supported).
+The scope is deliberately narrow — see [what's not supported yet](docs/architecture/00-high-level-index.md#not-yet-supported).
 
 ## Quick start
 
@@ -183,9 +183,9 @@ Prefer to read before you pipe to bash? [The script is here](https://freellmapi.
 
 Open http://localhost:3001, add your provider keys on the **Keys** page, reorder the **Fallback Chain** to taste, and grab your unified API key from the **Keys** page header. That unified key is what you point your OpenAI SDK at.
 
-On Windows, the easiest path is the desktop **[`.exe` installer from Releases](https://github.com/tashfeenahmed/freellmapi/releases/latest)** (below). On Android, see the experimental [Termux guide](docs/install/android-termux.md).
+On Windows, the easiest path is the desktop **[`.exe` installer from Releases](https://github.com/tashfeenahmed/freellmapi/releases/latest)** (below). On Android, see the experimental [Termux guide](docs/install/02-android-termux.md).
 
-Everything else — Docker Compose, local development, declarative startup config, production builds, LAN access, and backups — is in **[docs/install.md](docs/install.md)**.
+Everything else — Docker Compose, local development, declarative startup config, production builds, LAN access, and backups — is in **[docs/install.md](docs/install/01-install.md)**.
 
 ## Desktop app
 
@@ -193,7 +193,7 @@ A native menu-bar app lives in [`desktop/`](./desktop): the entire router + dash
 
 ![FreeLLMAPI desktop app](repo-assets/desktop.png)
 
-**[Download from Releases](https://github.com/tashfeenahmed/freellmapi/releases/latest)** — the macOS `.dmg` and the Windows `.exe` installer are attached to every release. No account or password to set up: the only credential you need is the unified API key from the tray popover. Build-from-source steps and where your data lives: [docs/install.md](docs/install.md#desktop-app).
+**[Download from Releases](https://github.com/tashfeenahmed/freellmapi/releases/latest)** — the macOS `.dmg` and the Windows `.exe` installer are attached to every release. No account or password to set up: the only credential you need is the unified API key from the tray popover. Build-from-source steps and where your data lives: [docs/install.md](docs/install/01-install.md#desktop-app).
 
 ## Works with OpenAI-compatible clients
 
@@ -335,7 +335,7 @@ Request volume, success rate, tokens in and out, average latency, and per-provid
 
 ![One request in, the best free model out — the fallback chain with live scores, cooldowns, and quota tracking](repo-assets/router-flow.png)
 
-One request in, the best free model out: the router picks the highest-priority model with a healthy key that's under all its rate limits, decrypts the key in memory, and calls the provider — on a 429/5xx it cools that key down and retries the next model in your chain. The component walkthrough, routing internals, and operational details live in **[docs/architecture.md](docs/architecture.md)**.
+One request in, the best free model out: the router picks the highest-priority model with a healthy key that's under all its rate limits, decrypts the key in memory, and calls the provider — on a 429/5xx it cools that key down and retries the next model in your chain. The component walkthrough, routing internals, and operational details live in **[docs/architecture.md](docs/architecture/00-high-level-index.md)**.
 
 ## FAQ
 
@@ -347,11 +347,11 @@ One request in, the best free model out: the router picks the highest-priority m
 
 **How do I uninstall?** Remove the app (Trash on macOS, *Settings → Apps* on Windows, `docker compose down -v` for Docker), then delete the data directory: `%APPDATA%\FreeLLMAPI\`, `~/Library/Application Support/FreeLLMAPI/`, or `~/.config/FreeLLMAPI/`. Uninstalling never touches that folder on its own.
 
-Longer answers, per install method: **[docs/install.md#faq-passwords-logs-uninstall](docs/install.md#faq-passwords-logs-uninstall)**.
+Longer answers, per install method: **[docs/install.md#faq-passwords-logs-uninstall](docs/install/01-install.md#faq-passwords-logs-uninstall)**.
 
 ## Limitations
 
-Stacking free tiers has real trade-offs: no frontier models, variable latency, no SLA — and the effective intelligence of the endpoint dips late in the day as top models hit their daily caps, then resets at UTC midnight. Read the honest list in **[docs/architecture.md#limitations](docs/architecture.md#limitations)** before building anything real on this.
+Stacking free tiers has real trade-offs: no frontier models, variable latency, no SLA — and the effective intelligence of the endpoint dips late in the day as top models hit their daily caps, then resets at UTC midnight. Read the honest list in **[docs/architecture.md#limitations](docs/architecture/00-high-level-index.md#limitations)** before building anything real on this.
 
 ## Contributing
 
@@ -482,7 +482,7 @@ Contributors very welcome! See [CONTRIBUTING.md](CONTRIBUTING.md) for the dev lo
 
 **This project is for personal experimentation and learning, not production.** Free tiers exist so developers can prototype against them; they aren't a stable, supported inference substrate and shouldn't be treated as one. If you build something real on top of FreeLLMAPI, swap in a paid API before you ship. Your relationship with each upstream provider is governed by the terms you accepted when you created your account — those terms still apply when the traffic is proxied through this project, and you're responsible for complying with them.
 
-How each provider's ToS views a personal, single-user proxy — reviewed provider by provider in May 2026 — is in [docs/architecture.md#terms-of-service-review](docs/architecture.md#terms-of-service-review).
+How each provider's ToS views a personal, single-user proxy — reviewed provider by provider in May 2026 — is in [docs/architecture.md#terms-of-service-review](docs/architecture/00-high-level-index.md#terms-of-service-review).
 
 ## License
 

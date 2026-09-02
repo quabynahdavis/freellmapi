@@ -55,5 +55,5 @@ Deliberately NOT mirrored: `restoreDbBackupIfNeeded`/`startDbBackupPump` (`FREEA
 ## Related
 
 - [Logging and updates](02-logging-and-updates.md) — `freeapi.log` rotation, update delivery, signing.
-- [Install & deploy](../install.md) — desktop vs Docker vs local dev.
+- [Install & deploy](../install/01-install.md) — desktop vs Docker vs local dev.
 - [Logs viewer](../logs/01-server-logs-viewer.md) — the polling API the desktop log tap feeds.

@@ -1,4 +1,4 @@
-[English](../../../install.md) · **简体中文**
+[English](../../../install/01-install.md) · **简体中文**
 
 # 安装与部署
 
@@ -26,7 +26,7 @@ curl -fsSL https://freellmapi.co/install.sh | bash
 
 在 Windows 上，最省事的方式是桌面版 **[Releases 里的 `.exe` 安装包](https://github.com/tashfeenahmed/freellmapi/releases/latest)**（见[下文](#桌面应用)）；上面的 Docker 步骤在 WSL 或任意 bash shell 里同样可用。
 
-在 Android 上，参见实验性的 [Termux 安装指南](../../../install/android-termux.md)。它使用 Node 内置的 SQLite 驱动，不需要 Android NDK。
+在 Android 上，参见实验性的 [Termux 安装指南](../../../install/02-android-termux.md)。它使用 Node 内置的 SQLite 驱动，不需要 Android NDK。
 
 打开 http://localhost:3001 ，在 **密钥** 页添加你的提供方密钥，按喜好调整 **回退链** 的顺序，然后在 **密钥** 页顶部拿到你的统一 API 密钥。这个统一密钥就是你的 OpenAI SDK 要指向的东西。
 
