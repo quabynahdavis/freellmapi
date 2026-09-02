@@ -1,4 +1,4 @@
-[English](../../../../architecture/02-quota-and-cooldown-engine.md) · **简体中文**
+[English](../../en/architecture/02-quota-and-cooldown-engine.md) · **简体中文**
 
 # 额度与冷却引擎 —— 深度剖析
 

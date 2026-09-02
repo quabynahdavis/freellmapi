@@ -1,4 +1,4 @@
-[English](../../../../architecture/01-routing-and-bandit-scoring.md) · **简体中文**
+[English](../../en/architecture/01-routing-and-bandit-scoring.md) · **简体中文**
 
 # 路由与老虎机评分 —— 深度剖析
 

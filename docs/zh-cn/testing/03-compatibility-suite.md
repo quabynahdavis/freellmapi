@@ -1,4 +1,4 @@
-[English](../../../../testing/03-compatibility-suite.md) · **简体中文**
+[English](../../en/testing/03-compatibility-suite.md) · **简体中文**
 
 # 兼容性套件
 

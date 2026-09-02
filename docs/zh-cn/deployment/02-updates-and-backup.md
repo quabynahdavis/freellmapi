@@ -1,4 +1,4 @@
-[English](../../../../deployment/02-updates-and-backup.md) · **简体中文**
+[English](../../en/deployment/02-updates-and-backup.md) · **简体中文**
 
 # 更新与备份
 

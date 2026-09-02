@@ -1,4 +1,4 @@
-[English](../../../../compression/01-compression-pipeline.md) · **简体中文**
+[English](../../en/compression/01-compression-pipeline.md) · **简体中文**
 
 # 提示词压缩
 

@@ -1,4 +1,4 @@
-[English](../../../../env/02-security-and-keys.md) · **简体中文**
+[English](../../en/env/02-security-and-keys.md) · **简体中文**
 
 # 安全与密钥处理
 

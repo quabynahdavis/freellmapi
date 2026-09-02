@@ -1,4 +1,4 @@
-[English](../../../../testing/01-running-tests.md) · **简体中文**
+[English](../../en/testing/01-running-tests.md) · **简体中文**
 
 # 运行测试
 

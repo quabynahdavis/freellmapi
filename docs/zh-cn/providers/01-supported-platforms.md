@@ -1,4 +1,4 @@
-[English](../../../../providers/01-supported-platforms.md) · **简体中文**
+[English](../../en/providers/01-supported-platforms.md) · **简体中文**
 
 # 支持的平台
 

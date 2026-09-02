@@ -1,4 +1,4 @@
-[English](../../../../api/01-rest-api.md) · **简体中文**
+[English](../../en/api/01-rest-api.md) · **简体中文**
 
 # API 参考
 

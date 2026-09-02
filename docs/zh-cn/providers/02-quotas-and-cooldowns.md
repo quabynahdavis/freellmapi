@@ -1,4 +1,4 @@
-[English](../../../../providers/02-quotas-and-cooldowns.md) · **简体中文**
+[English](../../en/providers/02-quotas-and-cooldowns.md) · **简体中文**
 
 # 额度、冷却与密钥健康
 

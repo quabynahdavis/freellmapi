@@ -1,4 +1,4 @@
-[English](../../../../architecture/06-observability.md) · **简体中文**
+[English](../../en/architecture/06-observability.md) · **简体中文**
 
 # 可观测性 —— 深度剖析
 

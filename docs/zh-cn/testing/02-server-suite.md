@@ -1,4 +1,4 @@
-[English](../../../../testing/02-server-suite.md) · **简体中文**
+[English](../../en/testing/02-server-suite.md) · **简体中文**
 
 # 服务器套件
 

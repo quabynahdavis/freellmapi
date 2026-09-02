@@ -1,4 +1,4 @@
-[English](../../../../providers/03-adding-a-new-provider.md) · **简体中文**
+[English](../../en/providers/03-adding-a-new-provider.md) · **简体中文**
 
 # 添加新提供方
 

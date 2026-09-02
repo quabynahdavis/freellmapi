@@ -1,4 +1,4 @@
-[English](../../../../architecture/03-streaming-pipeline.md) · **简体中文**
+[English](../../en/architecture/03-streaming-pipeline.md) · **简体中文**
 
 # 流式管线 —— 深度剖析
 

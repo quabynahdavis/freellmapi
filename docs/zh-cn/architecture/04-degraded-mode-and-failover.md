@@ -1,4 +1,4 @@
-[English](../../../../architecture/04-degraded-mode-and-failover.md) · **简体中文**
+[English](../../en/architecture/04-degraded-mode-and-failover.md) · **简体中文**
 
 # 降级模式与回退 —— 深度剖析
 

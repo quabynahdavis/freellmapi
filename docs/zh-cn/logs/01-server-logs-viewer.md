@@ -1,4 +1,4 @@
-[English](../../../../logs/01-server-logs-viewer.md) · **简体中文**
+[English](../../en/logs/01-server-logs-viewer.md) · **简体中文**
 
 # 服务器日志查看器
 

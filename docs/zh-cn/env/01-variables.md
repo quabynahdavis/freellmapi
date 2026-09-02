@@ -1,4 +1,4 @@
-[English](../../../../env/01-variables.md) · **简体中文**
+[English](../../en/env/01-variables.md) · **简体中文**
 
 # 环境变量参考
 
