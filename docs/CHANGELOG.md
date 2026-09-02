@@ -2,6 +2,14 @@
 
 Revision history for `docs/`, derived from git commits touching this directory. Most recent first.
 
+## 2026-09-02
+
+| Commit | Date | Summary |
+| --- | --- | --- |
+| `c2114c0` | 2026-09-02 | docs(proxy): create proxy domain and move Fetch Relay into it — `01-fetch-relay.md` moved from flat `fetch-relay.md`, `detectSystemProxy()` OS auto-detect, `TRUST_PROXY` |
+| `26f71dd` | 2026-09-02 | docs(env): cover `PROXY_MODE`, `FETCH_RELAY_TOKEN`, `TRUST_PROXY`, `QUOTA_OBSERVATIONS_*`, `IDEMPOTENCY_TTL_MS` — full precedence chain, callout boxes |
+| `8bd3acd` | 2026-09-02 | docs(api): document Idempotency-Key safe retries (`02-idempotency.md`) — replay/409/miss, fingerprint, curl example |
+
 ## 2026-08-25
 
 | Commit | Date | Summary |

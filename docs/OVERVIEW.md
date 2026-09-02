@@ -2,7 +2,7 @@
 
 ## Scope
 
-This file is the domain index for `docs/` — a complete file map of every guide and domain folder (install, API, clients, compression, architecture deep-dives, env, proxy, deployment, providers, testing, fallback, logs, i18n). It lists where each document lives and how the domain folders relate.
+This file is the domain index for `docs/` — a complete file map of every guide and domain folder (install, API, clients, CLI, compression, architecture deep-dives, env, proxy, deployment, providers, testing, fallback, logs, desktop, troubleshooting, glossary, i18n). It lists where each document lives and how the domain folders relate.
 
 For getting started as a user, see [README.md](README.md) (the user entry point); for the product overview, see the root [README](../README.md).
 
@@ -32,5 +32,9 @@ For getting started as a user, see [README.md](README.md) (the user entry point)
 | [install/](install/OVERVIEW.md) | Platform-specific installation guides; see its own [OVERVIEW.md](install/OVERVIEW.md). |
 | [logs/](logs/OVERVIEW.md) | Server logs viewer: live dashboard panel, two-tier store, polling API, and configuration; see its own [OVERVIEW.md](logs/OVERVIEW.md). |
 | [fallback/](fallback/OVERVIEW.md) | Named fallback chains: chain lifecycle, empty-chain authoritative 400, `auto:<name>` discovery, catalog-sync backfill (`auto_include_new_models`); see its own [OVERVIEW.md](fallback/OVERVIEW.md). |
+| [desktop/](desktop/OVERVIEW.md) | Desktop app: Electron app shape, file logging and update delivery; see its own [OVERVIEW.md](desktop/OVERVIEW.md). |
+| [cli/](cli/OVERVIEW.md) | Setup CLI: `setup-*` generators, config-file merge layer, backups; see its own [OVERVIEW.md](cli/OVERVIEW.md). |
+| [troubleshooting/](troubleshooting/OVERVIEW.md) | Troubleshooting: common issues (Docker, empty chain, fetch-relay, idempotency, quota, TRUST_PROXY); see its own [OVERVIEW.md](troubleshooting/OVERVIEW.md). |
+| [glossary.md](glossary.md) | Glossary of recurring terms: headroom, RPD/TPD, pool key, `auto:<name>`, model-age gate, bandit, `TRUST_PROXY`, `FREEAPI_SHOT`. |
 
 > `index.html` and `success.html` are static website assets shipped with the docs directory, not markdown documentation.
