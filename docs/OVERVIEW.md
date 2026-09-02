@@ -13,6 +13,7 @@ For getting started as a user, see [README.md](README.md) (the user entry point)
 | [README.md](README.md) | Documentation index: links every guide plus related docs elsewhere in the repo. |
 | [install.md](install.md) | Install & deploy: one-liner quick start, Docker Compose, local development, declarative startup config, the Docker image, desktop app, and data locations. |
 | [api/01-rest-api.md](api/01-rest-api.md) | API reference: chat completions, `auto:*` routing strategies, streaming, tool calling, vision, embeddings, response headers, and the Anthropic Messages surface. |
+| [api/02-idempotency.md](api/02-idempotency.md) | Idempotency-Key on non-streaming `POST /v1/chat/completions` — safe retries without double-spending free-tier quota (`36b877d`/`95bc46f`). |
 | [clients/01-agent-clients.md](clients/01-agent-clients.md) | Clients & coding agents: OpenAI-compatible clients, setup recipes for Claude Code / Codex CLI / Cline / Continue / Aider / opencode / Cursor, MCP server, autocomplete, Context Handoff. |
 | [compression/01-compression-pipeline.md](compression/01-compression-pipeline.md) | Prompt compression: request-side modes, safeguards, per-request controls, custom tool-output filters, statistics, and preview APIs. |
 | [architecture.md](architecture.md) | Architecture & internals (high-level index): how the router works, routing and operational details, what is not supported, limitations, and the provider Terms-of-Service review. |

@@ -2,6 +2,10 @@
 
 Doc revision history for `docs/architecture/`, seeded from commits touching architecture-relevant code.
 
+## 2026-09-02
+
+- **docs(architecture): cross-ref Idempotency-Key replay in degraded-mode doc** — `04-degraded-mode-and-failover.md:10` now maps the pre-routing idempotency lookup (`server/src/services/idempotency.ts`, `proxy.ts:1793-1838`) and post-success persist (`proxy.ts:2640-2656`) to the fallback loop, notes `X-Routed-Via: idempotency` zero-cost replay, `stream:true` + `finish_reason:length` exclusion, in-flight NOT deduplicated (`95bc46f`), `IDEMPOTENCY_TTL_MS` 24 h lazy sweep, and that `409` + replay bypass `isDegraded()` / retry budget / hedging. Client contract lives in `docs/api/02-idempotency.md` (`36b877d`).
+
 ## 2026-08-25
 
 - **docs(architecture): deduplicate `architecture.md` vs `architecture/OVERVIEW.md` intros, clarify `docs/README.md` vs `docs/OVERVIEW.md`** — root `architecture.md` is now the high-level index (what the system is, two-paragraph summary, request-flow diagram, limitations and ToS) with a `See [OVERVIEW.md](OVERVIEW.md) for deep-dives` bridge and no duplicated provider/routing summaries (removed the deep-dive reference table and the Routing/Operational detail sections — those live in `01`/`02` deep-dives); `architecture/OVERVIEW.md` is now the domain scope (Scope + File Index + How deep-dives fit, high-level index cross-link); `docs/README.md` clarified as the user entry point (getting started) vs `docs/OVERVIEW.md` as the domain index (full file map) and verified no dangling `api.md`/`clients.md`/`compression.md` links (`rg "api\.md|clients\.md|compression\.md" docs --glob '!CHANGELOG.md'` — only numbered `01-*.md` hits remain).

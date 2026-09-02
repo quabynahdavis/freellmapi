@@ -1,6 +1,8 @@
 # Degraded Mode & Failover — Deep Dive
 
-> **Source:** `server/src/services/degradation.ts`, `server/src/lib/fallback-loop.ts`, `server/src/routes/proxy.ts`, `server/src/services/ratelimit.ts`
+> **Source:** `server/src/services/degradation.ts`, `server/src/lib/fallback-loop.ts`, `server/src/routes/proxy.ts`, `server/src/services/ratelimit.ts`, `server/src/services/idempotency.ts`
+
+> **Cross-ref:** Client-facing contract for `Idempotency-Key` (header, replay/409/miss, fingerprint, TTL, curl example) lives in [`../api/02-idempotency.md`](../api/02-idempotency.md). This file notes how that replay interacts with failover.
 
 ## 1. Degraded-Mode State Machine (f412e97)
 
@@ -315,3 +317,46 @@ request → /v1/chat/completions
   │   └─ onExhausted() → 429 with X-Fallback-Detail + Retry-After
   └─ response headers: X-Fallback-Attempts, X-Fallback-Trail, X-Fallback-Detail
 ```
+
+---
+
+## 10. Idempotency-Key Replay — Failover Interaction
+
+> Full client contract: [`../api/02-idempotency.md`](../api/02-idempotency.md). This section is the architecture cross-ref.
+
+### Where it sits in the request path
+
+```
+request → /v1/chat/completions
+  ├─ [BEFORE routing] Idempotency lookup  (proxy.ts:1796-1838)
+  │   ├─ hit + fingerprint matches  → replay 200 with X-Routed-Via: idempotency (zero cost, no routing)
+  │   ├─ hit + fingerprint differs → 409 idempotency_key_conflict (fail fast, no provider hit)
+  │   └─ miss / streaming / no key → continue to cache → runFallbackLoop() → provider
+  └─ [AFTER success, non-stream only] Persist response if finish_reason !== 'length'
+      └─ storeIdempotencyResult(keyHash, fingerprint, 200, body)  (proxy.ts:2644-2656)
+```
+
+The lookup happens **before** response-cache lookup (the cache is keyed by request content; idempotency is caller-scoped per key hash) and **before** `newFallbackState()` — a replay never enters the fallback loop, never touches `routeRequest`, and never consumes a quota lease.
+
+### What is stored / replayed
+
+- Only a `SHA-256(key)` + `SHA-256(canonical model+messages+temperature/top_p/max_tokens/tools/tool_choice)` fingerprint are persisted; the raw key is never stored (`hashIdempotencyKey`, `computeIdempotencyFingerprint` in `server/src/services/idempotency.ts:46-70`).
+- `response_status` + `response_body` (the sanitized `outboundBody` that the client received) are replayed verbatim. Replays carry no `X-Fallback-*` headers and do not write analytics rows — same zero-cost semantics as a cache `HIT`.
+- Streaming (`stream: true`) and truncated turns (`finish_reason === 'length'`) are never stored — consistent with the response cache.
+
+### In-flight NOT deduplicated (95bc46f)
+
+A second request with the same `Idempotency-Key` arriving **while the first is still in flight** does **not** coalesce: only **completed** claims are claimable, so both execute. The second `storeIdempotencyResult` replaces the first. Guarding the window would require a `pending` claim with a short TTL so a crash cannot wedge a key for 24 h — deliberately out of scope (`idempotency.ts:17-20`).
+
+### TTL & expiry
+
+- `IDEMPOTENCY_TTL_MS` (default `24 h`, `idempotencyTtlMs()` in `idempotency.ts:40-42`, `envNum` guard) sets `expires_at_ms = now + ttl`.
+- Expired rows are lazily swept per `key_hash` at the next `storeIdempotencyResult` (`DELETE WHERE key_hash = ? AND expires_at_ms <= ?`) plus the `idx_idempotency_claims_expires` index; a lookup where `expires_at_ms <= now` is a `miss`.
+
+### Interaction with degraded mode & hedging
+
+- An `idempotency` replay bypasses `isDegraded()` entirely — it is already a success and does not consult the router's exploration gate.
+- A `miss` that then enters the fallback loop is subject to the normal degraded-mode rules (exploration disabled, retry budget, hedging via `abortInFlight`). The `409` path never enters the loop.
+- `HedgeAbortError` and other non-provider-health failures that cause `timedOut` exhaustion do not persist a claim for that `Idempotency-Key` — the attempt did not succeed.
+
+See [`../api/02-idempotency.md`](../api/02-idempotency.md) for the header contract, fingerprint details, `409` body, per-field TDD, and a full `curl` retry example.
