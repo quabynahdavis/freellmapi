@@ -54,7 +54,7 @@ credentials or complete target URLs, and stream rather than buffer bodies.
 
 ## Cloudflare Worker reference
 
-[`examples/fetch-relay-worker`](../examples/fetch-relay-worker/README.md)
+[`examples/fetch-relay-worker`](../../examples/fetch-relay-worker/README.md)
 contains a provider-agnostic, single-file Worker. It keeps no target-site list:
 each request carries its complete public HTTP(S) target in `Fetch-Relay-Target`.
 The implementation authenticates with a Cloudflare secret, blocks obvious SSRF

@@ -2,7 +2,7 @@
 
 ## Scope
 
-This file is the domain index for `docs/` — a complete file map of every guide and domain folder (install, API, clients, compression, architecture deep-dives, env, deployment, providers, testing, fallback, logs, i18n). It lists where each document lives and how the domain folders relate.
+This file is the domain index for `docs/` — a complete file map of every guide and domain folder (install, API, clients, compression, architecture deep-dives, env, proxy, deployment, providers, testing, fallback, logs, i18n). It lists where each document lives and how the domain folders relate.
 
 For getting started as a user, see [README.md](README.md) (the user entry point); for the product overview, see the root [README](../README.md).
 
@@ -23,6 +23,7 @@ For getting started as a user, see [README.md](README.md) (the user entry point)
 | [install.sh](install.sh) | Unix Docker bootstrap script served by the project website. |
 | [install.ps1](install.ps1) | PowerShell bootstrap script served by the project website. |
 | [env/](env/OVERVIEW.md) | Runtime configuration: full `.env` variable reference, encryption-key lifecycle, and outbound-proxy configuration; see its own [OVERVIEW.md](env/OVERVIEW.md). |
+| [proxy/](proxy/OVERVIEW.md) | Outbound proxy transports: forward vs fetch-relay, system auto-detect, `TRUST_PROXY` for inbound; see its own [OVERVIEW.md](proxy/OVERVIEW.md). |
 | [deployment/](deployment/OVERVIEW.md) | Docker operations: image & Compose reference, container networking gotchas, upgrades, backups, declarative config; see its own [OVERVIEW.md](deployment/OVERVIEW.md). |
 | [providers/](providers/OVERVIEW.md) | Provider integrations: supported-platform catalog with auth models and adapter classes, per-key quota accounting and cooldowns, and a contributor walkthrough for adding a provider; see its own [OVERVIEW.md](providers/OVERVIEW.md). |
 | [testing/](testing/OVERVIEW.md) | Testing: local test command matrix and CI summary, server-suite layout and conventions, and the e2e coding-agent compatibility suite; see its own [OVERVIEW.md](testing/OVERVIEW.md). |
