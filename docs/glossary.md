@@ -15,4 +15,4 @@
 | **`FREEAPI_SHOT`** | Desktop capture mode flag in `desktop/src/main.ts` for screenshots. |
 | **`freellmapi-…`** | Pooled fallback chain identifier — the gateway's single logical model that fans out over the fallback ladder. |
 
-See also: [Architecture](../architecture/OVERVIEW.md), [Routing & bandit scoring](architecture/01-routing-and-bandit-scoring.md), [Quota & cooldown](architecture/02-quota-and-cooldown-engine.md).
+See also: [Architecture](architecture/OVERVIEW.md), [Routing & bandit scoring](architecture/01-routing-and-bandit-scoring.md), [Quota & cooldown](architecture/02-quota-and-cooldown-engine.md).
