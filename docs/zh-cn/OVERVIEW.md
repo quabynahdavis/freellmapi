@@ -16,9 +16,9 @@ use the same words (提供方, 词元, 令牌, ...).
 | File | Mirrors | Description |
 | --- | --- | --- |
 | [README.md](README.md) | [../../README.md](../../README.md) | Project overview: what the gateway does, supported providers, quick start, and configuration - the full root README in Simplified Chinese. |
-| [en/README.md](en/README.md) | [../../../en/README.md](../../../en/README.md) | Documentation index page listing every guide in the docs tree. |
+| [../en/README.md](../en/README.md) | [../en/README.md](../en/README.md) | Documentation index page listing every guide in the docs tree. |
 | [docs/install.md](../en/install/01-install.md) | [../../../docs/install.md](../en/install/01-install.md) | Installation guide covering Docker Compose, local setup, and desktop app installs. |
-| [en/api/01-rest-api.md](en/api/01-rest-api.md) | [../../../en/api/01-rest-api.md](../../../en/api/01-rest-api.md) | API reference for the OpenAI-compatible `/v1` endpoints, authentication, and request formats. |
+| [../en/api/01-rest-api.md](../en/api/01-rest-api.md) | [../en/api/01-rest-api.md](../en/api/01-rest-api.md) | API reference for the OpenAI-compatible `/v1` endpoints, authentication, and request formats. |
 
 ### Translated domain subtrees
 
@@ -27,12 +27,12 @@ docs, CHANGELOG):
 
 | Folder | Mirrors | Contents |
 | --- | --- | --- |
-| [docs/env/](en/env/OVERVIEW.md) | [../../../docs/env/](../../../docs/env/) | Runtime configuration surface: the full `.env` variable reference, encryption-key handling, and outbound proxy configuration. |
-| [docs/deployment/](en/deployment/OVERVIEW.md) | [../../../docs/deployment/](../../../docs/deployment/) | Docker operations: image, Compose quickstart, persistence, healthchecks, upgrades, and backups. |
-| [docs/providers/](en/providers/OVERVIEW.md) | [../../../docs/providers/](../../../docs/providers/) | Provider layer: supported platforms catalog, quotas/cooldowns/key health, and how to add a new provider. |
-| [docs/testing/](en/testing/OVERVIEW.md) | [../../../docs/testing/](../../../docs/testing/) | Test matrix across workspaces, server suite conventions, and the coding-agent compatibility suite. |
-| [docs/logs/](en/logs/OVERVIEW.md) | [../../../docs/logs/](../../../docs/logs/) | Live server log viewer in the dashboard: two-tier store, polling API, level counts, clear endpoint, env vars, redaction integration. |
-| [docs/architecture/](en/architecture/OVERVIEW.md) | [../../../docs/architecture/](../../../docs/architecture/) | Deep-dive server architecture: bandit router, quota/cooldown engine, streaming pipeline, degraded mode, catalog sync, observability. |
+| [../en/env/](../en/env/OVERVIEW.md) | [../../../../en/env/](../../../../en/env/) | Runtime configuration surface: the full `.env` variable reference, encryption-key handling, and outbound proxy configuration. |
+| [../en/deployment/](../en/deployment/OVERVIEW.md) | [../../../../en/deployment/](../../../../en/deployment/) | Docker operations: image, Compose quickstart, persistence, healthchecks, upgrades, and backups. |
+| [../en/providers/](../en/providers/OVERVIEW.md) | [../../../../en/providers/](../../../../en/providers/) | Provider layer: supported platforms catalog, quotas/cooldowns/key health, and how to add a new provider. |
+| [../en/testing/](../en/testing/OVERVIEW.md) | [../../../../en/testing/](../../../../en/testing/) | Test matrix across workspaces, server suite conventions, and the coding-agent compatibility suite. |
+| [../en/logs/](../en/logs/OVERVIEW.md) | [../../../../en/logs/](../../../../en/logs/) | Live server log viewer in the dashboard: two-tier store, polling API, level counts, clear endpoint, env vars, redaction integration. |
+| [../en/architecture/](../en/architecture/OVERVIEW.md) | [../../../../en/architecture/](../../../../en/architecture/) | Deep-dive server architecture: bandit router, quota/cooldown engine, streaming pipeline, degraded mode, catalog sync, observability. |
 
 Pages not listed here have no translation yet; they link to their English
 originals by design.

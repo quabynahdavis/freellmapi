@@ -1,11 +1,11 @@
-[English](../../en/README.md) · **简体中文**
+[English](../en/README.md) · **简体中文**
 
 # FreeLLMAPI 文档
 
 根目录的 [README](../en/README.md) 是产品总览，详细指南在这里。
 
 > **翻译状态：** 「安装与部署」和「API 参考」已翻译成中文。其余三篇指南目前只有英文版，
-> 链接直接指向英文原文。完整状态见 [这里](../../en/README.md#status)。想认领其中一篇，欢迎提 PR。
+> 链接直接指向英文原文。完整状态见 [这里](../en/README.md#status)。想认领其中一篇，欢迎提 PR。
 
 ## 指南
 

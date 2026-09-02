@@ -1,4 +1,4 @@
-[English](../../../../logs/CHANGELOG.md) · **简体中文**
+[English](../../en/logs/CHANGELOG.md) · **简体中文**
 
 # 变更日志
 

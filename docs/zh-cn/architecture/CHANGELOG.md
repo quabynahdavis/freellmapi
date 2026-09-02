@@ -1,4 +1,4 @@
-[English](../../../../architecture/CHANGELOG.md) · **简体中文**
+[English](../../en/architecture/CHANGELOG.md) · **简体中文**
 
 # 架构域 —— 变更日志
 

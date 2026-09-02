@@ -1,4 +1,4 @@
-[English](../../../../api/CHANGELOG.md) · **简体中文**
+[English](../../en/api/CHANGELOG.md) · **简体中文**
 
 # API 域 —— 变更日志
 

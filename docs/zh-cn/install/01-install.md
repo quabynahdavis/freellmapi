@@ -2,7 +2,7 @@
 
 # 安装与部署
 
-[← 返回 README](../../../en/README.md) · [文档索引](../../en/README.md)
+[← 返回 README](../../en/README.md) · [文档索引](../../en/README.md)
 
 把 FreeLLMAPI 跑起来所需的一切：一行命令、Docker Compose、本地开发、声明式配置、生产构建、桌面应用，以及你的数据存放在哪里。
 
@@ -198,7 +198,7 @@ FREEAPI_DB_BACKUP_INTERVAL_MS=300000
 
 启动时如果数据库文件不存在，FreeLLMAPI 会先恢复备份，再执行迁移。服务运行期间，它会定期上传一份新的加密备份。如果没有设置 `FREEAPI_DB_BACKUP_KEY`，备份信封也会使用 `ENCRYPTION_KEY`。
 
-更多 Docker 运维内容和示例在 [docker/../../en/README.md](../../../../docker/../../en/README.md)。
+更多 Docker 运维内容和示例在 [docker/../../en/README.md](../../../docker/README.md)。
 
 ## 桌面应用
 
@@ -218,7 +218,7 @@ npm run desktop:dist:win      # Windows → "desktop/dist-electron/FreeLLMAPI Se
 ```
 
 > 本地构建出来的应用没有签名，所以 Windows SmartScreen 首次运行时可能会警告（点「更多信息」→「仍要运行」）；macOS 构建则不会触发 Gatekeeper 提示。
-> 完整说明见 [desktop/../../en/README.md](../../../../desktop/../../en/README.md)。
+> 完整说明见 [desktop/../../en/README.md](../../en/desktop/../../en/README.md)。
 
 ## 凭据与数据存放位置
 

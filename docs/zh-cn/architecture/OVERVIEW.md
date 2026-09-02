@@ -1,4 +1,4 @@
-[English](../../../../architecture/OVERVIEW.md) · **简体中文**
+[English](../../en/architecture/OVERVIEW.md) · **简体中文**
 
 # 架构域 —— 概览与文件索引
 

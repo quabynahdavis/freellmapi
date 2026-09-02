@@ -1,4 +1,4 @@
-[English](../../../../deployment/OVERVIEW.md) · **简体中文**
+[English](../../en/deployment/OVERVIEW.md) · **简体中文**
 
 # 部署总览
 

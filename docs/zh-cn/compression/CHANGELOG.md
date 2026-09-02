@@ -1,4 +1,4 @@
-[English](../../../../compression/CHANGELOG.md) · **简体中文**
+[English](../../en/compression/CHANGELOG.md) · **简体中文**
 
 # 压缩域 —— 变更日志
 
