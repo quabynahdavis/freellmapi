@@ -1,4 +1,4 @@
-**English** · [简体中文](../i18n/zh-CN/docs/install.md)
+**English** · [简体中文](../../zh-cn/install/OVERVIEW.md)
 
 # Install & deploy
 
@@ -218,7 +218,7 @@ before migrations run. While the server is running it uploads a fresh encrypted
 backup periodically. If `FREEAPI_DB_BACKUP_KEY` is omitted, the app uses
 `ENCRYPTION_KEY` for the backup envelope too.
 
-More Docker operations and examples live in [docker/README.md](../../docker/README.md).
+More Docker operations and examples live in [docker/README.md](../../../docker/README.md).
 
 ## Desktop app
 
@@ -241,7 +241,7 @@ npm run desktop:dist:win      # Windows → "desktop/dist-electron/FreeLLMAPI Se
 
 > Locally built apps are unsigned, so Windows SmartScreen may warn on first run
 > ("More info" → "Run anyway"); the macOS build launches without Gatekeeper prompts.
-> Full instructions in [desktop/README.md](../../desktop/README.md).
+> Full instructions in [desktop/README.md](../../../desktop/README.md).
 
 ## Credentials and where your data lives
 

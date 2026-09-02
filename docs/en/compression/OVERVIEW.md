@@ -18,4 +18,4 @@ tool-output filters, and the statistics/preview APIs.
 
 - [../api/](../api/) — API reference showing `X-FreeLLM-Compress` response header.
 - [../clients/](../clients/) — Coding agents that benefit from automatic compression.
-- [../i18n/zh-CN/docs/compression/](../i18n/zh-CN/docs/compression/) — Simplified Chinese mirror (when translated).
+- [../../zh-cn/compression/](../../zh-cn/compression/) — Simplified Chinese mirror (when translated).

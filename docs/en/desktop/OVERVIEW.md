@@ -32,7 +32,7 @@ For installation from the user's point of view — quick start, Docker vs local 
 
 ## Related
 
-- [Desktop README](../../desktop/README.md) — prerequisites, `npm run desktop:dist`/`desktop:dev`, native rebuild note.
+- [Desktop README](../../../desktop/README.md) — prerequisites, `npm run desktop:dist`/`desktop:dev`, native rebuild note.
 - [Install & deploy](../install/01-install.md) — desktop column next to Docker/local-dev, data-location table, uninstall/FAQ.
 - [Deployment](../deployment/OVERVIEW.md) — Docker image/Compose operations (the other install shape).
 - [Logs viewer](../logs/01-server-logs-viewer.md) and [Observability](../architecture/06-observability.md) — the polling API and store internals that the desktop log tap feeds.

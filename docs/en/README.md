@@ -1,8 +1,8 @@
-**English** · [简体中文](i18n/zh-CN/docs/README.md)
+**English** · [简体中文](../zh-cn/OVERVIEW.md)
 
 # FreeLLMAPI documentation
 
-This is the user entry point — start here to install the gateway, call the OpenAI-compatible API, connect coding agents and understand the high-level architecture. The root [README](../README.md) is the product overview; this index gets you running.
+This is the user entry point — start here to install the gateway, call the OpenAI-compatible API, connect coding agents and understand the high-level architecture. The root [README](../../README.md) is the product overview; this index gets you running.
 
 ## Guides
 
@@ -17,10 +17,10 @@ This is the user entry point — start here to install the gateway, call the Ope
 
 - [Android with Termux](install/02-android-termux.md) — experimental local installation using Node's built-in SQLite driver.
 - [Fallback chains](fallback/01-named-chains.md) — named fallback-chain lifecycle, empty-chain authoritative 400, `auto:<name>` routing, and catalog-sync backfill.
-- [Docker deployment](../docker/README.md) — container configuration and persistent storage.
-- [Desktop app](../desktop/README.md) — build and package the Electron application.
-- [Contributor guide](../CONTRIBUTING.md) — development loop, testing expectations, and contribution policy.
-- [Database migrations](../server/src/db/README.md) — create, apply, inspect, and roll back schema migrations.
+- [Docker deployment](../../docker/README.md) — container configuration and persistent storage.
+- [Desktop app](../../desktop/README.md) — build and package the Electron application.
+- [Contributor guide](../../CONTRIBUTING.md) — development loop, testing expectations, and contribution policy.
+- [Database migrations](../../server/src/db/README.md) — create, apply, inspect, and roll back schema migrations.
 
 ## Website assets in this directory
 

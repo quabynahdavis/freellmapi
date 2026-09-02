@@ -9,7 +9,7 @@ This domain documents FreeLLMAPI's outbound proxy transports and the related inb
 
 For inbound traffic, `TRUST_PROXY` (`server/src/lib/config.ts:95` `parseTrustProxy`) controls Express `trust proxy` (`false` default — do not trust `X-Forwarded-For`/`X-Forwarded-Proto`; `true` — trust all; `<hops>` number — trust that many hops from the socket peer; comma-separated `addr/CIDR` list — trust only those) so analytics and `PROXY_RATE_LIMIT_RPM`/`ADMIN_RATE_LIMIT_RPM` see the real client IP behind a reverse proxy (Caddy/nginx/Traefik).
 
-Related: the full `.env` surface is in [`../env/01-variables.md`](../env/01-variables.md) and the forward-proxy chain is expanded in [`../env/03-outbound-proxies.md`](../env/03-outbound-proxies.md); provider routing and failover that consumes the proxy lives in [`../architecture/`](../architecture/OVERVIEW.md); the Cloudflare Worker reference is in [`../../examples/fetch-relay-worker/README.md`](../../examples/fetch-relay-worker/README.md).
+Related: the full `.env` surface is in [`../env/01-variables.md`](../env/01-variables.md) and the forward-proxy chain is expanded in [`../env/03-outbound-proxies.md`](../env/03-outbound-proxies.md); provider routing and failover that consumes the proxy lives in [`../architecture/`](../architecture/OVERVIEW.md); the Cloudflare Worker reference is in [`../../../examples/fetch-relay-worker/README.md`](../../../examples/fetch-relay-worker/README.md).
 
 ## File index
 
@@ -20,7 +20,7 @@ Related: the full `.env` surface is in [`../env/01-variables.md`](../env/01-vari
 
 ## Conventions
 
-- Sources: [`.env.example`](../../.env.example) proxy block (lines 70-80: `PROXY_MODE`, `PROXY_URL`, `FETCH_RELAY_TOKEN`), [`server/src/lib/proxy.ts`](../../server/src/lib/proxy.ts) (`PROXY_MODES`, `detectSystemProxy` `scutil`/`registry`/`gsettings`, `fetchRelayFetch`, `isLoopbackRelayHostname`/`fetchRelayUrlError`), [`server/src/lib/config.ts`](../../server/src/lib/config.ts) (`parseTrustProxy` at line 95), [`examples/fetch-relay-worker/README.md`](../../examples/fetch-relay-worker/README.md).
+- Sources: [`.env.example`](../../.env.example) proxy block (lines 70-80: `PROXY_MODE`, `PROXY_URL`, `FETCH_RELAY_TOKEN`), [`server/src/lib/proxy.ts`](../../server/src/lib/proxy.ts) (`PROXY_MODES`, `detectSystemProxy` `scutil`/`registry`/`gsettings`, `fetchRelayFetch`, `isLoopbackRelayHostname`/`fetchRelayUrlError`), [`server/src/lib/config.ts`](../../server/src/lib/config.ts) (`parseTrustProxy` at line 95), [`examples/fetch-relay-worker/README.md`](../../../examples/fetch-relay-worker/README.md).
 - `forward` remains the default `PROXY_MODE`; `fetch-relay` overwrites caller-supplied `Fetch-Relay-*` headers, strips them before fetching the target, rejects local/metadata destinations and relay loops, handles redirects manually, avoids cookies, never logs credentials, and streams rather than buffers bodies.
 
 ## Navigation
@@ -28,4 +28,4 @@ Related: the full `.env` surface is in [`../env/01-variables.md`](../env/01-vari
 - ← [Documentation root](../README.md)
 - ↔ [Environment domain](../env/OVERVIEW.md)
 - Outbound proxy detail: [`../env/03-outbound-proxies.md`](../env/03-outbound-proxies.md)
-- Worker reference: [`../../examples/fetch-relay-worker/README.md`](../../examples/fetch-relay-worker/README.md)
+- Worker reference: [`../../../examples/fetch-relay-worker/README.md`](../../../examples/fetch-relay-worker/README.md)

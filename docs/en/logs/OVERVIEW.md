@@ -21,4 +21,4 @@ logger), see the [Observability deep-dive](../architecture/06-observability.md).
 ## Related
 
 - [../api/](../api/) — API reference for inference endpoints (the log viewer is an admin route under `/api/logs`).
-- [../i18n/zh-CN/docs/logs/](../i18n/zh-CN/docs/logs/) — Simplified Chinese mirror (when translated).
+- [../../zh-cn/logs/](../../zh-cn/logs/) — Simplified Chinese mirror (when translated).

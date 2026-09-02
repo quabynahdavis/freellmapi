@@ -1,4 +1,4 @@
-**English** · [简体中文](../i18n/zh-CN/docs/api/01-rest-api.md)
+**English** · [简体中文](../../zh-cn/api/OVERVIEW.md)
 
 # API reference
 

@@ -1,6 +1,6 @@
 # Architecture & internals
 
-[← Back to README](../../README.md) · [Documentation index](../README.md) · [Deep-dive domain](OVERVIEW.md)
+[← Back to README](../../../README.md) · [Documentation index](../README.md) · [Deep-dive domain](OVERVIEW.md)
 
 FreeLLMAPI is a self-hosted OpenAI-compatible gateway that stacks the free tiers of ~34 providers behind a single `freellmapi-…` bearer token. An Express proxy exposes `/v1/chat/completions` (plus `/v1/responses`, `/v1/messages`, `/v1/completions`, `/v1/embeddings` and `/v1/models`) and, per request, the router selects the best healthy model that is under all of its rate limits, decrypts its upstream key in memory, and streams the response back.
 
