@@ -10,8 +10,9 @@ Every variable FreeLLMAPI reads from `.env`, grouped by concern. Defaults and de
 - [Outbound proxies](#outbound-proxies)
 - [Request body & media limits](#request-body--media-limits)
 - [Storage, cache, analytics & misc](#storage-cache-analytics--misc)
+- [Idempotency](#idempotency)
 
-Related reading: [02-security-and-keys.md](02-security-and-keys.md) expands on `ENCRYPTION_KEY`; [03-outbound-proxies.md](03-outbound-proxies.md) expands on the proxy chain.
+Related reading: [02-security-and-keys.md](02-security-and-keys.md) expands on `ENCRYPTION_KEY`; [03-outbound-proxies.md](03-outbound-proxies.md) expands on the proxy chain; [`../proxy/01-fetch-relay.md`](../proxy/01-fetch-relay.md) details the Fetch Relay transport.
 
 ## Server & binding
 
@@ -22,6 +23,7 @@ Related reading: [02-security-and-keys.md](02-security-and-keys.md) expands on `
 | `HOST_BIND` | `127.0.0.1` | Docker only: which host interface the container's port is published on. The default keeps the dashboard/API reachable only from the machine running Docker; set `0.0.0.0` to open it to the LAN (e.g. a Raspberry Pi at `http://192.168.1.x:3001`) — only on a trusted network, since the proxy is single-user and guarded only by the unified API key. |
 | `DASHBOARD_ORIGINS` | `localhost:5173`, `127.0.0.1:5173`, `[::1]:5173` allowed | Comma-separated extra origins allowed to call the API from a browser. Only needed if you serve the dashboard from a different host than the API (e.g. `http://my-server.local`). |
 | `CSP_UPGRADE_INSECURE_REQUESTS` | Auto (unset) | Controls the Content-Security-Policy `upgrade-insecure-requests` directive (#682). Unset: emit only when the request arrives over TLS or behind an HTTPS reverse proxy (`X-Forwarded-Proto: https`), so plain-HTTP LAN installs stay renderable. `true`: force the directive on even over plain HTTP (rarely useful). `false`: force it off even behind HTTPS (e.g. mixed-content reverse proxies). |
+| `TRUST_PROXY` | `false` | Trust forwarded headers (`X-Forwarded-For` / `X-Forwarded-Proto`) from a reverse proxy so Analytics and IP-based rate limiting see the real client IP (`server/src/lib/config.ts:95-110`, `.env.example:314`). Accepts `false` (default — do not trust; direct callers cannot spoof), `true` (trust every hop — only on a fully trusted network), a non-negative integer hop count e.g. `1` for a single reverse proxy (Caddy/nginx/Traefik on the same host — Express `trust proxy: 1` idiom), or a comma-separated list of proxy addresses/CIDRs e.g. `100.64.0.0/10,192.168.1.10`. Parsed by `parseTrustProxy()` and forwarded to Express `trust proxy`; when trusted, `client-context` and the per-IP rate limiters read the left-most untrusted `X-Forwarded-For` entry. See [03-outbound-proxies.md](03-outbound-proxies.md) inbound vs outbound callout. |
 
 ## Outbound proxies (local destinations)
 
@@ -43,8 +45,8 @@ First-run note: the first dashboard account is normally created from a browser o
 
 | Variable | Default | Purpose |
 | --- | --- | --- |
-| `PROXY_RATE_LIMIT_RPM` | `120` | Max `/v1` proxy requests per minute per client IP. Set to `0` to disable proxy rate limiting. See [03-outbound-proxies.md](03-outbound-proxies.md) for related knobs. |
-| `ADMIN_RATE_LIMIT_RPM` | `600` | Max `/api` dashboard requests per minute per client IP. A flood guard — login has its own per-email lockout and key export its own much tighter cap. Set to `0` to disable. |
+| `PROXY_RATE_LIMIT_RPM` | `120` | Max `/v1` proxy requests per minute per client IP. Set to `0` to disable proxy rate limiting. See [03-outbound-proxies.md](03-outbound-proxies.md) for related knobs. When `TRUST_PROXY` is set, the limiter counts the real client IP from `X-Forwarded-For` instead of the socket peer. |
+| `ADMIN_RATE_LIMIT_RPM` | `600` | Max `/api` dashboard requests per minute per client IP. A flood guard — login has its own per-email lockout and key export its own much tighter cap. Set to `0` to disable. Also respects `TRUST_PROXY`. |
 
 ## Routing overrides, timeouts & failover
 
@@ -67,15 +69,17 @@ First-run note: the first dashboard account is normally created from a browser o
 
 | Variable | Default | Purpose |
 | --- | --- | --- |
-| `PROXY_URL` | Unset | Outbound proxy for provider requests. Normally set in the dashboard (Keys → Outbound proxy); env vars exist for headless installs. Schemes: `http`, `https`, `socks4`, `socks4a`, `socks5`, `socks5h` — the `h`/`a` variants resolve DNS at the proxy, which is what you want on a DNS-poisoned network. Highest link in the precedence chain below. |
+| `PROXY_MODE` | `forward` | Selects how the outbound proxy URL is used (`server/src/lib/proxy.ts:52` `PROXY_MODES`, `.env.example:76`). `forward` (default) — ordinary forward proxy (HTTP/SOCKS) via undici `ProxyAgent` / `SocksProxyAgent`; `fetch-relay` (opt-in) — application-layer relay that forwards the provider request with `Fetch-Relay-Target` / `Fetch-Relay-Authorization` headers (`server/src/lib/proxy.ts:52-414`). When `fetch-relay`, `PROXY_URL` is interpreted as the relay endpoint and must be `https` (or `http` only for loopback hosts per `isLoopbackRelayHostname` — `localhost`, `127.0.0.1`, `::1`, `127.*`). A legacy `PROXY_URL` without an explicit `PROXY_MODE` always stays `forward` regardless of a saved dashboard mode. See [`../proxy/01-fetch-relay.md`](../proxy/01-fetch-relay.md) (owned by another writer; link assumes it will exist). |
+| `PROXY_URL` | Unset | Outbound proxy for provider requests. Normally set in the dashboard (Keys → Outbound proxy); env vars exist for headless installs. Schemes: `http`, `https`, `socks4`, `socks4a`, `socks5`, `socks5h` — the `h`/`a` variants resolve DNS at the proxy, which is what you want on a DNS-poisoned network. Highest link in the precedence chain below. In `fetch-relay` mode this is the relay URL, not a forward proxy. |
+| `FETCH_RELAY_TOKEN` | Unset (empty → unauthenticated) | Bearer credential FreeLLMAPI uses to authenticate to the Fetch Relay (`server/src/lib/proxy.ts:389-417`, `.env.example:78`). Sent as `Fetch-Relay-Authorization: Bearer <token>` on the relay hop (separate from the provider's `Authorization` header, which is preserved). Encrypted at rest when saved via the dashboard (`encodeFetchRelayToken` → `encrypt()` JSON envelope `{encrypted,iv,authTag}` in the settings table; decrypted by `decodeFetchRelayToken`); the env var `FETCH_RELAY_TOKEN` never enters the DB and takes precedence over the dashboard value (`readEnv('FETCH_RELAY_TOKEN') || dbValue`). Empty means the relay is unauthenticated. A plaintext relay to a remote host leaks both the provider key and this token — `fetchRelayUrlError()` warns at boot and the probe fails 401/403 as relay rejection. Details in [`../proxy/01-fetch-relay.md`](../proxy/01-fetch-relay.md). |
 | `ALL_PROXY` | Unset | Standard proxy variable, third in the precedence chain. |
 | `HTTPS_PROXY` | Unset | Standard proxy variable, fourth in the precedence chain. |
-| `HTTP_PROXY` | Unset | Standard proxy variable, last in the precedence chain. |
-| `NO_PROXY` | Unset | Hosts that must be reached directly, bypassing the proxy above. Comma-separated; a bare domain also covers its subdomains, and `*` disables the proxy entirely. |
+| `HTTP_PROXY` | Unset | Standard proxy variable, fifth in the precedence chain (before system fallback). |
+| `NO_PROXY` | Unset | Hosts that must be reached directly, bypassing the proxy above. Comma-separated; a bare domain also covers its subdomains, and `*` disables the proxy entirely. Also see `FREEAPI_PROXY_LOCAL_DESTINATIONS` above for local/LAN bypass. |
 
-**Precedence:** `PROXY_URL` → dashboard setting → `ALL_PROXY` → `HTTPS_PROXY` → `HTTP_PROXY`. The standard variables are also read in their lower-case spellings.
+**Precedence:** `PROXY_URL` → dashboard setting → `ALL_PROXY` → `HTTPS_PROXY` → `HTTP_PROXY` → `detectSystemProxy()` system fallback → direct. The standard variables are also read in their lower-case spellings. The final fallback reads the OS-wide proxy (`server/src/lib/proxy.ts:52-414`, `resolveProxySource` / `detectSystemProxy`): macOS `scutil --proxy` (HTTPEnable/HTTPProxy or SOCKSEnable/SOCKSProxy), Windows registry `HKCU\Software\Microsoft\Windows\CurrentVersion\Internet Settings` (`ProxyEnable` + `ProxyServer`), Linux GNOME `gsettings` (`org.gnome.system.proxy` `mode == 'manual'` plus `org.gnome.system.proxy.http` host/port). This is last-resort only (commit `86368ac`); best-effort and never throws — failure falls through to direct. Per-key proxy overrides (`withKeyProxy` `AsyncLocalStorage`, `#590`) ride request-scoped and win over the global proxy for that request but still respect `NO_PROXY` / local bypass / disabled / per-platform bypass.
 
-In Docker, `127.0.0.1` is the container, not your machine — see [03-outbound-proxies.md](03-outbound-proxies.md).
+In Docker, `127.0.0.1` is the container, not your machine — see [03-outbound-proxies.md](03-outbound-proxies.md). Fetch-Relay loopback guard: `http` is only allowed when the relay hostname is loopback (`isLoopbackRelayHostname` — `localhost`, `127.0.0.1`, `::1`/`[::1]`, `127.*`); otherwise `fetchRelayUrlError()` requires `https`.
 
 ## Request body & media limits
 
@@ -98,9 +102,11 @@ In Docker, `127.0.0.1` is the container, not your machine — see [03-outbound-p
 | `FREELLMAPI_COMPRESSION` | `off` | Request-side prompt/context compression. `lossless` applies whitespace hygiene, exact repeated-block references, and reversible tabular-JSON encoding; `standard` also filters tool output and superseded file reads; `aggressive` adds age/relevance/budget condensation. The dashboard can change this live under Settings. A request may lower the configured mode with `X-FreeLLM-Compress`, but cannot override a global `off` master switch. |
 | `REQUEST_ANALYTICS_RETENTION_DAYS` | `90` | Request analytics retention in days. Set to `0` to disable this limit. |
 | `REQUEST_ANALYTICS_MAX_ROWS` | `100000` | Request analytics row cap. Set to `0` to disable this limit. |
-| `REQUEST_ANALYTICS_LOG_CLIENT` | `true` | Per-request caller identity (client IP + User-Agent) recorded into request analytics and shown in the dashboard "Recent calls" table. Set to `false` to store nulls instead (aggregate analytics unaffected). |
+| `REQUEST_ANALYTICS_LOG_CLIENT` | `true` | Per-request caller identity (client IP + User-Agent) recorded into request analytics and shown in the dashboard "Recent calls" table. Set to `false` to store nulls instead (aggregate analytics unaffected). When `TRUST_PROXY` is set, the logged IP is the real client from `X-Forwarded-For`. |
 | `SERVER_LOGS_RETENTION_DAYS` | `7` | Persisted server logs behind the dashboard's log viewer. Only warn/error lines are written to the database (the live view is an in-memory ring), so these bounds are far tighter than the analytics ones above. Set to `0` to disable this limit. |
 | `SERVER_LOGS_MAX_ROWS` | `50000` | Persisted server logs row cap. Set to `0` to disable this limit. |
+| `QUOTA_OBSERVATIONS_RETENTION_DAYS` | `30` | Age bound for the provider quota observation audit trail (`provider_quota_observations` behind `provider_quota_state`, `.env.example:230-233`, `server/src/services/request-retention.ts:22-24`). Only the newest row per pool is ever read (indexed seek via `20260901_000002` composite index; previously window-functioned entire log). History older than this is pruned daily. `0` disables age pruning. Split from analytics retention in `77e0ecc`. |
+| `QUOTA_OBSERVATIONS_MAX_ROWS` | `200000` | Count bound for the same audit trail (`QUOTA_OBSERVATIONS_MAX_ROWS=200000`, `.env.example:230-233`). Keeps the newest N rows, pruning the excess daily via `ORDER BY created_at DESC, rowid DESC LIMIT … OFFSET maxRows`. `0` disables count pruning. Together the two knobs are `getQuotaObservationRetentionConfig()`; pruned on the daily gate (24h interval, or next 60s tick while backlog remains) in budgeted chunks of `5k` rows / `250ms` (`QUOTA_OBSERVATIONS_PRUNE_CHUNK` / `QUOTA_OBSERVATIONS_PRUNE_BUDGET_MS`, `server/src/services/request-retention.ts:89-90`, refined in `4a8f095` from 20k/870ms). The count bound is far above live pool count, so keeping newest row per pool is guaranteed. |
 | `FREEAPI_DB_PATH` | Default location next to the server build | Optional SQLite location override. Useful on hosts where only one directory is mounted persistently, or to keep the DB outside `server/data`. Example: `/app/server/data/freellmapi.db`. |
 | `FREEAPI_DB_BACKUP_PATH` | Unset | Optional encrypted SQLite backup target (file path). On startup, FreeLLMAPI restores this backup if the configured DB file is missing; while running, it uploads a fresh backup periodically. |
 | `FREEAPI_DB_BACKUP_URL` | Unset | HTTP(S) backup target, alternative to the path above. |
@@ -115,3 +121,9 @@ In Docker, `127.0.0.1` is the container, not your machine — see [03-outbound-p
 | `FREELLMAPI_INSTALL_METHOD` | Injected by official builds (the Docker image sets `docker`) | Install-type metadata used by the update checker. Normally should not be set in `.env`. |
 | `CLIENT_DIST` | Bundled client build | Path to a prebuilt client `dist` directory to serve. Set this only if you build the dashboard separately. |
 | `FREEAPI_ENV_PATH` | `./.env` | Explicit path to the `.env` file to load. Useful for embedders (e.g. the desktop app, where the code runs from inside a bundle); dotenv silently no-ops on a missing file. |
+
+## Idempotency
+
+| Variable | Default | Purpose |
+| --- | --- | --- |
+| `IDEMPOTENCY_TTL_MS` | `86400000` (24h) | Replay window for completed `Idempotency-Key` claims (`server/src/services/idempotency.ts:36,40-42`, `.env.example` not yet listed — `24*60*60*1000`). Read per call via `envNum()` so tests can flip it live; non-finite/negative → fallback. Only a SHA-256 hash of the caller's key is stored (`hashIdempotencyKey`, never raw key), bound to a fingerprint `SHA-256(model+messages+temperature+top_p+max_tokens+tools+tool_choice)`. Same key + same fingerprint → replay original `200` + body at zero provider cost with `X-Routed-Via: idempotency`; same key + different fingerprint → `409 idempotency_key_conflict`. Applies to non-streaming `POST /v1/chat/completions` only (`stream:true` always bypassed; `finish_reason: length` truncated turns not stored). A duplicate arriving while the original is still in-flight is **NOT deduped** — only completed responses are claimable, so both attempts execute (commit `95bc46f` corrected the header to say so; deliberately out of scope vs a pending-claim with short TTL that could wedge a key — `server/src/services/idempotency.ts:16-20`). Expired rows swept lazily per `key_hash` on next `storeIdempotencyResult` (`DELETE … WHERE expires_at_ms <= ?`). |

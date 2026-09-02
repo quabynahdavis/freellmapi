@@ -2,7 +2,7 @@
 
 How FreeLLMAPI routes its provider-bound traffic through proxies, which variables win when several are set, and the Docker networking gotchas that come with that.
 
-Sources: [`.env.example`](../../.env.example) (proxy block), [`docker-compose.yml`](../../docker-compose.yml), the container-networking notes in [`docs/install.md`](../install.md), and the proxy transports in [`../proxy/01-fetch-relay.md`](../proxy/01-fetch-relay.md) / [`../proxy/OVERVIEW.md`](../proxy/OVERVIEW.md) (`server/src/lib/proxy.ts:52-414`).
+Sources: [`.env.example`](../../.env.example) (proxy block), [`docker-compose.yml`](../../docker-compose.yml), the container-networking notes in [`docs/install.md`](../install.md), the proxy transports in [`../proxy/01-fetch-relay.md`](../proxy/01-fetch-relay.md) / [`../proxy/OVERVIEW.md`](../proxy/OVERVIEW.md) (`server/src/lib/proxy.ts:52-414`, `server/src/lib/config.ts:95-110` for `TRUST_PROXY`).
 
 - [Proxy chain precedence](#proxy-chain-precedence)
 - [Fetch Relay transport](#fetch-relay-transport)
@@ -54,6 +54,8 @@ The `h`/`a` variants (`socks5h`, `socks4a`) resolve DNS at the proxy rather than
 ```env
 PROXY_URL=socks5h://127.0.0.1:1080
 ```
+
+> **Fetch-Relay note:** when `PROXY_MODE=fetch-relay` (`server/src/lib/proxy.ts:52` `PROXY_MODES`), the winning URL is treated as an application-layer relay endpoint and must be `http`/`https` — SOCKS schemes are rejected at boot by `enforceRelayUrlPolicy()` (`server/src/lib/proxy.ts:339-350`), and plain `http` is only allowed for loopback relays (`isLoopbackRelayHostname` — `localhost`, `127.0.0.1`, `::1`/`[::1]`, `127.*`, `fetchRelayUrlError()` `server/src/lib/proxy.ts:71-81`). Encrypted-at-rest token handling and env precedence (`FETCH_RELAY_TOKEN` → `readEnv('FETCH_RELAY_TOKEN') || dbValue`, `encodeFetchRelayToken`/`decodeFetchRelayToken` `389-417`) are detailed in [01-variables.md](01-variables.md#outbound-proxies) and [`../proxy/01-fetch-relay.md`](../proxy/01-fetch-relay.md).
 
 ## NO_PROXY bypasses
 
