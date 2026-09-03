@@ -1,7 +1,5 @@
+<!-- TODO: Asante Twi — English is source of truth. Translate in-place, keep structure. Source: docs/en/troubleshooting/OVERVIEW.md -->
 # Troubleshooting Domain — Overview & File Index
-
-> TODO: Asante Twi translation pending — see [English](../../en/troubleshooting/OVERVIEW.md) for authoritative source.
-
 
 ## Scope
 

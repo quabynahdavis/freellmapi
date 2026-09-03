@@ -1,7 +1,5 @@
+<!-- TODO: Asante Twi — English is source of truth. Translate in-place, keep structure. Source: docs/en/fallback/OVERVIEW.md -->
 # Fallback Domain — Overview & File Index
-
-> TODO: Asante Twi translation pending — see [English](../../en/fallback/OVERVIEW.md) for authoritative source.
-
 
 This domain documents FreeLLMAPI's named fallback-chain system: how chains are stored, how the router resolves the active chain (and refuses when it is empty), how named chains surface to clients as `auto:<name>`, and how catalog sync interacts with curated chains. The root [`README.md`](../README.md) and [`OVERVIEW.md`](../OVERVIEW.md) index this as the operator's primary mechanism for controlling which models the router may use.
 

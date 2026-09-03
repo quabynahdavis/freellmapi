@@ -1,7 +1,5 @@
+<!-- TODO: Asante Twi — English is source of truth. Translate in-place, keep structure. Source: docs/en/testing/OVERVIEW.md -->
 # Testing overview
-
-> TODO: Asante Twi translation pending — see [English](../../en/testing/OVERVIEW.md) for authoritative source.
-
 
 ## Scope
 

@@ -1,7 +1,5 @@
+<!-- TODO: Asante Twi — English is source of truth. Translate in-place, keep structure. Source: docs/en/desktop/OVERVIEW.md -->
 # Desktop Domain — Overview & File Index
-
-> TODO: Asante Twi translation pending — see [English](../../en/desktop/OVERVIEW.md) for authoritative source.
-
 
 ## Scope
 

@@ -1,7 +1,5 @@
+<!-- TODO: Asante Twi — English is source of truth. Translate in-place, keep structure. Source: docs/en/proxy/CHANGELOG.md -->
 # Proxy Domain — Changelog
-
-> TODO: Asante Twi translation pending — see [English](../../en/proxy/CHANGELOG.md) for authoritative source.
-
 
 Revision history for `docs/proxy/`, derived from git commits touching the outbound proxy and Fetch Relay surface. Most recent first.
 

@@ -1,7 +1,5 @@
+<!-- TODO: Asante Twi — English is source of truth. Translate in-place, keep structure. Source: docs/en/deployment/OVERVIEW.md -->
 # Deployment overview
-
-> TODO: Asante Twi translation pending — see [English](../../en/deployment/OVERVIEW.md) for authoritative source.
-
 
 ## Scope
 

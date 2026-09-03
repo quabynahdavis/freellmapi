@@ -1,7 +1,5 @@
+<!-- TODO: Asante Twi — English is source of truth. Translate in-place, keep structure. Source: docs/en/troubleshooting/CHANGELOG.md -->
 # Changelog — troubleshooting
-
-> TODO: Asante Twi translation pending — see [English](../../en/troubleshooting/CHANGELOG.md) for authoritative source.
-
 
 | Commit | Date | Summary |
 | --- | --- | --- |

@@ -1,7 +1,5 @@
+<!-- TODO: Asante Twi — English is source of truth. Translate in-place, keep structure. Source: docs/en/env/OVERVIEW.md -->
 # Environment configuration overview
-
-> TODO: Asante Twi translation pending — see [English](../../en/env/OVERVIEW.md) for authoritative source.
-
 
 ## Scope
 

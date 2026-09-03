@@ -1,7 +1,5 @@
+<!-- TODO: Asante Twi — English is source of truth. Translate in-place, keep structure. Source: docs/en/deployment/CHANGELOG.md -->
 # Changelog
-
-> TODO: Asante Twi translation pending — see [English](../../en/deployment/CHANGELOG.md) for authoritative source.
-
 
 Revision history for `docs/deployment/`, listing the commits that shaped the Docker operations and maintenance behavior documented here. Most recent first.
 

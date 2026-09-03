@@ -1,7 +1,5 @@
+<!-- TODO: Asante Twi — English is source of truth. Translate in-place, keep structure. Source: docs/en/install/CHANGELOG.md -->
 # Changelog
-
-> TODO: Asante Twi translation pending — see [English](../../en/install/CHANGELOG.md) for authoritative source.
-
 
 Revision history for `docs/install/`, derived from git commits touching this directory. Most recent first.
 

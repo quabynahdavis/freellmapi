@@ -1,7 +1,5 @@
+<!-- TODO: Asante Twi — English is source of truth. Translate in-place, keep structure. Source: docs/en/fallback/CHANGELOG.md -->
 # Fallback Domain — Changelog
-
-> TODO: Asante Twi translation pending — see [English](../../en/fallback/CHANGELOG.md) for authoritative source.
-
 
 Doc revision history for `docs/fallback/`, seeded from fallback-relevant commits.
 

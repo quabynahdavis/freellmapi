@@ -1,7 +1,5 @@
+<!-- TODO: Asante Twi — English is source of truth. Translate in-place, keep structure. Source: docs/en/clients/OVERVIEW.md -->
 # Clients Domain
-
-> TODO: Asante Twi translation pending — see [English](../../en/clients/OVERVIEW.md) for authoritative source.
-
 
 ## Scope
 

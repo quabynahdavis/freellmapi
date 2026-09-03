@@ -1,7 +1,5 @@
+<!-- TODO: Asante Twi — English is source of truth. Translate in-place, keep structure. Source: docs/en/architecture/OVERVIEW.md -->
 # Architecture Domain — Overview & File Index
-
-> TODO: Asante Twi translation pending — see [English](../../en/architecture/OVERVIEW.md) for authoritative source.
-
 
 ## Scope
 

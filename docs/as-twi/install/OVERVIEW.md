@@ -1,7 +1,5 @@
+<!-- TODO: Asante Twi — English is source of truth. Translate in-place, keep structure. Source: docs/en/install/OVERVIEW.md -->
 # Install guides overview
-
-> TODO: Asante Twi translation pending — see [English](../../en/install/OVERVIEW.md) for authoritative source.
-
 
 ## Scope
 

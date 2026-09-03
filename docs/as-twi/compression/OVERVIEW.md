@@ -1,7 +1,5 @@
+<!-- TODO: Asante Twi — English is source of truth. Translate in-place, keep structure. Source: docs/en/compression/OVERVIEW.md -->
 # Compression Domain
-
-> TODO: Asante Twi translation pending — see [English](../../en/compression/OVERVIEW.md) for authoritative source.
-
 
 ## Scope
 

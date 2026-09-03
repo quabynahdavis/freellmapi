@@ -1,7 +1,5 @@
+<!-- TODO: Asante Twi — English is source of truth. Translate in-place, keep structure. Source: docs/en/architecture/CHANGELOG.md -->
 # Architecture Domain — Changelog
-
-> TODO: Asante Twi translation pending — see [English](../../en/architecture/CHANGELOG.md) for authoritative source.
-
 
 Doc revision history for `docs/architecture/`, seeded from commits touching architecture-relevant code.
 

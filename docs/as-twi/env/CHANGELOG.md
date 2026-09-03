@@ -1,7 +1,5 @@
+<!-- TODO: Asante Twi — English is source of truth. Translate in-place, keep structure. Source: docs/en/env/CHANGELOG.md -->
 # Changelog
-
-> TODO: Asante Twi translation pending — see [English](../../en/env/CHANGELOG.md) for authoritative source.
-
 
 Revision history for `docs/env/`, listing the commits that shaped the runtime configuration surface documented here. Most recent first.
 

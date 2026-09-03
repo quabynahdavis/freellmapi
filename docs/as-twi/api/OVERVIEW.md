@@ -1,7 +1,5 @@
+<!-- TODO: Asante Twi — English is source of truth. Translate in-place, keep structure. Source: docs/en/api/OVERVIEW.md -->
 # API Domain — Overview & File Index
-
-> TODO: Asante Twi translation pending — see [English](../../en/api/OVERVIEW.md) for authoritative source.
-
 
 This domain documents FreeLLMAPI's OpenAI-compatible HTTP surface and its Anthropic/Gemini-compatible shims. The root [`README.md`](../README.md) and [`OVERVIEW.md`](../OVERVIEW.md) index this as the gateway's external contract.
 

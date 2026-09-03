@@ -1,7 +1,5 @@
+<!-- TODO: Asante Twi — English is source of truth. Translate in-place, keep structure. Source: docs/en/testing/CHANGELOG.md -->
 # Changelog
-
-> TODO: Asante Twi translation pending — see [English](../../en/testing/CHANGELOG.md) for authoritative source.
-
 
 Revision history for `docs/testing/`, listing the upstream commits that shaped the test infrastructure documented here. Most recent first.
 

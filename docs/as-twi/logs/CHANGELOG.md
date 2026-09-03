@@ -1,7 +1,5 @@
+<!-- TODO: Asante Twi — English is source of truth. Translate in-place, keep structure. Source: docs/en/logs/CHANGELOG.md -->
 # Changelog
-
-> TODO: Asante Twi translation pending — see [English](../../en/logs/CHANGELOG.md) for authoritative source.
-
 
 Doc revision history for `docs/logs/`. Most recent first.
 

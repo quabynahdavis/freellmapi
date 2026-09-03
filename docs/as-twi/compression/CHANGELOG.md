@@ -1,7 +1,5 @@
+<!-- TODO: Asante Twi — English is source of truth. Translate in-place, keep structure. Source: docs/en/compression/CHANGELOG.md -->
 # Changelog
-
-> TODO: Asante Twi translation pending — see [English](../../en/compression/CHANGELOG.md) for authoritative source.
-
 
 Doc revision history for `docs/compression/`. Most recent first.
 

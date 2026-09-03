@@ -1,7 +1,5 @@
+<!-- TODO: Asante Twi — English is source of truth. Translate in-place, keep structure. Source: docs/en/providers/CHANGELOG.md -->
 # Changelog
-
-> TODO: Asante Twi translation pending — see [English](../../en/providers/CHANGELOG.md) for authoritative source.
-
 
 Revision history for `docs/providers/`, listing the upstream commits that shaped the provider layer documented here. Most recent first.
 

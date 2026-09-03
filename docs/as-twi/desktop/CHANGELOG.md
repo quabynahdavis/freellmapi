@@ -1,7 +1,5 @@
+<!-- TODO: Asante Twi — English is source of truth. Translate in-place, keep structure. Source: docs/en/desktop/CHANGELOG.md -->
 # Changelog — desktop
-
-> TODO: Asante Twi translation pending — see [English](../../en/desktop/CHANGELOG.md) for authoritative source.
-
 
 | Commit | Date | Summary |
 | --- | --- | --- |

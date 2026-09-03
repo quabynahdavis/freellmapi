@@ -1,7 +1,5 @@
+<!-- TODO: Asante Twi — English is source of truth. Translate in-place, keep structure. Source: docs/en/api/CHANGELOG.md -->
 # API Domain — Changelog
-
-> TODO: Asante Twi translation pending — see [English](../../en/api/CHANGELOG.md) for authoritative source.
-
 
 Doc revision history for `docs/api/`, seeded from API-relevant commits.
 
