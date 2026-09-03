@@ -1,5 +1,22 @@
 # Changelog
 
+## 2026-09-02 — Per-language structure
+
+| Commit | Date | Summary |
+| --- | --- | --- |
+| `c108132` | 2026-09-02 | scaffold per-language en/ and zh-cn/ top-level |
+| `7378adc` | 2026-09-02 | move English domains under en/ (17 domains, git mv) |
+| `cbb2620` | 2026-09-02 | fix link depths after move (0 broken in en/) |
+| `91c1776` | 2026-09-02 | migrate Chinese translations to zh-cn/ (10 domains) |
+| `ab0d0f9` | 2026-09-02 | obliterate i18n wrapper — simple /docs/{en,zh-cn} |
+| `9c679bd` | 2026-09-02 | fix zh-cn link depths |
+| `4761a0b` | 2026-09-02 | fix remaining link depths |
+| `5f887aa` | 2026-09-02 | translate cli and desktop domains to zh-cn |
+| `13ca740` | 2026-09-02 | translate proxy, fallback, glossary to zh-cn |
+| `a0a4df7` | 2026-09-02 | translate troubleshooting to zh-cn |
+
+
+
 Revision history for `docs/`, derived from git commits touching this directory. Most recent first.
 
 ## 2026-09-02
