@@ -15,7 +15,7 @@ Aggregate free tiers from dozens of providers, plus custom OpenAI-compatible cha
 
 **[freellmapi.co](https://freellmapi.co/?utm_source=github&utm_medium=readme&utm_campaign=repository&utm_content=readme_top)** · browse the full catalog: 474 model families, 635 free endpoints
 
-**English** · [简体中文](README.zh-cn.md)
+**English** · [简体中文](README.zh-cn.md) · [Asante Twi](README.as-twi.md)
 
 <p align="center">
   <a href="https://play.google.com/store/apps/details?id=co.freellmapi.app"><img src="repo-assets/badges/play-store.svg" height="60" alt="Get it on Google Play"></a>

@@ -29,4 +29,4 @@ Language-specific index for English documentation.
 - [README.md](README.md) — English docs index (per-language).
 - [../../README.md](../../README.md) — Documentation index (global).
 
-See also: [简体中文 — Chinese](../zh-cn/OVERVIEW.md) · [Translating guide](../TRANSLATION.md)
+See also: [简体中文 · Asante Twi — Chinese](../zh-cn/OVERVIEW.md) · [Translating guide](../TRANSLATION.md)

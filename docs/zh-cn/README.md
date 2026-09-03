@@ -1,4 +1,4 @@
-[English](../en/README.md) · **简体中文**
+[English](../en/README.md) · **简体中文** · [Asante Twi](../as-twi/OVERVIEW.md)
 
 # FreeLLMAPI 文档
 

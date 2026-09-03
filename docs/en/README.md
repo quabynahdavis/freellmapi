@@ -1,4 +1,4 @@
-**English** · [简体中文](../zh-cn/OVERVIEW.md)
+**English** · [简体中文](../zh-cn/OVERVIEW.md) · [Asante Twi](../as-twi/OVERVIEW.md)
 
 # FreeLLMAPI documentation
 
