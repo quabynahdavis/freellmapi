@@ -35,6 +35,10 @@ docs, CHANGELOG):
 | [../en/architecture/](../en/architecture/OVERVIEW.md) | [../../../../en/architecture/](../../../../en/architecture/) | Deep-dive server architecture: bandit router, quota/cooldown engine, streaming pipeline, degraded mode, catalog sync, observability. |
 | [../en/cli/](../en/cli/OVERVIEW.md) | [../../../../en/cli/](../../../../en/cli/) | Setup CLI: `setup-*` generators, config-file merge layer, zero-persistence launchers and `doctor`. |
 | [../en/desktop/](../en/desktop/OVERVIEW.md) | [../../../../en/desktop/](../../../../en/desktop/) | Desktop app: Electron shape, file logging and update delivery. |
+| [../en/fallback/](../en/fallback/OVERVIEW.md) | [../../../../en/fallback/](../../../../en/fallback/) | Named fallback chains: lifecycle, `auto:<name>`, catalog-sync backfill. |
+| [../en/glossary/](../en/glossary/OVERVIEW.md) | [../../../../en/glossary/](../../../../en/glossary/) | Glossary of recurring terms: headroom, RPD/TPD, pool key, `auto:<name>`, model-age gate. |
+| [../en/proxy/](../en/proxy/OVERVIEW.md) | [../../../../en/proxy/](../../../../en/proxy/) | Outbound proxy transports: forward vs fetch-relay, system auto-detect. |
+| [../en/troubleshooting/](../en/troubleshooting/OVERVIEW.md) | [../../../../en/troubleshooting/](../../../../en/troubleshooting/) | 常见问题：Docker 容器网络、空链 `400`、fetch-relay 环回防护、幂等 `409`、额度面板、更新检查、密码重置、反向代理 `TRUST_PROXY`。 |
 
 Pages not listed here have no translation yet; they link to their English
 originals by design.
