@@ -4,7 +4,7 @@
 
 **Nya tokens ɔpepepem 7.4 bosome biara. Fa LLM providers 34 ne models endpoints bɛyɛ 635 di dwuma a wontua hwee. Wei nyinaa fa OpenAI-compatible endpoint biako mu.**
 
-Aggregate free tiers from dozens of providers, plus custom OpenAI-compatible chat, embedding, image, and audio endpoints, behind a single `/v1` API. Keys are stored encrypted. A router picks the best available model for each request, falls over to the next provider when one is rate-limited, and tracks per-key usage so you stay under every free-tier cap.
+Boaboa free tiers firi providers ahodoɔ hɔ, ne wo custom OpenAI-compatible chat, embedding, mfoni, ne audio endpoints, to `/v1` API biako akyi. API safoa no ho banbɔ so yie paa. Abere biara a, wobɛyɛ abisadeɛ no, router no fa model a ne tumi no betumi ayɛ adwuma no. Nanso sɛ model no di nkuguo a, router no fa model a edi hɔ no, na ɛdi dwumadie biara a wode safoa no bɛyɛ no akyi, sɛnea wontra wo free-tier no.
 
 [![CI](https://github.com/tashfeenahmed/freellmapi/actions/workflows/ci.yml/badge.svg)](https://github.com/tashfeenahmed/freellmapi/actions/workflows/ci.yml)
 [![GitHub stars](https://img.shields.io/github/stars/tashfeenahmed/freellmapi?style=flat&logo=github&color=yellow)](https://github.com/tashfeenahmed/freellmapi/stargazers)
@@ -13,9 +13,9 @@ Aggregate free tiers from dozens of providers, plus custom OpenAI-compatible cha
 [![Docker image](https://img.shields.io/badge/ghcr.io-freellmapi-2496ED?logo=docker&logoColor=white)](https://github.com/tashfeenahmed/freellmapi/pkgs/container/freellmapi)
 [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/tashfeenahmed/freellmapi)
 
-**[freellmapi.co](https://freellmapi.co/?utm_source=github&utm_medium=readme&utm_campaign=repository&utm_content=readme_top)** · browse the full catalog: 474 model families, 635 free endpoints
+**[freellmapi.co](https://freellmapi.co/?utm_source=github&utm_medium=readme&utm_campaign=repository&utm_content=readme_top)** · hwehwɛ katalog no nyinaa mu: model mmusua 474, endpoints 635 a ɛyɛ free
 
-**English** · [简体中文](README.zh-cn.md) · [Asante Twi](README.as-twi.md)
+[English](README.md) · [简体中文](README.zh-cn.md) · **Asante Twi**
 
 <p align="center">
   <a href="https://play.google.com/store/apps/details?id=co.freellmapi.app"><img src="repo-assets/badges/play-store.svg" height="60" alt="Get it on Google Play"></a>
