@@ -2,7 +2,7 @@
 
 # FreeLLMAPI
 
-**7.4 billion tokens per month.  34 free LLM providers. 635 free model endpoints. One OpenAI-compatible endpoint.**
+**Nya tokens ɔpepepem 7.4 bosome biara. Fa LLM providers 34 ne models endpoints bɛyɛ 635 di dwuma a wontua hwee. Wei nyinaa fa OpenAI-compatible endpoint biako mu.**
 
 Aggregate free tiers from dozens of providers, plus custom OpenAI-compatible chat, embedding, image, and audio endpoints, behind a single `/v1` API. Keys are stored encrypted. A router picks the best available model for each request, falls over to the next provider when one is rate-limited, and tracks per-key usage so you stay under every free-tier cap.
 
