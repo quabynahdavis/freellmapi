@@ -4,7 +4,7 @@
 
 **Nya tokens ɔpepepem 7.4 bosome biara. Fa LLM providers 34 ne models endpoints bɛyɛ 635 di dwuma a wontua hwee. Wei nyinaa fa OpenAI-compatible endpoint biako mu.**
 
-Boaboa free tiers firi providers ahodoɔ hɔ, ne wo custom OpenAI-compatible chat, embedding, mfoni, ne audio endpoints, to `/v1` API biako akyi. API safoa no ho banbɔ so yie paa. Abere biara a, wobɛyɛ abisadeɛ no, router no fa model a ne tumi no betumi ayɛ adwuma no. Nanso sɛ model no di nkuguo a, router no fa model a edi hɔ no, na ɛdi dwumadie biara a wode safoa no bɛyɛ no akyi, sɛnea wontra wo free-tier no.
+Boaboa free tiers firi providers ahodoɔ hɔ, ne wo custom OpenAI-compatible chat, embedding, mfoni, ne audio endpoints, to `/v1` API biako akyi. API safoa no ho banbɔ so yie paa. Abere biara a, wobɛyɛ abisadeɛ no, router no fa model a ne tumi no betumi ayɛ adwuma no. Nanso sɛ model no di nkuguo a, router no fa model a edi hɔ no, na edi dwumadie biara a wode safoa no bɛyɛ no akyi, sɛnea wontra wo free-tier no.
 
 [![CI](https://github.com/tashfeenahmed/freellmapi/actions/workflows/ci.yml/badge.svg)](https://github.com/tashfeenahmed/freellmapi/actions/workflows/ci.yml)
 [![GitHub stars](https://img.shields.io/github/stars/tashfeenahmed/freellmapi?style=flat&logo=github&color=yellow)](https://github.com/tashfeenahmed/freellmapi/stargazers)
